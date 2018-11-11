@@ -1,0 +1,603 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-header card-header-tabs card-header-success">
+                      <div class="nav-tabs-navigation">
+                          <div class="nav-tabs-wrapper">
+                              <ul class="nav nav-tabs catalogue_tab" data-tabs="tabs">
+                                  <li class="nav-item" *ngFor="let entity of entities; let i = index">
+                                      <a [ngClass]="i === 0 ? 'nav-link active' : 'nav-link'"
+                                         href="javascript:void(0)"
+                                         (click)="selectEntity(entity.entity)"
+                                         data-toggle="tab">
+                                          {{entity.entity}}
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li><!--
+                                  <li class="nav-item">
+                                      <a class="nav-link"
+                                         (click)="selectEntity('Task')"
+                                         href="javascript:void(0)"
+                                         data-toggle="tab">
+                                          Task
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link"
+                                         (click)="selectEntity('Customer')"
+                                         href="javascript:void(0)"
+                                         data-toggle="tab">
+                                          Customer
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>-->
+                              </ul>
+                              <div class="tab-actions">
+                                  <button mat-raised-button mat-min-fab
+                                          class="btn btn-success btn-just-icon btn-round"
+                                          matTooltip="Add New Column"
+                                          (click)="addColumn()"
+                                          [matTooltipPosition]="'above'"
+                                          data-toggle="modal"
+                                          data-target="#addColumnModal">
+                                      <i class="material-icons">add</i>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!--<div class="card-header card-header-icon card-header-success">
+                      <div class="card-icon">
+                          <i class="material-icons">assignment</i>
+                      </div>
+                      <h4 class="card-title">Configure Columns</h4>
+                      <div class="card-toolbar pull-right">
+                          <button mat-raised-button type="button" class="btn btn-link btn-round btn-success btn-sm" data-toggle="modal" data-target="#addColumnModal">
+                              <i class="material-icons">add</i>Add New Column
+                          </button>
+                      </div>
+                  </div>-->
+                  <div class="card-body">
+                      <div class="table-responsive" *ngIf="utilizedCols.length > 0">
+                          <table class="table">
+                              <thead class="text-primary">
+                                  <tr>
+                                      <th>Field Name</th>
+                                      <th>Type</th>
+                                      <th>Constraints</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let col of utilizedCols; let i = index">
+                                      <td>{{col.virtual_name}}</td>
+                                      <td>{{col.type}}</td>
+                                      <td>
+                                          <span class="badge badge-default"
+                                                *ngIf="col.validation_rule[0] !== 'nullable'">
+                                              Required
+                                          </span>
+                                          <ng-container *ngFor="let rule of col.validation_rule; let i = index">
+                                              <span class="badge badge-default" *ngIf="i > 0">
+                                                  {{rule}}
+                                              </span>
+                                          </ng-container>
+                                      </td>
+                                      <td>
+                                          <button mat-raised-button
+                                                  type="button"
+                                                  (click)="editColumn(i)"
+                                                  data-toggle="modal"
+                                                  data-target="#addColumnModal"
+                                                  class="btn btn-success btn-sm btn-fab btn-round">
+                                              <i class="material-icons">edit</i>
+                                          </button>
+                                          <button mat-raised-button
+                                                  (click)="deleteColumn(i)"
+                                                  type="button"
+                                                  class="btn btn-rose btn-sm btn-fab btn-round">
+                                              <i class="material-icons">delete</i>
+                                          </button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <h5 class="info-text" *ngIf="utilizedCols.length === 0">
+                        {{showText}}
+                      </h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Add Column Modal -->
+<div class="modal fade" id="addColumnModal" tabindex="-1" role="dialog" aria-labelledby="addColumnModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!--  Wizard container  -->
+            <div class="wizard-container">
+                <div class="card card-wizard configWizard" data-color="green" id="wizardConfig1">
+                    <form action="" method="">
+                        <div class="card-header text-center">
+                            <h3 class="card-title">
+                                Configure Columns
+                            </h3>
+                            <!--<h5 class="card-description">This information will let us know more about you.</h5>-->
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#configStep_1" data-toggle="tab" role="tab">
+                                        Step 1
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#configStep_2" data-toggle="tab" role="tab">
+                                        Step 2
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#configStep_3" data-toggle="tab" role="tab">
+                                        Step 3
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="configStep_1">
+                                    <h5 class="info-text"> Please tell us a little bit about your requirement</h5>
+                                    <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            <div class="configForm">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Entity"
+                                                                (change)="entitySelected()"
+                                                                [(ngModel)]="selectedEntity"
+                                                                name="selectEnt">
+                                                        <mat-option value="Sample">Sample</mat-option>
+                                                        <mat-option value="Task">Task</mat-option>
+                                                        <mat-option value="Customer">Customer</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <input matInput
+                                                           placeholder="Field Name"
+                                                           name="fieldName"
+                                                           [(ngModel)]="fieldVal"
+                                                           (change)="enterFieldName()"
+                                                           required>
+                                                    <mat-error>Enter a field name</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="configStep_2">
+                                    <h5 class="info-text">Please choose the entity type you want to configure</h5>
+                                    <div class="row justify-content-center entityRadio">
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="string">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        text_rotation_none
+                                                    </i>
+                                                </div>
+                                                <h6>String</h6>
+                                                <div class="hoverDesc">
+                                                    <p>String is used to store texts up to 255 characters.</p>
+                                                    <span class="note">Useful for: Billing Addresses, Comments, Email Addresses</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="int">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        filter_1
+                                                    </i>
+                                                </div>
+                                                <h6>Integer</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Integer is used to store data such as amount of commission or other custom numerical data </p>
+                                                    <span class="note">Examples: Commission, Priority level</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="datetime">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        today
+                                                    </i>
+                                                </div>
+                                                <h6>Datetime</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Datetime is used to store dates, picked from a handy inline calendar. </p>
+                                                    <span class="note">Useful for: Delivery Dates, Deadlines</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="float">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        more_horiz
+                                                    </i>
+                                                </div>
+                                                <h6>Float</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Float is used to store data such as amount or other custom numerical floating point data </p>
+                                                    <span class="note">Useful for: Amount, Cost, Price</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="configStep_3">
+                                    <br>
+                                    <div class="row justify-content-center" *ngIf="!typeSelected">
+                                        <h3>Choose a type from previous step</h3>
+                                    </div>
+                                    <div class="row justify-content-center" *ngIf="typeSelected">
+                                        <div class="col-md-6">
+                                            <div class="configForm">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input"
+                                                                       type="radio"
+                                                                       name="fieldType"
+                                                                       [(ngModel)]="optionalValue"
+                                                                       value="required"> Mandatory
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input"
+                                                                       type="radio"
+                                                                       [(ngModel)]="optionalValue"
+                                                                       name="fieldType"
+                                                                       value="nullable"> Optional
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" *ngIf="selectedType === 'string'">
+                                                        <div class="col-sm-12">
+                                                            <h5>Can only take a fixed set of values</h5>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+                                                                           type="radio"
+                                                                           name="fix"
+                                                                           (click)="changeFixedValues('yes')"
+                                                                           [(ngModel)]="fixedValue"
+                                                                           value="yes"> Yes
+                                                                    <span class="circle">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input"
+                                                                           type="radio"
+                                                                           [(ngModel)]="fixedValue"
+                                                                           (click)="changeFixedValues('no')"
+                                                                           name="fix"
+                                                                           value="no"> No
+                                                                    <span class="circle">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="possibleValues"
+                                                     *ngIf="selectedType === 'string' && fixedValue === 'yes'; else const">
+                                                    <label>Specify Possible Values:</label>
+                                                    <tag-input placeholder="Enter possible values"
+                                                               name="possValues"
+                                                               [(ngModel)]="possibleValues"
+                                                               theme='filled-theme'>
+                                                    </tag-input>
+                                                </div>
+                                                <ng-template #const>
+                                                    <div class="possibleValues">
+                                                        <label>Additional Constraints:</label>
+                                                        <tag-input placeholder="Enter another constraint"
+                                                                   name="defVal"
+                                                                   [(ngModel)]="constraints"
+                                                                   theme='filled-theme'></tag-input>
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="mr-auto">
+                                <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+                            </div>
+                            <div class="ml-auto">
+                                <input type="button"
+                                       class="btn btn-next btn-fill btn-success btn-wd"
+                                       [disabled]="!(isEntitySelected && isFieldName)"
+                                       name="next"
+                                       value="Next">
+                                <input type="button"
+                                       class="btn btn-finish btn-fill btn-success btn-wd"
+                                       name="finish"
+                                       data-dismiss="modal"
+                                       (click)="submit()"
+                                       value="Finish"
+                                       style="display: none;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- wizard container -->
+        </div>
+    </div>
+</div>
+<!-- Edit Column Modal -->
+<!--
+<div class="modal fade" id="editColumnModal" tabindex="-1" role="dialog" aria-labelledby="addColumnModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            &lt;!&ndash;  Wizard container  &ndash;&gt;
+            <div class="wizard-container">
+                <div class="card card-wizard configWizard" data-color="green" id="wizardConfig2">
+                    <form action="" method="">
+                        <div class="card-header text-center">
+                            <h3 class="card-title">
+                                Configure Columns
+                            </h3>
+                            &lt;!&ndash;<h5 class="card-description">This information will let us know more about you.</h5>&ndash;&gt;
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#edit1" data-toggle="tab" role="tab">
+                                        Step 1
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="edit2" data-toggle="tab" role="tab">
+                                        Step 2
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#edit3" data-toggle="tab" role="tab">
+                                        Step 3
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="edit1">
+                                    <h5 class="info-text"> Please tell us a little bit about your requirement</h5>
+                                    <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            <div class="configForm">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Entity"
+                                                                (change)="entitySelected()"
+                                                                [(ngModel)]="selectedEntity"
+                                                                name="selectEnt">
+                                                        <mat-option value="Sample">Sample</mat-option>
+                                                        <mat-option value="Task">Task</mat-option>
+                                                        <mat-option value="Customer">Customer</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <input matInput
+                                                           placeholder="Field Name"
+                                                           name="fieldName"
+                                                           [(ngModel)]="fieldVal"
+                                                           (change)="enterFieldName()"
+                                                           required>
+                                                    <mat-error>Enter a field name</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="edit2">
+                                    <h5 class="info-text">Please choose the entity type you want to configure</h5>
+                                    <div class="row justify-content-center entityRadio">
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="string">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        text_rotation_none
+                                                    </i>
+                                                </div>
+                                                <h6>String</h6>
+                                                <div class="hoverDesc">
+                                                    <p>String is used to store texts up to 255 characters.</p>
+                                                    <span class="note">Useful for: Billing Addresses, Comments, Email Addresses</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="int">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        filter_1
+                                                    </i>
+                                                </div>
+                                                <h6>Integer</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Integer is used to store data such as amount of commission or other custom numerical data </p>
+                                                    <span class="note">Examples: Commission, Priority level</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="datetime">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        today
+                                                    </i>
+                                                </div>
+                                                <h6>Datetime</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Datetime is used to store dates, picked from a handy inline calendar. </p>
+                                                    <span class="note">Useful for: Delivery Dates, Deadlines</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="choice" data-toggle="wizard-radio">
+                                                <input type="radio"
+                                                       name="entity"
+                                                       value="float">
+                                                <div class="icon">
+                                                    <i class="material-icons">
+                                                        more_horiz
+                                                    </i>
+                                                </div>
+                                                <h6>Float</h6>
+                                                <div class="hoverDesc">
+                                                    <p>Float is used to store data such as amount or other custom numerical floating point data </p>
+                                                    <span class="note">Useful for: Amount, Cost, Price</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="edit3">
+                                    <br>
+                                    <div class="row justify-content-center" *ngIf="!typeSelected">
+                                        <h3>Choose a type from previous step</h3>
+                                    </div>
+                                    <div class="row justify-content-center" *ngIf="typeSelected">
+                                        <div class="col-md-6">
+                                            <div class="configForm">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input"
+                                                                       type="radio"
+                                                                       name="fieldType"
+                                                                       [(ngModel)]="optionalValue"
+                                                                       value="required"> Mandatory
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input"
+                                                                       type="radio"
+                                                                       [(ngModel)]="optionalValue"
+                                                                       name="fieldType"
+                                                                       value="nullable"> Optional
+                                                                <span class="circle">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="possibleValues" *ngIf="selectedType === 'string'">
+                                                    <label>Specify Possible Values:</label>
+                                                    <tag-input placeholder="Enter Possible Values"
+                                                               name="possValues"
+                                                               [(ngModel)]="fixedValues"
+                                                               theme='filled-theme'></tag-input>
+                                                </div>
+                                                <mat-form-field>
+                                                    <input matInput
+                                                           name="defVal"
+                                                           [(ngModel)]="defaultVal"
+                                                           placeholder="Default Value">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="mr-auto">
+                                <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+                            </div>
+                            <div class="ml-auto">
+                                <input type="button"
+                                       class="btn btn-next btn-fill btn-success btn-wd"
+                                       [disabled]="!(isEntitySelected && isFieldName)"
+                                       name="next"
+                                       value="Next">
+                                <input type="button"
+                                       class="btn btn-finish btn-fill btn-success btn-wd"
+                                       name="finish"
+                                       data-dismiss="modal"
+                                       (click)="submit()"
+                                       value="Finish"
+                                       style="display: none;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            &lt;!&ndash; wizard container &ndash;&gt;
+        </div>
+    </div>
+</div>
+-->
+

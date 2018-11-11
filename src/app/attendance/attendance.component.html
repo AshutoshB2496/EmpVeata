@@ -1,0 +1,215 @@
+<!--<div class="main-content">-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <!--<div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select
+                                            type="text"
+                                            [(value)] = "selectedName"
+                                            (selectionChange)="getLocations(selectedName)"
+                                            [formControl]="userName"
+                                            placeholder="Select Employee">
+                                        <mat-option *ngFor="let name of names; let i = index"
+                                                    [value]="i">
+                                            {{ name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>-->
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select placeholder="Date Range"
+                                                [(value)]="selectedDate"
+                                                (selectionChange)="filterByDate(selectedDate)">
+                                        <mat-option *ngFor="let dateFilter of dateFilters; let i = index"
+                                                    [value]="i">
+                                            {{ dateFilter }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select placeholder="Status"
+                                                [(value)]="selectedStatus">
+                                        <!--<mat-option value="On-Time Late">ALL</mat-option>-->
+                                        <mat-option *ngFor="let statusFilter of statusFilters"
+                                                    [value]="statusFilter">
+                                            {{ statusFilter }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table beat-table">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th style="width: 100px;">Date</th>
+                                    <th class="text-center">Time</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Day Start Time</th>
+                                    <th class="text-center">Locations</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of tableData1.dataRows | filter: selectedStatus">
+                                    <td class="text-center">{{row[0]}}</td>
+                                    <td class="text-center">{{ row[1] }}</td>
+                                    <td class="text-center">{{row[2]}}</td>
+                                    <td class="text-center">{{ row[3] }}</td>
+                                    <td class="text-center">
+                                        <button mat-button type="button"
+                                                data-toggle="modal"
+                                                data-target="#locations"
+                                                (click)="showLocations(row[0])"
+                                                matTooltip="Show Locations"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-link btn-fab btn-round btn-info">
+                                            <i class="fa fa-map-marker"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+    </div>
+<!--</div>-->
+
+<div class="modal fade beat-modal" id="plannedTask" tabindex="-1" role="dialog" aria-labelledby="plannedTaskLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card" style="margin: 0;">
+                <div class="card-header card-header-tabs card-header-success">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">Tasks:</span>
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#open_tasks" data-toggle="tab">
+                                        <i class="material-icons">assignment</i> Open
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#marked_done_tasks" data-toggle="tab">
+                                        <i class="material-icons">done</i> Marked Done
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#completed_tasks" data-toggle="tab">
+                                        <i class="material-icons">done_all</i> Completed
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="open_tasks">
+                            <table class="table">
+                                <tbody>
+                                <tr *ngFor="let row of tasks1">
+                                    <td class="taskTitle">
+                                        <h4>{{row.title}}</h4>
+                                        <a  href="#taskUpdates" data-toggle="modal" data-dismiss="modal">3 Updates on this task</a>
+                                        <span>Due Date: 08-05-2018</span>
+                                        <span>Overdue Since: 12-06-2018</span>
+                                        <span>Assigned To: Munish Bansal</span>
+                                        <span>Label: Installation</span>
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button mat-raised-button type="button" matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">comment</i>
+                                        </button>
+                                        <button mat-raised-button type="button" matTooltip="Done" [matTooltipPosition]="'above'"
+                                                class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">done</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="marked_done_tasks">
+                            <table class="table">
+                                <tbody>
+                                <tr *ngFor="let row of tasks2">
+                                    <td class="taskTitle">
+                                        <h4>{{row.title}}</h4>
+                                        <a  href="#taskUpdates" data-toggle="modal" data-dismiss="modal">2 Updates on this task</a>
+                                        <span>Due Date: 08-05-2018</span>
+                                        <span>Overdue Since: 12-06-2018</span>
+                                        <span>Assigned To: Munish Bansal</span>
+                                        <span>Label: Installation</span>
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button mat-raised-button type="button" matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">comment</i>
+                                        </button>
+                                        <button mat-raised-button type="button" matTooltip="Done" [matTooltipPosition]="'above'"
+                                                class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">done</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="completed_tasks">
+                            <table class="table">
+                                <tbody>
+                                <tr *ngFor="let row of tasks3">
+                                    <td class="taskTitle">
+                                        <h4>{{row.title}}</h4>
+                                        <a  href="#taskUpdates" data-toggle="modal" data-dismiss="modal">1 Update on this task</a>
+                                        <span>Due Date: 08-05-2018</span>
+                                        <span>Overdue Since: 12-06-2018</span>
+                                        <span>Assigned To: Munish Bansal</span>
+                                        <span>Label: Installation</span>
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button mat-raised-button type="button" matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">comment</i>
+                                        </button>
+                                        <button mat-raised-button type="button" matTooltip="Done" [matTooltipPosition]="'above'"
+                                                class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                            <i class="material-icons">done</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="locations" tabindex="-1" role="dialog" aria-labelledby="addTeamTaskLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

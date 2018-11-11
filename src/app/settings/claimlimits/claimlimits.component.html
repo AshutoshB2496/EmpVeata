@@ -1,0 +1,131 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Claim Limits</h4>
+          </div>
+          <div class="card-body" style="min-height: 450px;">
+            <div class="table-responsive">
+              <table class="table claimlimit-table">
+                <thead class="text-primary">
+                  <tr>
+                    <th class="text-center">{{ tableData.headerRow[0] }}</th>
+                    <th>{{ tableData.headerRow[1] }}</th>
+                    <th class="text-center">{{ tableData.headerRow[2] }}</th>
+                    <th class="text-right">{{ tableData.headerRow[3] }}</th>
+                    <th class="text-right">{{ tableData.headerRow[4] }}</th>
+                    <th class="text-right">{{ tableData.headerRow[5] }}</th>
+                    <th class="text-right">{{ tableData.headerRow[6] }}</th>
+                    <th class="text-right">{{ tableData.headerRow[7] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of tableData.dataRows">
+                    <td class="text-center">{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td class="text-center">
+                        <div class="togglebutton">
+                            <label>
+                                <input type="checkbox" checked="">
+                                <span class="toggle"></span>
+                                Allowed
+                            </label>
+                        </div>
+                    </td>
+                    <td class="text-right">&#8377;{{row[3]}}</td>
+                    <td class="text-right">&#8377;{{row[4]}}</td>
+                    <td class="text-right">&#8377;{{row[5]}}</td>
+                      <td class="text-right">&#8377;{{row[6]}}</td>
+                    <td class="text-right">
+                        <button mat-button type="button" data-toggle="modal" data-target="#editClaim" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-fab btn-sm btn-round btn-success">
+                            <i class="material-icons">create</i>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- end content-->
+        </div>
+        <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editClaim" tabindex="-1" role="dialog" aria-labelledby="editSchemeLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editSchemeLabel">Edit Claim Limits</h3>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Level" value="1">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Tag" value="Tag1">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Air Travel</label>
+                        <div class="togglebutton">
+                            <label>
+                                <input type="checkbox" checked="">
+                                <span class="toggle"></span>
+                                Allowed
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Hotel(&#8377;)" value="450">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Phone(&#8377;)" value="200">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Outstation DA(&#8377;)" value="150">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" placeholder="Local DA(&#8377;)" value="100">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-success btn-round btn-fill" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

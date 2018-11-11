@@ -1,0 +1,389 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-success">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">Requests:</span>
+                <ul class="nav nav-tabs tasks_tab" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" (click)="refresh()" href="#requests_01"
+                       data-toggle="tab">
+                      Sale Return
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refresh()" href="#requests_02" data-toggle="tab">
+                      Extra Distcount
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refresh()" href="#requests_03" data-toggle="tab">
+                      Dr/Cr Notes
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refresh()" href="#requests_04" data-toggle="tab">
+                      Credit Limited Extension
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+                <!-- <div class="tab-actions">
+                          <button mat-raised-button mat-min-fab class="btn btn-rose btn-just-icon btn-round" matTooltip="Add Task" [matTooltipPosition]="'above'" data-toggle="modal" data-target="#newtaskModal">
+                            <i class="material-icons">add</i>
+                          </button>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="requests_01">
+                <table class="table">
+                  <tbody>
+                  <tr *ngFor="let row of requests_01">
+                    <td>
+                      <div *ngIf="false" [ngSwitch]="row.checked">
+                        <div *ngSwitchCase="true">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value=""
+                                     checked>
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td *ngIf="row.reason!=null" class="taskTitle">
+                      <h4>Reason: {{row.reason}}</h4>
+                      <a href="javascript:void(0);" *ngIf="row.cdata.items!=undefined"
+                         (click)="changeItems(row.customer_name,row.cdata.items)"
+                         data-toggle="modal" data-target="#ordersModal"
+                         class="collaterals">{{row.cdata.items.length}} items</a>
+                      <br>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Invoice No: {{row.invoice_number}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td *ngIf="row.reason==null" class="taskTitle">
+                      <h4>Reason not mentioned</h4>
+                      <a href="javascript:void(0);" *ngIf="row.cdata.items!=undefined"
+                         (click)="changeItems(row.customer_name,row.cdata.items)"
+                         data-toggle="modal" data-target="#ordersModal"
+                         class="collaterals">{{row.cdata.items.length}} items</a>
+                      <br>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Invoice No: {{row.invoice_number}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td class="td-actions text-right" style="width: 120px;">
+                      <span *ngFor="let action of row.user_actions">
+                             <button mat-raised-button type="button" matTooltip="Accept"
+                              (click)="openDialogForApprove(row.unique_code)"
+                              [matTooltipPosition]="'above'" *ngIf="action=='Approve'"
+                              class="btn btn-success btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">done</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Reject"
+                              (click)="openDialogForReject(row.unique_code)"
+                              [matTooltipPosition]="'above'" *ngIf="action=='Reject'"
+                              class="btn btn-rose btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">clear</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Comment"
+                              (click)="openDialogForComment(row.unique_code)"
+                              [matTooltipPosition]="'above'" *ngIf="action=='Comment'"
+                              class="btn btn-default btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">comment</i>
+                      </button>
+                        </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="requests_02">
+                <table class="table">
+                  <tbody>
+                  <tr *ngFor="let row of requests_02">
+                    <td>
+                      <div *ngIf="false" [ngSwitch]="row.checked">
+                        <div *ngSwitchCase="true">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value=""
+                                     checked>
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td *ngIf="row.reason!=null" class="taskTitle">
+                      <h4>Reason: {{row.reason}}</h4>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Invoice Amount(&#8377;): {{row.invoice_amount}}</span>
+                      <span>Year To Date Salas(&#8377;): {{row.year_to_date}}</span>
+                      <span>AR Days: {{row.ar_days}}</span>
+                      <span>Company Discount(&#8377;): {{row.company_discount}}</span>
+                      <span>Proposed Discount(&#8377;): {{row.proposed_discount}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td *ngIf="row.reason==null" class="taskTitle">
+                      <h4>Reason not mentioned</h4>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Invoice Amount(&#8377;): {{row.invoice_amount}}</span>
+                      <span>Year To Date Salas(&#8377;): {{row.year_to_date}}</span>
+                      <span>AR Days: {{row.ar_days}}</span>
+                      <span>Company Discount(%): {{row.company_discount}}</span>
+                      <span>Proposed Discount(%): {{row.proposed_discount}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td class="td-actions text-right" style="width: 120px;">
+                      <span *ngFor="let action of row.user_actions">
+                             <button mat-raised-button type="button" matTooltip="Accept"
+                                     (click)="openDialogForApprove(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Approve'"
+                                     class="btn btn-success btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">done</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Reject"
+                                     (click)="openDialogForReject(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Reject'"
+                                     class="btn btn-rose btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">clear</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Comment"
+                                     (click)="openDialogForComment(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Comment'"
+                                     class="btn btn-default btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">comment</i>
+                      </button>
+                        </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="requests_03">
+                <table class="table">
+                  <tbody>
+                  <tr *ngFor="let row of requests_03">
+                    <td>
+                      <div *ngIf="false" [ngSwitch]="row.checked">
+                        <div *ngSwitchCase="true">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value=""
+                                     checked>
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="taskTitle">
+                      <h4>Reason: {{row.title}}</h4>
+                      <span>Customer: Customer Name</span>
+                      <span>Invoice Amount(&#8377;): 2000</span>
+                      <span>Company Discount(&#8377;): 1200</span>
+                      <span>Proposed Discount(&#8377;): 1400</span>
+                    </td>
+                    <td class="td-actions text-right" style="width: 120px;">
+                      <span *ngFor="let action of row.user_actions">
+                             <button mat-raised-button type="button" matTooltip="Accept"
+                                     (click)="openDialogForApprove(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Approve'"
+                                     class="btn btn-success btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">done</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Reject"
+                                     (click)="openDialogForReject(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Reject'"
+                                     class="btn btn-rose btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">clear</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Comment"
+                                     (click)="openDialogForComment(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Comment'"
+                                     class="btn btn-default btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">comment</i>
+                      </button>
+                        </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="requests_04">
+                <table class="table">
+                  <tbody>
+                  <tr *ngFor="let row of requests_04">
+                    <td>
+                      <div *ngIf="false" [ngSwitch]="row.checked">
+                        <div *ngSwitchCase="true">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value=""
+                                     checked>
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+                    <td *ngIf="row.reason!=null" class="taskTitle">
+                      <h4>Reason: {{row.reason}}</h4>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Year To Date Salas(&#8377;): {{row.year_to_date}}</span>
+                      <span>AR Days: {{row.ar_days}}</span>
+                      <span>Current Credit Limit(&#8377;): {{row.current_credit_limit}}</span>
+                      <span>Proposed Credit Limit(&#8377;): {{row.proposed_credit_limit}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td *ngIf="row.reason==null" class="taskTitle">
+                      <h4>Reason not mentioned</h4>
+                      <span>Customer: {{row.customer_name}}</span>
+                      <span>Year To Date Salas(&#8377;): {{row.year_to_date}}</span>
+                      <span>AR Days: {{row.ar_days}}</span>
+                      <span>Current Credit Limit(&#8377;): {{row.current_credit_limit}}</span>
+                      <span>Proposed Credit Limit(&#8377;): {{row.proposed_credit_limit}}</span>
+                      <span>Requested By: {{row.creator.name}}</span>
+                      <span>Requested On: {{row.created_at|date}}</span>
+                    </td>
+                    <td class="td-actions text-right" style="width: 120px;">
+                      <span *ngFor="let action of row.user_actions">
+                             <button mat-raised-button type="button" matTooltip="Accept"
+                                     (click)="openDialogForApprove(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Approve'"
+                                     class="btn btn-success btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">done</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Reject"
+                                     (click)="openDialogForReject(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Reject'"
+                                     class="btn btn-rose btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">clear</i>
+                      </button>
+                             <button mat-raised-button type="button" matTooltip="Comment"
+                                     (click)="openDialogForComment(row.unique_code)"
+                                     [matTooltipPosition]="'above'" *ngIf="action=='Comment'"
+                                     class="btn btn-default btn-link btn-sm btn-fab btn-round">
+                        <i class="material-icons">comment</i>
+                      </button>
+                        </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Item Table Model -->
+<div class="modal fade" id="ordersModal" tabindex="-1" role="dialog" aria-labelledby="ordersModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="ordersModalLabel">Requested By: {{customername}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                <tr>
+                  <th>Item</th>
+                  <th class="text-center">Ordered Quantity</th>
+                  <th class="text-center">Return Quantity</th>
+                  <th class="text-right">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of items">
+                  <td>{{item.item}}</td>
+                  <td class="text-center">{{item.ordered_qty}}</td>
+                  <td class="text-center">{{item.return_qty}}</td>
+                  <td class="text-right">{{item.price}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-rose" data-dismiss="modal">Ok</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

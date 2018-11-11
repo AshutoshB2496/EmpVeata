@@ -1,0 +1,40 @@
+<ul class="sub_ul">
+  <li *ngFor="let item of items">
+    <span><i></i> {{ item.name }}</span>
+    <div class="dropdown">
+      <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+        <i class="material-icons">more_horiz</i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-left">
+        <!--<li>
+          <a style="cursor: pointer"
+             href="javascript: void(0);"
+             (click)="showDetails(item.name)">Employee Detail</a>
+        </li>-->
+        <li>
+          <a style="cursor: pointer"
+             href="javascript: void(0);"
+             *ngIf="item.hasOwnProperty('reportees')"
+             (click)="makeRoot(item)">Show from this node onwards</a>
+        </li>
+        <li>
+          <a style="cursor: pointer"
+             href="javascript: void(0);"
+             (click)="showLocations(item.id, item.name)">Locations</a>
+        </li>
+        <!--<li>-->
+          <!--<a style="cursor: pointer"-->
+             <!--href="javascript: void(0);"-->
+             <!--(click)="showAttendance(item.id, item.name)">Attendance(Table)</a>-->
+        <!--</li>-->
+        <li>
+          <a style="cursor: pointer"
+             href="javascript: void(0);"
+             (click)="showCalendar(item.id, item.name)">Attendance(Calendar)</a>
+        </li>
+      </ul>
+    </div>
+    <app-tree *ngIf="item.hasOwnProperty('reportees')"
+              [items]="item.reportees"></app-tree>
+  </li>
+</ul>

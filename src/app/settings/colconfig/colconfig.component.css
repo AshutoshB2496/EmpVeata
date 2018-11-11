@@ -1,0 +1,117 @@
+.catalogue_tab {
+    width: 70%;
+    float: left;
+}
+
+.tab-actions {
+    float: right;
+    display: block;
+    overflow: hidden;
+    text-align: right;
+    width: 30%;
+}
+
+.tab-actions .btn {
+    margin-left: 5px;
+}
+.card-header-success .nav-link.active {
+    background: #fff !important;
+    color: #00cebd !important;
+}
+
+a.badge:hover {
+    color: #fff !important;
+}
+.charLimit {
+    width: 65px;
+    display: inline-block !important;
+    margin-left: 10px;
+    text-align: center;
+}
+.togglebutton label {
+    /*color: #737373;*/
+}
+.card .slider {
+    margin-top: 35px;
+}
+
+.card-toolbar {
+    margin-top: -30px;
+}
+
+.card-toolbar .btn-sm {
+    text-transform: none;
+    font-size: 14px;
+}
+.modal-content .card-wizard {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#addColumnModal .card-wizard {
+    width: 800px;
+}
+.configForm label {
+    display: block;
+}
+.configForm .possibleValues {
+    margin-top: 10px;
+}
+.configForm .possibleValues span.badge {
+    text-transform: none;
+    font-size: 12px;
+}
+.entityRadio .choice {
+    position: relative;
+    transition: all 0.3s;
+}
+.entityRadio .choice .icon {
+    border-radius: 10px;
+}
+.entityRadio .choice .hoverDesc {
+    position: absolute;
+    top: 165px;
+    left: 20px;
+    width: 280px;
+    text-align: left;
+    background: #f4f4f4;
+    z-index: 9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid #5acfbe;
+    display: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.entityRadio .choice .hoverDesc:before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #5acfbe;
+    top: -12px;
+    left: 50px;
+}
+.entityRadio .choice:hover .hoverDesc {
+    display: block;
+}
+.entityRadio .choice .hoverDesc p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    line-height: 19px;
+}
+.entityRadio .choice .hoverDesc span.note {
+    font-size: 13px;
+    font-weight: 400;
+    color: #797979;
+    line-height: 17px;
+    display: block;
+}
+.entityRadio .choice .hoverDesc ul {
+    margin: 0;
+    padding: 0 0 0 15px;
+    list-style-type: circle;
+}
+.entityRadio .choice .hoverDesc ul li {}

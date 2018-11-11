@@ -1,0 +1,245 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4" id="treeView">
+                <div class="card">
+                    <div class="card-body" style="min-height: 450px;">
+                        <a class="badge badge-success"
+                           href="javascript: void(0);"
+                           (click)="reload()"
+                           *ngIf="flag"
+                           style="cursor: pointer">Show original tree</a>
+                        <div class="tree">
+                            <a href="javascript: void(0);" class="btn btn-default btn-sm btn-fab btn-round collapseBtn">
+                                <i class="material-icons a">
+                                    chevron_left
+                                </i>
+                            </a>
+
+                            <a href="javascript: void(0);" class="btn btn-default btn-sm btn-fab btn-round expBtn">
+                                <i class="material-icons a">
+                                    chevron_right
+                                </i>
+                            </a>
+                            <ul id="treeList">
+                                <li *ngFor="let employee of employees">
+                                    <span><i></i> {{ employee.name }}</span>
+                                    <div class="dropdown">
+                                        <button mat-raised-button href="javascript: void(0);"
+                                                class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link"
+                                                data-toggle="dropdown">
+                                            <i class="material-icons">more_horiz</i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-left">
+                                            <li>
+                                                <a style="cursor: pointer"
+                                                   href="javascript: void(0);"
+                                                   *ngIf="employee.hasOwnProperty('reportees')"
+                                                   class="root"
+                                                   (click)="makeRoot(employee)">Show from this node onwards</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);"
+                                                   style="cursor: pointer"
+                                                   (click)="showLocations(employee.id, employee.name)">Locations</a>
+                                            </li>
+                                            <li>
+                                                <a style="cursor: pointer"
+                                                   href="javascript: void(0);"
+                                                   (click)="showCalendar(employee.id, employee.name)">Attendance(Calendar)</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <app-tree *ngIf="employee.hasOwnProperty('reportees')"
+                                              [items]="employee.reportees"></app-tree>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+            </div>
+
+            <div class="col calander-container" *ngIf="employeeName !== ''">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center" *ngIf="employeeName !== ''"><b>{{employeeName}}</b></h3>
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<iframe src="http://reports.dashboard.simplifii.xyz/#/ncreport?geography_type=Zone&month=0&role=HQ"-->
+<!--height="650"></iframe>-->
+<!--http://mapview.dashboard.simplifii.xyz/#/list-view?view=map&startFromAttendance=0&id={{team.id}}&token={{token}}&url={{url}}/api/v1/-->
+
+<!-- View Modal -->
+<div class="modal fade" id="viewEmpModal" tabindex="-1" role="dialog" aria-labelledby="viewEmpModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-wizard" data-color="green">
+                <div class="card-header text-center">
+                    <h3 class="card-title">
+                        Dhananjay Kumar
+                    </h3>
+                    <h5 class="card-description">This information will let us know more about you.</h5>
+                </div>
+                <div class="wizard-navigation">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab_01" data-toggle="tab" role="tab">
+                                Tracked Locations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_02" data-toggle="tab" role="tab">
+                                Check-Ins
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_03" data-toggle="tab" role="tab">
+                                Logins/Devices
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_04" data-toggle="tab" role="tab">
+                                Targets
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_01">
+                        <ul class="timeline">
+                            <li class="timeline-inverted">
+                                <div class="timeline-badge success">
+                                    <i class="material-icons">card_travel</i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <span class="label label-danger">Some Title</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Wifey made the best Father's Day meal ever. So thankful so happy so
+                                            blessed.</p>
+                                    </div>
+                                    <h6>
+                                        <i class="ti-time"></i> 11 hours ago via Twitter
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-badge success">
+                                    <i class="material-icons">extension</i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <span class="label label-success">Another One</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Thank God for the support of my wife and real friends.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <div class="timeline-badge success">
+                                    <i class="material-icons">fingerprint</i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <span class="label label-info">Another Title</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Called I Miss the Old Kanye That’s all it was Kanye.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-badge success">
+                                    <i class="material-icons">flight_land</i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <span class="label label-warning">Another One</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Tune into Big Boy's 92.3 I'm about to play the first single.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab_02">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                <tr>
+                                    <!-- <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th> -->
+                                    <th style="width: 250px;">Name</th>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th class="text-right">Sale(&#8377;)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of tableData1.dataRows">
+                                    <td>{{row[0]}}</td>
+                                    <td>{{row[1]}}</td>
+                                    <td>{{row[2]}}</td>
+                                    <td class="text-right">{{row[3]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_03">
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th style="width: 250px;">Name</th>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th class="text-right">Sale(&#8377;)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of tableData1.dataRows">
+                                    <td>{{row[0]}}</td>
+                                    <td>{{row[1]}}</td>
+                                    <td>{{row[2]}}</td>
+                                    <td class="text-right">{{row[3]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_04">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-profile">
+                                    <div class="card-body">
+                                        <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
+                                        <h4 class="card-title">Dhananjay Kumar</h4>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation
+                                            in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design
+                                            but the back is...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

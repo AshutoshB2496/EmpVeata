@@ -1,0 +1,35 @@
+<div class="main-content">
+    <div class="mobile-body">
+        <div class="container-fluid btn-bottom">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="table-title">{{zone}}</h3>
+                    <table class="table table-bordered report-table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Region</th>
+                            <th class="text-center">Sales(&#8377;)</th>
+                            <th class="text-center">Target Achieved</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let region of regionData">
+                            <th><a href="javascript:void(0)">{{region.geography}}</a></th>
+                            <td>{{region.sales_actual}}</td>
+                            <td class="status-red">{{region.sales_target_achieved}}%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="javascript:void(0)"
+                   (click)="back()"
+                   class="btn btn-success btn-round">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    Back to zonal data
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

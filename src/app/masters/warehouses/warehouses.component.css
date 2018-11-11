@@ -1,0 +1,116 @@
+table.dataTable > thead > tr > th {
+    font-weight: bold;
+    font-size: 13px;
+}
+.table-action-toolbar {
+    position: absolute;
+    right: 15px;
+    width: 40%;
+    text-align: right;
+    z-index: 999;
+}
+.table-action-toolbar .btn + .btn {
+    margin-right: 10px;
+}
+
+.fixed-plugin .fa-filter {
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+
+.fixed-plugin li.header-title-main {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+.form-filter .row + .row {
+    margin-top: 15px;
+}
+.form-filter legend {
+    font-size: 16px;
+    font-weight: 400;
+}
+.form-filter .togglebutton {
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+.togglebutton label .toggle {
+    margin-left: 0px !important;
+}
+.form-filter .range-slider-wrapper {
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+.inline-checkboxes {
+    padding: 10px 2px 20px;
+}
+.filterDrop .btn {
+    margin: 0 auto 20px;
+    width: 150px;
+    display: block;
+}
+
+#viewModal .card-wizard {
+    box-shadow: none;
+    width: 100%;
+    width: 800px;
+}
+#viewModal .modal-title {
+    font-size: 22px;
+}
+#viewModal .modal-header {
+    margin-bottom: 20px;
+} 
+#viewModal .timeline {
+    margin-top: 0;
+}
+.card-profile {
+    text-align: left;
+}
+
+.card-body+.card-footer {
+    border-top: 1px solid #eee !important;
+}
+
+#filterContainer {
+    display: none;
+}
+.add_cust_form .legend {
+    font-size: 16px;
+    font-weight: 400;
+}
+.summary-card .card-body p {}
+.summary-card .card-body p label {
+    width: 200px;
+}
+table span.status {
+    font-size: 12px;
+    color: #fff;
+    background: #00bcd4;
+    border-radius: 20px;
+    padding: 0 8px;
+    display: inline-block;
+    line-height: 22px;
+    font-weight: 400;
+}
+table span.status.placed { background: #00bcd4; }
+table span.status.accepted { background: #73e497; }
+table span.status.rejected { background: #f44336; }
+table span.status.invoiced { background: #338f36; }
+@media (max-width: 767px){
+    #datatables_length {
+        text-align: left !important;
+    }
+    #viewModal .card-wizard {
+        box-shadow: none;
+        width: 100%;
+    }
+}

@@ -1,0 +1,443 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="filterContainer">
+                    <div class="card-header ">
+                        <h4 class="card-title">Filter Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-filter">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <legend>Placed On</legend>
+                                    <mat-form-field>
+                                        <mat-select placeholder="Choose Order Time" (change)="changeCreatedAt()"
+                                                    [(ngModel)]="duration">
+                                            <mat-option *ngFor="let placedid of placedids" [value]="placedid.value">
+                                                {{ placedid.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Created By</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="Choose Creator" (change)="changeCreator()"
+                                                    [(ngModel)]="creator">
+                                            <mat-option *ngFor="let placedid of employees"
+                                                        [value]="placedid.id">
+                                                {{ placedid.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Order ID</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="" (change)="changeOrderId()"
+                                               [(ngModel)]="order_id" value="">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Customer</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="Choose Customer" (change)="changeCustomer()"
+                                                    [(ngModel)]="customer">
+                                            <mat-option *ngFor="let placedid of customers"
+                                                        [value]="placedid.unique_code">
+                                                {{ placedid.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Amount(&#8377;)</legend>
+                                    <div class="range-slider-wrapper">
+                                        <nouislider class="slider slider-info" [connect]="true" [min]="0"
+                                                    [max]="500000" [step]="1" (change)="changeAmount()"
+                                                    [(ngModel)]="doubleSlider1"
+                                                    [tooltips]="true"></nouislider>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Depot</legend>
+                                    <mat-form-field>
+                                        <mat-select placeholder="Choose Depot" (change)="changeDepot()"
+                                                    [(ngModel)]="depot">
+                                            <mat-option *ngFor="let depotid of plants"
+                                                        [value]="depotid.description">
+                                                {{ depotid.description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-right btn-row">
+                                    <button mat-raised-button type="submit" id="resetFilter" (click)="reset()"
+                                            class="btn btn-round btn-default">Reset Filter(s)
+                                    </button>
+                                    <button mat-raised-button type="submit" (click)="applyFilter()"
+                                            class="btn btn-fill btn-round btn-rose">
+                                        Apply Filter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-success">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Orders:</span>
+                                <ul class="nav nav-tabs order_tab" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" (click)="refresh()" href="#open_orders"
+                                           data-toggle="tab">
+                                            Open
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="refresh()" href="#accepted_orders"
+                                           data-toggle="tab">
+                                            Accepted
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="refresh()" href="#invoiced_orders"
+                                           data-toggle="tab">
+                                            Invoiced
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="refresh()" href="#rejected_orders"
+                                           data-toggle="tab">
+                                            Rejected
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="dropdown pull-right" id="bulkAction_drop">
+                                    <div class="alert" id="notify_bulk">
+                                        <button mat-button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                        <span>Select bulk action</span>
+                                    </div>
+                                    <button mat-raised-button href="#pablo" class="dropdown-toggle btn btn-bulk"
+                                            data-toggle="dropdown">Complete
+                                        <b class="caret"></b>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="#dd">Complete</a>
+                                        </li>
+                                        <li>
+                                            <a href="#dd">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="open_orders">
+                                <table class="table orders-table">
+                                    <tbody>
+                                    <tr *ngFor="let row of orders_open">
+                                        <td>
+                                            <div *ngIf="false" [ngSwitch]="row.checked">
+                                                <div *ngSwitchCase="true">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" (change)="showBulk()"
+                                                                   type="checkbox" value="" checked>
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchDefault>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="taskTitle">
+                                            <h4>{{row.customer_name}}</h4>
+                                            <a href="javascript:void(0);"
+                                               (click)="changeOrders(row.customer_name,row.cdata.ordered_items)"
+                                               data-toggle="modal" data-target="#ordersModal"
+                                               class="collaterals">{{row.cdata.ordered_items.length}} items</a>
+                                            <span>Placed On: {{row.created_at|date}}</span>
+                                            <span>Depot: {{row.plant}}</span>
+                                            <span>Order Value: {{row.total}}</span>
+                                            <span>Collected By: {{row.creator.name}}</span>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <span *ngFor="let action of row.user_actions">
+                                            <button mat-raised-button type="button" matTooltip="Accept"
+                                                    (click)="openDialogForApprove(row.unique_code)"
+                                                    [matTooltipPosition]="'above'" *ngIf="action=='Approve'"
+                                                    class="btn btn-success btn-link btn-fab btn-round btn-sm">
+                                                <i class="material-icons">done</i>
+                                            </button>
+                                            <button mat-raised-button type="button" matTooltip="Reject"
+                                                    (click)="openDialogForReject(row.unique_code)"
+                                                    [matTooltipPosition]="'above'" *ngIf="action=='Reject'"
+                                                    class="btn btn-danger btn-link btn-fab btn-round btn-sm">
+                                                <i class="material-icons">clear</i>
+                                            </button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="accepted_orders">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of orders_accepted">
+                                        <td>
+                                            <div *ngIf="false" [ngSwitch]="row.checked">
+                                                <div *ngSwitchCase="true">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                   checked>
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchDefault>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td class="taskTitle">
+                                            <h4>{{row.customer_name}}</h4>
+                                            <a href="javascript:void(0);"
+                                               (click)="changeOrders(row.customer_name,row.cdata.ordered_items)"
+                                               data-toggle="modal" data-target="#ordersModal"
+                                               class="collaterals">{{row.cdata.ordered_items.length}} items</a>
+                                            <span>Placed On: {{row.created_at|date}}</span>
+                                            <span>Depot: {{row.plant}}</span>
+                                            <span>Order Value: {{row.total}}</span>
+                                            <span>Collected By: {{row.creator.name}}</span>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Dispatch"
+                                                    (click)="openDialogForDispatch(row.unique_code)"
+                                                    [matTooltipPosition]="'above'"
+                                                    class="btn btn-success btn-link btn-fab btn-round btn-sm">
+                                                <i class="material-icons">done_all</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="invoiced_orders">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of orders_invoiced">
+                                        <td>
+                                            <div *ngIf="false" [ngSwitch]="row.checked">
+                                                <div *ngSwitchCase="true">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                   checked>
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchDefault>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td class="taskTitle">
+                                            <h4>{{row.customer_name}}</h4>
+                                            <a href="javascript:void(0);"
+                                               (click)="changeOrders(row.customer_name,row.cdata.ordered_items)"
+                                               data-toggle="modal" data-target="#ordersModal"
+                                               class="collaterals">{{row.cdata.ordered_items.length}} items</a>
+                                            <span>Placed On: {{row.created_at|date}}</span>
+                                            <span>Depot: {{row.plant}}</span>
+                                            <span>Order Value: {{row.total}}</span>
+                                            <span>Collected By: {{row.creator.name}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="rejected_orders">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of orders_rejected">
+                                        <td>
+                                            <div *ngIf="false" [ngSwitch]="row.checked">
+                                                <div *ngSwitchCase="true">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" (change)="showBulk()"
+                                                                   type="checkbox" value="" checked>
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngSwitchDefault>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" (change)="showBulk()"
+                                                                   type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td class="taskTitle">
+                                            <h4>{{row.customer_name}}</h4>
+                                            <a href="javascript:void(0);"
+                                               (click)="changeOrders(row.customer_name,row.cdata.ordered_items)"
+                                               data-toggle="modal" data-target="#ordersModal"
+                                               class="collaterals">{{row.cdata.ordered_items.length}} items</a>
+                                            <span>Placed On: {{row.created_at|date}}</span>
+                                            <span>Depot: {{row.plant}}</span>
+                                            <span>Order Value: {{row.total}}</span>
+                                            <span>Collected By: {{row.creator.name}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Orders Modal -->
+<div class="modal fade" id="ordersModal" tabindex="-1" role="dialog" aria-labelledby="ordersModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ordersModalLabel">{{customername}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-right">Price/Unit</th>
+                                    <th class="text-right">Total</th>
+                                    <th class="text-center">Availability</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let item of orders;let i=index">
+                                    <td>{{item.sku}}</td>
+                                    <td>{{item.description}}</td>
+                                    <td class="text-center">{{item.qty}}</td>
+                                    <td class="text-right">{{item.price_per_unit_of_measurement}}</td>
+                                    <td class="text-primary text-right">{{item.order_value}}</td>
+                                    <td class="text-center">
+                                        <button mat-raised-button type="button" *ngIf="!switchFlag[i]"
+                                                matTooltip="Available" (click)="availSwitch(i, 't')"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-success btn-link btn-fab btn-round btn-sm">
+                                            <i class="material-icons">done</i>
+                                        </button>
+                                        <button mat-raised-button type="button" *ngIf="!switchFlag[i]"
+                                                matTooltip="Not Available" (click)="availSwitch(i, 'c')"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-danger btn-link btn-fab btn-round btn-sm">
+                                            <i class="material-icons">clear</i>
+                                        </button>
+                                        <div class="togglebutton" *ngIf="switchFlag[i] && buttonFlag[i]">
+                                            <label>
+                                                <input type="checkbox" checked="checked">
+                                                <span class="toggle"></span>
+                                            </label>
+                                        </div>
+                                        <div class="togglebutton" *ngIf="switchFlag[i] && !buttonFlag[i]">
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="toggle"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="modal-footer">-->
+            <!--<button type="button" class="btn btn-rose" data-dismiss="modal">Ok</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown" aria-expanded="true" id="showFilter">
+            <i class="fa fa-filter fa-2x"> </i>
+        </a>
+    </div>
+</div>

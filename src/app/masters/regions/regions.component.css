@@ -1,0 +1,89 @@
+
+/*Tree CSS*/
+
+.tree {
+    min-height: 20px;
+    margin-bottom: 20px;
+}
+.tree > ul  {
+    padding-left: 0;
+}
+.tree > ul > li > ul {
+    padding-left: 40px;
+}
+.tree > ul > li > ul li {
+    display: none;
+}
+.tree ul li .dropdown ul li {
+    display: block !important;
+}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 0 0 0px;
+    position:relative
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-35px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:1px solid #ddd;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:1px solid #ddd;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    display: inline-block;
+    padding: 5px 0px;
+    text-decoration: none;
+    position: relative;
+}
+.tree li span i.fa {
+    color: #444;
+}
+.tree li.parent_li>span {
+    cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:25px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span, .tree li.parent_li>span:hover i.fa {
+    border:0;
+    color:#00CEBD;
+}
+
+.tree li span + .dropdown {
+    display: inline-block;
+}
+.tree li span + .dropdown .dropdown-toggle:after {
+    display: none;
+}
+.tree li span + .dropdown li:before,
+.tree li span + .dropdown li:after {
+    display: none;
+}
+
+/*========== Add Form styles ==========*/
+.modal-content form .legend {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+.dropdown.show .btn-success.btn-link {
+    background-color: #00CEBD !important;
+    color: #fff !important;
+}

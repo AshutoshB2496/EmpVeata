@@ -1,0 +1,18 @@
+<table id="fixedTable" class="table table-striped table-bordered table-hover" cellspacing="0">
+  <thead>
+  <tr>
+    <th></th>
+    <th *ngFor="let unit of units">{{unit.value}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let molecule of molecules2">
+    <td>{{molecule.molecule}}</td>
+    <td *ngFor="let unit of units">{{molecule.stocks[unit.value]}} </td>
+  </tr>
+  <tr *ngFor="let molecule of molecules">
+    <td>{{molecule.molecule}}</td>
+    <td *ngFor="let unit of units"></td>
+  </tr>
+  </tbody>
+</table>

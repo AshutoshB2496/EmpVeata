@@ -1,0 +1,80 @@
+table > thead > tr > th {
+  font-weight: bold;
+  font-size: 13px;
+}
+table#fixedTable {
+  position: relative;
+  min-width: 700px;
+  max-width: 1000px;
+  overflow: hidden;
+  border-collapse: collapse;
+  margin: 10px auto;
+}
+
+
+/*thead*/
+#fixedTable thead {
+  position: relative;
+  display: block;
+  min-width: 700px;
+  max-width: 1000px;
+  overflow: visible;
+}
+
+#fixedTable thead th {
+  background-color: #f7f7f9;
+  min-width: 120px;
+  max-width: 120px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+#fixedTable thead th:nth-child(1) {
+  position: relative;
+  background-color: #f7f7f9;
+}
+
+
+/*tbody*/
+#fixedTable tbody {
+  position: relative;
+  display: block;
+  min-width: 700px;
+  max-width: 1000px;
+  max-height: 500px;
+  /*height: 500px;*/
+  overflow: scroll;
+}
+
+#fixedTable tbody td {
+  min-width: 120px;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+#fixedTable tbody tr td:nth-child(1) {
+  position: relative;
+  background-color: #f7f7f9;
+  font-weight: bold;
+}
+
+
+@media (max-width: 767px){
+  table#fixedTable,
+  #fixedTable thead {
+    min-width: 260px;
+    max-width: 260px;
+  }
+  /*tbody*/
+  #fixedTable tbody {
+    min-width: 260px;
+    max-width: 260px;
+    height: 400px;
+  }
+
+  #fixedTable thead th,
+  #fixedTable tbody td {
+    min-width: 100px;
+    max-width: 100px;
+  }
+}

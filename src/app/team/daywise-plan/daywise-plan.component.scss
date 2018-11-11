@@ -1,0 +1,341 @@
+.table-action-radio {
+  padding-top: 8px;
+  text-align: right;
+}
+
+.beat-table-actions {
+  margin-bottom: 15px;
+}
+
+.beat-table-actions .btn {
+  font-weight: 400;
+}
+
+.table-action-radio .form-check .form-check-label {
+  font-weight: 400;
+  color: #6f6f6f;
+}
+
+.beat-table tr th {
+  text-align: center;
+}
+.beat-table .text-button {
+  color: #00cebd;
+  display: inline-block;
+  line-height: 18px;
+  font-size: 14px;
+  width: 74px;
+}
+.beat-table tr th:first-child {
+  text-align: left;
+}
+
+.beat-table tr td h5 {
+  margin-bottom: 0;
+  font-size: 15px;
+  text-transform: none !important;
+}
+
+.beat-table td .btn-sm {
+  font-size: 13px;
+  text-transform: none !important;
+}
+
+.beat-modal .modal-title {
+  text-align: left !important;
+}
+
+.beat-modal .modal-title i {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.beat-modal .modal-title label {
+  color: #404040;
+}
+
+.beat-modal .modal-title span {
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.beat-modal .modal-title span:last-child {
+  margin-right: 0;
+  padding-right: 0px;
+  border-right: none;
+}
+
+.header-check {
+  padding-top: 30px;
+}
+
+.head-text-field {
+  padding-top: 9px;
+}
+
+.head-drop {
+  padding-top: 20px;
+}
+
+.head-drop .dropdown-toggle:after {
+  transform: rotate(0deg) !important;
+}
+
+.head-drop .show .dropdown-toggle:after {
+  transform: rotate(180deg) !important;
+}
+
+.beatDetail h5,
+.beatDetail label {
+  margin-bottom: 0;
+}
+
+.form-check .form-check-input:checked + .form-check-sign .check {
+  background: #00cebd !important;
+}
+
+#addTeamTask legend {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.card-header-success .nav-link.active {
+  background: #fff !important;
+  color: #00cebd !important;
+}
+
+.taskTitle span {
+  display: inline-block;
+  background: #f6f6f6;
+  border-radius: 20px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.taskTitle span.danger-span {
+  background: #d60202;
+  color: #fff;
+}
+.taskTitle span.warn-span {
+  background: darkorange;
+  color: #fff;
+}
+.taskTitle span.low-span {
+  background: #ffe000;
+  color: #fff;
+}
+.taskTitle a {
+  display: block;
+}
+
+td.taskTitle {
+  width: auto !important;
+}
+
+td.td-actions {
+  min-width: 115px;
+  vertical-align: top;
+  padding-top: 35px;
+}
+
+.updates-container {
+  padding: 0px;
+  background: #fff;
+}
+
+.updates-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 0 0 2px;
+}
+
+.updates-container ul li {
+  padding-bottom: 20px;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+}
+
+.updates-container ul li > i {
+  position: absolute;
+  left: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  width: 24px;
+  text-align: center;
+}
+
+.updates-container ul li:after {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 2px;
+  background: #ccc;
+  left: 11px;
+  top: 24px;
+}
+
+.updates-container label {
+  margin-bottom: 0;
+  display: block;
+  padding-top: 0px;
+  line-height: 24px;
+}
+
+.updates-container label h5 {
+  color: #00cebd;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 10px;
+}
+
+.updates-container ul li:last-child:after {
+  display: none;
+}
+
+.updates-container ul li:before {
+  position: absolute;
+  content: '';
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background: #00CEBD;
+  top: 0px;
+  left: 0;
+}
+
+.updates-container .subTitle {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.updates-container .comment {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .beat-table-actions {
+    text-align: center;
+  }
+
+  .beat-table-actions .btn {
+    width: auto;
+  }
+
+  .beat-table-actions .btn span {
+    display: none;
+  }
+
+  .table-action-radio {
+    text-align: center;
+    padding-top: 0;
+  }
+}
+
+
+/* Day wise page styles */
+.person-cols {
+  margin: 0;
+}
+
+.person-cols .col-card.col-odd {
+  background: #ebf0f2;
+}
+.person-cols .col-card.col-even {
+  background: #f5f7f8;
+}
+.person-cols .col-head {
+  line-height: 45px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #464646;
+  text-align: left;
+  margin: 0 -15px 15px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 0 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.person-cols .col-head i {
+  display: block;
+  line-height: 45px;
+  float: left;
+  margin-right: 10px;
+}
+.col-height {
+  height: 530px;
+  overflow-y: auto;}
+.header-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: inherit;
+  margin-bottom: 5px;
+}
+.card.slot-card {
+  margin-top: 0;
+  margin-bottom: 15px;
+  box-shadow: 0px 1px 1px 0px rgba(130,145,153,0.5);
+}
+.slot-card.hoverable:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.08);
+}
+.slot-card .card-body {}
+.slot-card label {
+  margin-bottom: 0;
+}
+.free-slot label {
+  display: inline-block;
+}
+.free-slot p.slot-title {
+}
+.slot-card p {}
+.slot-card span {
+  float: left;
+  display: inline-block;
+}
+.slot-card i {
+  margin: 0 5px;
+  display: block;
+  float: left;
+}
+.slot-title {
+  overflow: hidden;
+  font-weight: 500;
+}
+.service-type {}
+.service-type p {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 17px;
+  color: #5d5d5d;
+}
+
+.service-type i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 17px;
+  margin: 0;
+}
+
+.btn-success.disabled, .btn-success:disabled {
+  background: #b5b5b5 !important;
+  color: #fff;
+  box-shadow: none;
+}

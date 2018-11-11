@@ -1,0 +1,89 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title" style="display: inline-block;">Locations</h4>
+            <div class="row pull-right">
+              <div class="col-md-7" style="padding-top: 12px;">
+                <button matTooltip="Previous day"
+                        [matTooltipPosition]="'above'"
+                        mat-raised-button
+                        type="button"
+                        class="btn btn-sm btn-default btn-fab"
+                        (click)="preday()">
+                  <i class="material-icons">chevron_left</i>
+                </button>
+                <button mat-raised-button
+                        type="button"
+                        class="btn btn-link btn-sm btn-success"
+                        style="font-size: 14px; font-weight: 500;">
+                  {{formattedDate|date}}
+                </button>
+                <button matTooltip="Next day"
+                        [matTooltipPosition]="'above'"
+                        mat-raised-button
+                        type="button"
+                        class="btn btn-sm btn-default btn-fab"
+                        (click)="nextday()">
+                  <i class="material-icons">chevron_right</i>
+                </button>
+            </div>
+              <div class="col-md-5">
+                <mat-form-field style="margin-top: 10px;" >
+                  <input matInput name="start_time" style="color: #464646;"
+                         #start_time="ngModel"
+                         [matDatepicker]="startDate"
+                         date="true"
+                         (dateChange)="dateSelected()"
+                         [(ngModel)]="planModel.start_time"
+                         placeholder="Choose a date"
+                         (click)="startDate.open()">
+                  <mat-datepicker-toggle class="date-icon" matSuffix [for]="startDate"></mat-datepicker-toggle>
+                  <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                <tr>
+                  <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let location of cords">
+                  <td>{{location.num}}</td>
+                  <td>{{location.from.substr(11, 5)}}</td>
+                  <td>{{location.till.substr(11, 5)}}</td>
+                  <td *ngIf="+location.duration !== 0">{{location.duration}} minutes</td>
+                  <td *ngIf="+location.duration === 0">---</td>
+                  <td>{{location.addr}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fixed-plugin">
+  <div class="dropdown show-dropdown">
+    <a href="javascript:void(0)"
+       aria-expanded="true"
+       (click)="toggleView()"
+       id="toggleView">
+      <i class="fa fa-filter fa-2x"> </i>
+    </a>
+  </div>
+</div>

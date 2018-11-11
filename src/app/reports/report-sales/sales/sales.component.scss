@@ -1,0 +1,74 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+body.btn-bottom {
+  position: relative;
+}
+
+a, a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+.mobile-body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  min-height: 100vh;
+  padding-top: 15px;
+}
+.page-title {
+  font-weight: 300;
+}
+.report-table {
+  font-size: 13px;
+}
+.report-table th {
+  font-weight: 400;
+  color: #333;
+}
+.report-table td {
+  font-weight: 400;
+  color: #222;
+}
+.report-table tbody th a {
+  color: #00cebd;
+  display: block;
+}
+.report-table td {
+  text-align: center;
+}
+.table-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4a4a4a;
+}
+.btnFixed {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #00cebd;
+  border-radius: 0;
+  line-height: 35px;
+  color: #ffffff;
+  border: 0;
+  border-top: 1px solid #5acfbe;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 14px;
+}
+.btnFixed i {
+  display: inline-block;
+}
+td.status-red {
+  color: #da3f34!important;
+}
+td.status-orange {
+  color: orange!important;
+}
+td.status-green {
+  color: #18bf18!important;
+}

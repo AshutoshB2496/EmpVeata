@@ -1,0 +1,46 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">cloud_upload</i>
+                        </div>
+                        <h4 class="card-title">Select &amp; upload excel file</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="fileDetails">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field>
+                                        <mat-select formControlName="action" placeholder="Choose a option">
+                                            <mat-option value="CreateTLE">Territory Level Employees</mat-option>
+                                            <mat-option value="CreateALE">Area Level Employees</mat-option>
+                                            <mat-option value="CreateRLE">Regional Level Employees</mat-option>
+                                            <mat-option value="CreateZLE">Zone Level Employees</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                    <span class="btn btn-round btn-file btn-sm">
+                                        <span class="fileinput-new">Select file</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" formControlName="image" (change)="onFileChange($event)" name="..."/>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <button type="submit" [disabled]="fileDetails.invalid" (click)="onSubmit()" class="btn btn-fill btn-round btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--accept=".xlx,.xlsx,.csv"-->

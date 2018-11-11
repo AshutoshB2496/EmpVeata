@@ -1,0 +1,161 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!--<div class="card" id="filterContainer">
+                    <div class="card-header ">
+                        <h4 class="card-title">Filter Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-filter">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <legend>Name of Product</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Please type..." type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Collaterals</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Please type..." type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <legend>Variants</legend>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Please type..." type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-right btn-row">
+                                    <button mat-raised-button type="submit" id="resetFilter"
+                                            class="btn btn-round btn-default">Reset Filter(s)
+                                    </button>
+                                    <button mat-raised-button type="submit" class="btn btn-fill btn-round btn-success">
+                                        Apply Filter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <br>
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-success">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs catalogue_tab" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active"
+                                           (click)="getSchemes('c')"
+                                           href="javascript:void(0)"
+                                           data-toggle="tab">
+                                            Currently Running
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                           (click)="getSchemes('p')"
+                                           href="javascript:void(0)"
+                                           data-toggle="tab">
+                                            Past Schemes
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="category_1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of tableData.dataRows; let i = index">
+                                        <td class="proImg">
+                                        <span>
+                                            <a href="#{{i}}" data-toggle="modal">
+                                          <img src="{{row[0]}}"/>
+                                                </a>
+                                        </span>
+                                        </td>
+                                        <td class="proDetail">
+                                            <h3>{{row[1]}} (Validity: {{row[4]}})</h3>
+                                            <span href="javascript:void(0);"
+                                                  style="color: #464646;"
+                                               class="collaterals">
+                                                {{row[2]}}</span>
+                                            <br>
+                                            <div class="packages">
+                                                <span>Applicable Regions: </span>
+                                                <ng-template [ngIf]="!allReg">
+                                                    <span *ngFor="let region of row[5]"> {{region}}</span>
+                                                </ng-template>
+                                                <span *ngIf="allReg"> {{row[5]}}</span>
+                                            </div>
+                                            <br>
+                                            <div class="packages">
+                                                <span class="header-small">Applicable Products: </span>
+                                                <ng-template [ngIf]="!allPro[i]">
+                                                    <span *ngFor="let product of row[6]">{{product}}</span>
+                                                </ng-template>
+                                                <span *ngIf="allPro[i]"> {{row[6]}}</span>
+                                            </div>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <div class="dropdown catlogue_actions">
+                                                <a mat-raised-button
+                                                   class="btn btn-success btn-fab btn-round btn-link">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </a>
+                                                <!--<ul class="dropdown-menu dropdown-menu-right">
+                                                    <li>
+                                                        <a>Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal"
+                                                           data-target="#addPackingsModal"
+                                                           (click)="addAlone(row.group,row.category)">Add variant</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal"
+                                                           data-target="#addCollateralsModal"
+                                                           (click)="addAlone(row.group,row.category)">Add collateral</a>
+                                                    </li>
+                                                    <li>
+                                                        <a>Deactivate</a>
+                                                    </li>
+                                                </ul>-->
+                                            </div>
+                                        </td>
+
+                                        <!-- Modal -->
+
+                                        <div class="modal fade" id="{{i}}" tabindex="-1" role="dialog" aria-labelledby="openImageLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <img src="{{row[0]}}" style="margin: 0 auto; display: block; max-width: 100%; max-height: 400px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+    </div>
+</div>

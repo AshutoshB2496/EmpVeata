@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="mobile-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="table-title">{{monthStr}}</h3>
+          <table class="table table-bordered report-table">
+            <thead class="thead-light">
+            <tr>
+              <th style="width: 100px;">Zone</th>
+              <th class="text-center">Actual</th>
+              <th class="text-center">Target</th>
+              <th class="text-center">Target Achieved</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let zone of zoneData">
+              <th><a href="javascript:void(0)" (click)="regionReport(zone.geography)">{{zone.geography}}</a></th>
+              <td>{{zone.nc_actual}}</td>
+              <td>{{zone.nc_target}}</td>
+              <td [class]="(+zone.nc_target_achieved > 100 ? 'status-green' : (+zone.nc_target_achieved > 90 ? 'status-orange' : 'status-red'))">
+                {{zone.nc_target_achieved}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h3 class="table-title">nc Growth</h3>
+          <table class="table table-bordered report-table">
+            <thead class="thead-light">
+            <tr>
+              <th style="width: 100px;">Zone</th>
+              <th class="text-center">({{month}} {{year}})</th>
+              <th class="text-center">({{previousMonth}} {{year}})</th>
+              <th class="text-center">({{befPreviousMonth}} {{year}})</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let zone of zoneData">
+              <th><a href="javascript:void(0)">{{zone.geography}}</a></th>
+              <td [class]="(+zone.nc_actual > 100 ? 'status-green' : (+zone.nc_actual > 90 ? 'status-orange' : 'status-red'))">{{zone.nc_actual}}</td>
+              <td [class]="(+zone.nc_added_in_prev_month > 100 ? 'status-green' : (+zone.nc_added_in_prev_month > 90 ? 'status-orange' : 'status-red'))">{{zone.nc_added_in_prev_month}}</td>
+              <td [class]="(+zone.nc_added_in_p2p_month > 100 ? 'status-green' : (+zone.nc_added_in_p2p_month > 90 ? 'status-orange' : 'status-red'))">{{zone.nc_added_in_p2p_month}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

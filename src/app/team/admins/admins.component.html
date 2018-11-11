@@ -1,0 +1,137 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" id="filterContainer">
+          <div class="card-header ">
+            <h4 class="card-title">Filter Results</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-filter">
+              <div class="row">
+                <div class="col-md-4">
+                  <legend>Search</legend>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Name, Email, Mobile," type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <legend>Type</legend>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Search by type" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-right btn-row">
+                  <button mat-raised-button type="submit" id="resetFilter" class="btn btn-round btn-default">Reset Filter(s)</button>
+                  <button mat-raised-button type="submit" class="btn btn-fill btn-round btn-success">Apply Filter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body" style="min-height: 450px;">
+            <div class="toolbar table-action-toolbar">
+              <div class="btn-group">
+                <button matTooltip="Download" [matTooltipPosition]="'above'" mat-raised-button type="button" class="btn btn-fab btn-sm btn-rose">
+                  <i class="material-icons">save_alt</i>
+                </button>
+                <button matTooltip="Add Admin" [matTooltipPosition]="'above'" mat-raised-button type="button" class="btn btn-fab btn-sm btn-rose" data-toggle="modal" data-target="#AddAdminModal">
+                  <i class="material-icons">add</i>
+                </button>
+              </div>
+            </div>
+            <div class="material-datatables">
+              <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>{{ dataTable.headerRow[0] }}</th>
+                    <th>{{ dataTable.headerRow[1] }}</th>
+                    <th>{{ dataTable.headerRow[2] }}</th>
+                    <th>{{ dataTable.headerRow[3] }}</th>
+                    <th>{{ dataTable.headerRow[4] }}</th>
+                    <th class="text-center">{{ dataTable.headerRow[5] }}</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>{{ dataTable.footerRow[0] }}</th>
+                    <th>{{ dataTable.footerRow[1] }}</th>
+                    <th>{{ dataTable.footerRow[2] }}</th>
+                    <th>{{ dataTable.footerRow[3] }}</th>
+                    <th>{{ dataTable.footerRow[4] }}</th>
+                    <th class="text-center">{{ dataTable.footerRow[5] }}</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                <tr *ngFor="let row of dataTable.dataRows">
+                  <td>{{row[0]}}</td>
+                  <td>{{row[1]}}</td>
+                  <td>{{row[2]}}</td>
+                  <td>{{row[3]}}</td>
+                  <td>{{row[4]}}</td>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <button mat-raised-button type="button" matTooltip="Deactivate Admin" [matTooltipPosition]="'above'" class="btn btn-success btn-sm">
+                        Deactivate
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- end content-->
+        </div>
+        <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Employee Modal -->
+<div class="modal fade" id="AddAdminModal" tabindex="-1" role="dialog" aria-labelledby="AddAdminModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header text-center">
+          <h3>Add New Admin</h3>
+        </div>
+        <div class="modal-body" style="min-height: 300px;">
+          <form class="add_cust_form">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Name">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Email">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Mobile Number">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Choose Type">
+                  <mat-option *ngFor="let typeid of types" [value]="typeid.value">
+                    {{ typeid.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-fill btn-success btn-round mat-raised-button">Submit</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown" aria-expanded="true" id="showFilter">
+            <i class="fa fa-filter fa-2x"> </i>
+        </a>
+    </div>
+</div>

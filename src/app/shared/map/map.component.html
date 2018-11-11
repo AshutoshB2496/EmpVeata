@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body" style="min-height: 450px;">
+                    <div class="row">
+                        <!--<div class="col-md-4">
+                            <mat-form-field>
+                                <mat-select placeholder="Choose Employee"
+                                            [(value)]="selectedEmployee"
+                                            (selectionChange)="getLocs(selectedEmployee)">
+                                    <mat-option *ngFor="let employee of employees; let i = index" [value]="employee.id">
+                                        {{ employee.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>-->
+
+                            <div class="col-md-5">
+                                <button matTooltip="Previous day"
+                                        [matTooltipPosition]="'above'"
+                                        mat-raised-button
+                                        type="button"
+                                        class="btn btn-sm btn-default btn-fab"
+                                        (click)="preday()">
+                                    <i class="material-icons">chevron_left</i>
+                                </button>
+                                <button mat-raised-button
+                                        type="button"
+                                        class="btn btn-link btn-sm btn-success"
+                                        style="font-size: 14px; font-weight: 500;">
+                                    {{formattedDate|date}}
+                                </button>
+                                <button matTooltip="Next day"
+                                        [matTooltipPosition]="'above'"
+                                        mat-raised-button
+                                        type="button"
+                                        class="btn btn-sm btn-default btn-fab"
+                                        (click)="nextday()">
+                                    <i class="material-icons">chevron_right</i>
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field >
+                                    <input matInput name="start_time" style="color: #464646; padding-bottom: 3px"
+                                           #start_time="ngModel"
+                                           [matDatepicker]="startDate"
+                                           date="true"
+                                           (dateChange)="dateSelected()"
+                                           [(ngModel)]="planModel.start_time"
+                                           placeholder="Choose a date"
+                                           (click)="startDate.open()">
+                                    <mat-datepicker-toggle class="date-icon" matSuffix [for]="startDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #startDate></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select placeholder="Select Visits"
+                                                [(value)]="visitsFilter"
+                                                visit="Customer Visit Only"
+                                                (selectionChange)="applyStatusFilter()"
+                                                ariaLabel="visits[0]">
+                                        <mat-option *ngFor="let visit of visits" [value]="visit">
+                                            {{ visit }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    <div id="map" #map style="width: 100%; height: 500px; margin-top: 0"></div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+</div>

@@ -1,0 +1,763 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body" style="min-height: 450px;">
+            <div class="tree">
+              <ul>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> East</span>
+                  <div class="dropdown">
+                    <button mat-raised-button class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#addSubAreaModal" data-toggle="modal">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#editSubAreaModal" data-toggle="modal">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#bulkAreaModal" data-toggle="modal">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li *ngFor="let region of eastData">
+                      <span><i class="fa fa-plus-square"></i> {{region.name}}</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <ul class="sub_ul">
+                        <li *ngFor="let area of region.areas">
+                          <span><i class="fa fa-leaf"></i> {{area.name}}</span>
+                          <div class="dropdown">
+                            <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                              <i class="material-icons">more_horiz</i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                              <li>
+                                <a href="#pablo">Add Sub-Area</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Details</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Mapping</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> West</span>
+                  <div class="dropdown">
+                    <button mat-raised-button class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#addSubAreaModal" data-toggle="modal">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#editSubAreaModal" data-toggle="modal">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#bulkAreaModal" data-toggle="modal">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li *ngFor="let region of eastData">
+                      <span><i class="fa fa-plus-square"></i> {{region.name}}</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <ul class="sub_ul">
+                        <li *ngFor="let area of region.areas">
+                          <span><i class="fa fa-leaf"></i> {{area.name}}</span>
+                          <div class="dropdown">
+                            <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                              <i class="material-icons">more_horiz</i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                              <li>
+                                <a href="#pablo">Add Sub-Area</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Details</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Mapping</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> North</span>
+                  <div class="dropdown">
+                    <button mat-raised-button class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#addSubAreaModal" data-toggle="modal">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#editSubAreaModal" data-toggle="modal">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#bulkAreaModal" data-toggle="modal">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li *ngFor="let region of eastData">
+                      <span><i class="fa fa-plus-square"></i> {{region.name}}</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <ul class="sub_ul">
+                        <li *ngFor="let area of region.areas">
+                          <span><i class="fa fa-leaf"></i> {{area.name}}</span>
+                          <div class="dropdown">
+                            <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                              <i class="material-icons">more_horiz</i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                              <li>
+                                <a href="#pablo">Add Sub-Area</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Details</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Mapping</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> South</span>
+                  <div class="dropdown">
+                    <button mat-raised-button class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#addSubAreaModal" data-toggle="modal">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#editSubAreaModal" data-toggle="modal">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#bulkAreaModal" data-toggle="modal">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li *ngFor="let region of eastData">
+                      <span><i class="fa fa-plus-square"></i> {{region.name}}</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <ul class="sub_ul">
+                        <li *ngFor="let area of region.areas">
+                          <span><i class="fa fa-leaf"></i> {{area.name}}</span>
+                          <div class="dropdown">
+                            <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                              <i class="material-icons">more_horiz</i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                              <li>
+                                <a href="#pablo">Add Sub-Area</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Details</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Edit Mapping</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                              <li>
+                                <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <!--<li>
+                  <span><i class="fa fa-folder-open"></i> East</span>
+                  <div class="dropdown">
+                    <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#pablo">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Arunachal Pradesh</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Assam</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Bihar</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Chattisgarh</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Jharkhand</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> South</span>
+                  <div class="dropdown">
+                    <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#pablo">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Goa</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Karnataka</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Kerala</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Lakshadweep</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Telangana</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> West</span>
+                  <div class="dropdown">
+                    <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#pablo">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Child</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span><i class="fa fa-folder-open"></i> Central</span>
+                  <div class="dropdown">
+                    <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                      <i class="material-icons">more_horiz</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                      <li>
+                        <a href="#pablo">Add Sub-Area</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Details</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Edit Mapping</a>
+                      </li>
+                      <li>
+                        <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class="sub_ul">
+                    <li>
+                      <span><i class="fa fa-leaf"></i> Child</span>
+                      <div class="dropdown">
+                        <button mat-raised-button href="#dd" class="dropdown-toggle btn btn-success btn-round btn-fab btn-sm btn-link" data-toggle="dropdown">
+                          <i class="material-icons">more_horiz</i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                          <li>
+                            <a href="#pablo">Add Sub-Area</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Details</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Edit Mapping</a>
+                          </li>
+                          <li>
+                            <a href="#pablo">Upload Sub-Areas in Bulk</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </li>-->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Sub Area Modal -->
+<div class="modal fade" id="addSubAreaModal" tabindex="-1" role="dialog" aria-labelledby="addSubAreaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Sub-Area</h3>
+      </div>
+      <form class="add_cust_form">
+        <div class="modal-body">
+          <p>Parent: <b>North</b></p>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Sub-Area Name">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Sub-Area Code (Optional)">
+          </mat-form-field>
+        </div>
+        <div class="modal-footer">
+          <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
+          <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Sub Area Modal -->
+<div class="modal fade" id="editSubAreaModal" tabindex="-1" role="dialog" aria-labelledby="editSubAreaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Sub-Area</h3>
+      </div>
+      <form class="add_cust_form">
+        <div class="modal-body">
+          <p>Parent: <b>North</b></p>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Sub-Area Name" value="Punjab">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Sub-Area Code (Optional)" value="PB">
+          </mat-form-field>
+        </div>
+        <div class="modal-footer">
+          <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
+          <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Bulk Sub Area Modal -->
+<div class="modal fade" id="bulkAreaModal" tabindex="-1" role="dialog" aria-labelledby="bulkAreaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Upload Sub-Areas in Bulk</h3>
+      </div>
+      <form class="add_cust_form">
+        <div class="modal-body text-center">
+          <button mat-raised-button class="btn btn-success btn-link">
+            <i class="material-icons">save_alt</i> Download .xlsx template
+          </button>
+          <br>
+          <br>
+          <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+            <div class="fileinput-new thumbnail">
+              <img src="./assets/img/image_placeholder.jpg" alt="...">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+            <div>
+                  <span class="btn btn-rose btn-round btn-file">
+                      <span class="fileinput-new">Select xlxs</span>
+                      <span class="fileinput-exists">Change</span>
+                      <input type="file" name="..." />
+                  </span>
+              <a href="#pablo" class="btn btn-success btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
+          <button mat-raised-button type="submit" class="btn btn-fill btn-rose btn-round">Submit</button>
+        </div> -->
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1341 @@
+<br>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-md-9 mr-auto ml-auto">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+                <div class="card card-wizard" data-color="green" id="wizardProfile">
+                    <form [formGroup]="incentiveForm" (ngSubmit)="onSubmit()">
+                        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                        <div class="card-header text-center">
+                            <h3 class="card-title">
+                                Incentive Configuration
+                            </h3>
+                            <!-- <h5 class="card-description">This information will let us know more about you.</h5> -->
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#step_1" data-toggle="tab" role="tab">
+                                        Step 1
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#step_2" data-toggle="tab" role="tab">
+                                        Step 2
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#step_3" data-toggle="tab" role="tab">
+                                        Step 3a
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#step_4" data-toggle="tab" role="tab">
+                                        Step 3b
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#step_5" data-toggle="tab" role="tab">
+                                        Step 3c
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#step_6" data-toggle="tab" role="tab">
+                                        Step 4
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" formGroupName="tab1" id="step_1">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Scheme Name</label>
+                                                <div class="col-sm-8">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput
+                                                               type="text"
+                                                               formControlName="schemeName">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Based on</label>
+                                                <div class="col-sm-8 checkbox-radios">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="basedOn"
+                                                                   value="monthly"> Monthly Sales
+                                                            <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="basedOn"
+                                                                   value="quarterly"> Quarterly Sales
+                                                            <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="basedOn"
+                                                                   value="yearly"> Yearly Sales
+                                                            <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Calculation based on</label>
+                                                <div class="col-sm-8 checkbox-radios">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="calcBasedOn"
+                                                                   value="sales"> Sales value
+                                                            <button mat-raised-button
+                                                                    class="btn btn-default infoBtn"
+                                                                    matTooltip="Help text"
+                                                                    [matTooltipPosition]="'below'">
+                                                                <i class="material-icons">error_outline</i>
+                                                            </button>
+                                                            <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="calcBasedOn"
+                                                                   value="target"> % of target
+                                                            <button mat-raised-button
+                                                                    class="btn btn-default infoBtn"
+                                                                    matTooltip="Help text 2"
+                                                                    [matTooltipPosition]="'below'">
+                                                                <i class="material-icons">error_outline</i>
+                                                            </button>
+                                                            <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Hierarchy</label>
+                                                <div class="col-sm-8" style="    margin-top: -5px;">
+                                                    <mat-form-field>
+                                                        <mat-select multiple>
+                                                            <mat-option>All</mat-option>
+                                                            <mat-option>Level 1</mat-option>
+                                                            <mat-option>Level 2</mat-option>
+                                                            <mat-option>Level 3</mat-option>
+                                                            <mat-option>Level 4</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Regions</label>
+                                                <div class="col-sm-8" style="    margin-top: -5px;">
+                                                    <mat-form-field>
+                                                        <mat-select multiple>
+                                                            <mat-option>All</mat-option>
+                                                            <mat-option>Punjab</mat-option>
+                                                            <mat-option>Haryana</mat-option>
+                                                            <mat-option>West Bengal</mat-option>
+                                                            <mat-option>Orissa</mat-option>
+                                                            <mat-option>Tamil Nadu</mat-option>
+                                                            <mat-option>Kerala</mat-option>
+                                                            <mat-option>Maharashtra</mat-option>
+                                                            <mat-option>Gujrat</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" formGroupName="tab2" id="step_2">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <div class="table-responsive">
+                                                <table class="table parameters-table bordered">
+                                                    <thead class="border-head">
+                                                    <tr>
+                                                        <th style="width: 70%;">Parameters</th>
+                                                        <th>Weightage</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label">
+                                                                    3A: Sales
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <mat-form-field class="table-input">
+                                                                <input matInput placeholder=""
+                                                                       type="text"
+                                                                       formControlName="sales"
+                                                                       [value]="salesValue">
+                                                            </mat-form-field>
+                                                            <b>%</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label">
+                                                                    3B: AR
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <mat-form-field class="table-input">
+                                                                <input matInput placeholder=""
+                                                                       type="text"
+                                                                       (input)="updateValues('a')"
+                                                                       formControlName="ar"
+                                                                       [value]="arValue">
+                                                            </mat-form-field>
+                                                            <b>%</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label">
+                                                                    3C: New Customers
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <mat-form-field class="table-input">
+                                                                <input matInput placeholder=""
+                                                                       type="text"
+                                                                       formControlName="customers"
+                                                                       (input)="updateValues('c')"
+                                                                       [value]="customersValue">
+                                                            </mat-form-field>
+                                                            <b>%</b>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" formGroupName="tab3" id="step_3">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Calculation Algorithm</label>
+                                                <div class="col-sm-8 checkbox-radios">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   value="variable"
+                                                                   (input)="fixedSelect('v', 'tab3')"
+                                                                   [checked]="true"> Variable
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   (input)="fixedSelect('i', 'tab3')"
+                                                                   formControlName="algo"
+                                                                   value="incremental"> Incremental
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   (input)="fixedSelect('f', 'tab3')"
+                                                                   value="Fixed"> Fixed
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table bordered" style="margin-top: 20px;min-width: 500px;">
+                                                <thead class="border-head">
+                                                <tr>
+                                                    <th rowspan="2">Incentive Levels</th>
+                                                    <th colspan="2">Sales Target (&#8377;)</th>
+                                                    <th rowspan="2" style="width: 80px;text-align: center;">Variable
+                                                    </th>
+                                                    <th rowspan="2" style="width: 80px;">Fixed</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width: 80px;">From</th>
+                                                    <th style="width: 80px;">To</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level1"
+                                                                   value="Level 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   min="0"
+                                                                   formControlName="from1"
+                                                                   value="0">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'from1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="to1">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to1']).value < incentiveForm.get(['tab3', 'from1']).value && incentiveForm.get(['tab3', 'to1']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab3', 'from1']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable1" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed1"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level2"
+                                                                   value="Level 2">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from2"
+                                                                   [min]="this.incentiveForm.get('tab3').get('to1').value + 1 "
+                                                                   [value]="this.incentiveForm.get('tab3').get('to1').value + 1 === 1 ? 0 : this.incentiveForm.get('tab3').get('to1').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(2)"
+                                                                   formControlName="to2">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to2']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to2']).value < incentiveForm.get(['tab3', 'from2']).value && incentiveForm.get(['tab3', 'to2']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab3', 'from2']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable2" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed2"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level3"
+                                                                   value="Level 3">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from3"
+                                                                   [min]="this.incentiveForm.get('tab3').get('to2').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab3').get('to2').value + 1 === 1 ? 0 : this.incentiveForm.get('tab3').get('to2').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(3)"
+                                                                   formControlName="to3">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to3']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to3']).value < incentiveForm.get(['tab3', 'from3']).value && incentiveForm.get(['tab3', 'to3']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab3', 'from3']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable3" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed3"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level4"
+                                                                   value="Level 4">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from4"
+                                                                   [min]="this.incentiveForm.get('tab3').get('to3').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab3').get('to3').value + 1 === 1 ? 0 : this.incentiveForm.get('tab3').get('to3').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(4)"
+                                                                   formControlName="to4">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to4']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab3', 'to4']).value < incentiveForm.get(['tab3', 'from4']).value && incentiveForm.get(['tab3', 'to4']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab3', 'from4']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable4" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed4"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level5"
+                                                                   value="Level 5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from5"
+                                                                   [min]="this.incentiveForm.get('tab3').get('to4').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab3').get('to4').value + 1 === 1 ? 0 : this.incentiveForm.get('tab3').get('to4').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(5)"
+                                                                   formControlName="to5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable5" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed5"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" formGroupName="tab4" id="step_4">
+                                    <div *ngIf="arValue > 0" class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Calculation Algorithm</label>
+                                                <div class="col-sm-8 checkbox-radios">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   value="variable"
+                                                                   (input)="fixedSelect('v', 'tab4')"
+                                                                   [checked]="true"> Variable
+                                                            <span class="circle">
+                                                  <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   (input)="fixedSelect('i', 'tab4')"
+                                                                   formControlName="algo"
+                                                                   value="incremental"> Incremental
+                                                            <span class="circle">
+                                                  <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   (input)="fixedSelect('f', 'tab4')"
+                                                                   value="Fixed"> Fixed
+                                                            <span class="circle">
+                                                  <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table bordered" style="margin-top: 20px;min-width: 500px;">
+                                                <thead class="border-head">
+                                                <tr>
+                                                    <th rowspan="2">Incentive Levels</th>
+                                                    <th colspan="2">AR Target (Days)</th>
+                                                    <th rowspan="2" style="width: 80px;text-align: center;">Variable
+                                                    </th>
+                                                    <th rowspan="2" style="width: 80px;">Fixed</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width: 80px;">From</th>
+                                                    <th style="width: 80px;">To</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level1"
+                                                                   value="Level 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   min="0"
+                                                                   formControlName="from1"
+                                                                   value="0">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'from1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="to1">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to1']).value < incentiveForm.get(['tab4', 'from1']).value && incentiveForm.get(['tab4', 'to1']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab4', 'from1']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable1" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed1"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level2"
+                                                                   value="Level 2">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from2"
+                                                                   [min]="this.incentiveForm.get('tab4').get('to1').value + 1 "
+                                                                   [value]="this.incentiveForm.get('tab4').get('to1').value + 1 === 1 ? 0 : this.incentiveForm.get('tab4').get('to1').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(2)"
+                                                                   formControlName="to2">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to2']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to2']).value < incentiveForm.get(['tab4', 'from2']).value && incentiveForm.get(['tab4', 'to2']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab4', 'from2']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable2" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed2"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level3"
+                                                                   value="Level 3">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from3"
+                                                                   [min]="this.incentiveForm.get('tab4').get('to2').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab4').get('to2').value + 1 === 1 ? 0 : this.incentiveForm.get('tab4').get('to2').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(3)"
+                                                                   formControlName="to3">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to3']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to3']).value < incentiveForm.get(['tab4', 'from3']).value && incentiveForm.get(['tab4', 'to3']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab4', 'from3']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable3" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed3"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level4"
+                                                                   value="Level 4">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from4"
+                                                                   [min]="this.incentiveForm.get('tab4').get('to3').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab4').get('to3').value + 1 === 1 ? 0 : this.incentiveForm.get('tab4').get('to3').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(4)"
+                                                                   formControlName="to4">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to4']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab4', 'to4']).value < incentiveForm.get(['tab4', 'from4']).value && incentiveForm.get(['tab4', 'to4']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab4', 'from4']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable4" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed4"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level5"
+                                                                   value="Level 5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from5"
+                                                                   [min]="this.incentiveForm.get('tab4').get('to4').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab4').get('to4').value + 1 === 1 ? 0 : this.incentiveForm.get('tab4').get('to4').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(5)"
+                                                                   formControlName="to5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable5" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed5"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="arValue <= 0" class="row justify-content-center">
+                                        <h5>AR weightage has not been given</h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" formGroupName="tab5" id="step_5">
+                                    <div *ngIf="customersValue > 0" class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Calculation Algorithm</label>
+                                                <div class="col-sm-8 checkbox-radios">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   value="variable"
+                                                                   (input)="fixedSelect('v', 'tab5')"
+                                                                   [checked]="true"> Variable
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   (input)="fixedSelect('i', 'tab5')"
+                                                                   formControlName="algo"
+                                                                   value="incremental"> Incremental
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="radio"
+                                                                   formControlName="algo"
+                                                                   (input)="fixedSelect('f', 'tab5')"
+                                                                   value="Fixed"> Fixed
+                                                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table bordered" style="margin-top: 20px;min-width: 500px;">
+                                                <thead class="border-head">
+                                                <tr>
+                                                    <th rowspan="2">Incentive Levels</th>
+                                                    <th colspan="2">New Customers Target (count)</th>
+                                                    <th rowspan="2" style="width: 80px;text-align: center;">Variable
+                                                    </th>
+                                                    <th rowspan="2" style="width: 80px;">Fixed</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width: 80px;">From</th>
+                                                    <th style="width: 80px;">To</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level1"
+                                                                   value="Level 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   min="0"
+                                                                   formControlName="from1"
+                                                                   value="0">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'from1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="to1">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to1']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to1']).value < incentiveForm.get(['tab5', 'from1']).value && incentiveForm.get(['tab5', 'to1']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab5', 'from1']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable1" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed1"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level2"
+                                                                   value="Level 2">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from2"
+                                                                   [min]="this.incentiveForm.get('tab5').get('to1').value + 1 "
+                                                                   [value]="this.incentiveForm.get('tab5').get('to1').value + 1 === 1 ? 0 : this.incentiveForm.get('tab5').get('to1').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(2)"
+                                                                   formControlName="to2">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to2']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to2']).value < incentiveForm.get(['tab5', 'from2']).value && incentiveForm.get(['tab5', 'to2']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab5', 'from2']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable2" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed2"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level3"
+                                                                   value="Level 3">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from3"
+                                                                   [min]="this.incentiveForm.get('tab5').get('to2').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab5').get('to2').value + 1 === 1 ? 0 : this.incentiveForm.get('tab5').get('to2').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(3)"
+                                                                   formControlName="to3">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to3']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to3']).value < incentiveForm.get(['tab5', 'from3']).value && incentiveForm.get(['tab5', 'to3']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab5', 'from3']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable3" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed3"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level4"
+                                                                   value="Level 4">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from4"
+                                                                   [min]="this.incentiveForm.get('tab5').get('to3').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab5').get('to3').value + 1 === 1 ? 0 : this.incentiveForm.get('tab5').get('to3').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(4)"
+                                                                   formControlName="to4">
+                                                        </mat-form-field>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to4']).value < 0">
+                                                Cannot be less than 0
+                                            </span>
+                                                        <span class="help-block text-danger"
+                                                              *ngIf="incentiveForm.get(['tab5', 'to4']).value < incentiveForm.get(['tab5', 'from4']).value && incentiveForm.get(['tab5', 'to4']).value > 0">
+                                                Cannot be less than {{incentiveForm.get(['tab5', 'from4']).value}}
+                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable4" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed4"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <mat-form-field class="table-input text-left">
+                                                            <input matInput type="text" formControlName="level5"
+                                                                   value="Level 5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   formControlName="from5"
+                                                                   [min]="this.incentiveForm.get('tab5').get('to4').value + 1"
+                                                                   [value]="this.incentiveForm.get('tab5').get('to4').value + 1 === 1 ? 0 : this.incentiveForm.get('tab5').get('to4').value + 1">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput
+                                                                   type="number"
+                                                                   (change)="updateFrom(5)"
+                                                                   formControlName="to5">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" type="text"
+                                                                   formControlName="variable5" value="0">
+                                                        </mat-form-field>
+                                                        <b>%</b>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="table-input">
+                                                            <input matInput placeholder="" formControlName="fixed5"
+                                                                   type="text">
+                                                        </mat-form-field>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="customersValue <= 0" class="row">
+                                        <!--<h5>New Customers weightage has not been given</h5>-->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!--Line 1-->
+                                                <div class="inline-sentence">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    Top
+                                                    <div class="inline-drop">
+                                                        <mat-form-field style="width: 70px;">
+                                                            <mat-select placeholder="Select">
+                                                                <mat-option value="option">01</mat-option>
+                                                                <mat-option value="option">02</mat-option>
+                                                                <mat-option value="option">03</mat-option>
+                                                                <mat-option value="option">04</mat-option>
+                                                                <mat-option value="option">05</mat-option>
+                                                                <mat-option value="option">06</mat-option>
+                                                                <mat-option value="option">07</mat-option>
+                                                                <mat-option value="option">08</mat-option>
+                                                                <mat-option value="option">09</mat-option>
+                                                                <mat-option value="option">10</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    In a zone by
+                                                    <div class="inline-drop">
+                                                        <mat-form-field style="width: 105px;">
+                                                            <mat-select placeholder="Select">
+                                                                <mat-option value="option">Sales</mat-option>
+                                                                <mat-option value="option">Overall Score</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    would get extra &#8377;
+                                                    <div class="inline-input">
+                                                        <mat-form-field style="width: 65px;">
+                                                            <input matInput placeholder="Amount">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    each.
+                                                </div>
+                                                <!--Line 2-->
+                                                <div class="inline-sentence">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="">
+                                                            <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                                        </label>
+                                                    </div>
+                                                    Top
+                                                    <div class="inline-drop">
+                                                        <mat-form-field style="width: 70px;">
+                                                            <mat-select placeholder="Select">
+                                                                <mat-option value="option">01</mat-option>
+                                                                <mat-option value="option">02</mat-option>
+                                                                <mat-option value="option">03</mat-option>
+                                                                <mat-option value="option">04</mat-option>
+                                                                <mat-option value="option">05</mat-option>
+                                                                <mat-option value="option">06</mat-option>
+                                                                <mat-option value="option">07</mat-option>
+                                                                <mat-option value="option">08</mat-option>
+                                                                <mat-option value="option">09</mat-option>
+                                                                <mat-option value="option">10</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    In a Region by
+                                                    <div class="inline-drop">
+                                                        <mat-form-field style="width: 105px;">
+                                                            <mat-select placeholder="Select">
+                                                                <mat-option value="option">Sales</mat-option>
+                                                                <mat-option value="option">Overall Score</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    would get extra &#8377;
+                                                    <div class="inline-input">
+                                                        <mat-form-field style="width: 65px;">
+                                                            <input matInput placeholder="Amount">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    each.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" formGroupName="tab5" id="step_6">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <!--Line 1-->
+                                            <div class="inline-sentence">
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                                    </label>
+                                                </div>
+                                                Top
+                                                <div class="inline-drop">
+                                                    <mat-form-field style="width: 70px;">
+                                                        <mat-select placeholder="Select">
+                                                            <mat-option value="option">01</mat-option>
+                                                            <mat-option value="option">02</mat-option>
+                                                            <mat-option value="option">03</mat-option>
+                                                            <mat-option value="option">04</mat-option>
+                                                            <mat-option value="option">05</mat-option>
+                                                            <mat-option value="option">06</mat-option>
+                                                            <mat-option value="option">07</mat-option>
+                                                            <mat-option value="option">08</mat-option>
+                                                            <mat-option value="option">09</mat-option>
+                                                            <mat-option value="option">10</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                employees in a zone by
+                                                <div class="inline-drop">
+                                                    <mat-form-field style="width: 105px;">
+                                                        <mat-select placeholder="Select">
+                                                            <mat-option value="option">Sales</mat-option>
+                                                            <mat-option value="option">Overall Score</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                would get extra bonus of &#8377;
+                                                <div class="inline-input">
+                                                    <mat-form-field style="width: 65px;">
+                                                        <input matInput placeholder="Amount">
+                                                    </mat-form-field>
+                                                </div>
+                                                each.
+                                            </div>
+                                            <!--Line 2-->
+                                            <div class="inline-sentence">
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                                    </label>
+                                                </div>
+                                                Top
+                                                <div class="inline-drop">
+                                                    <mat-form-field style="width: 70px;">
+                                                        <mat-select placeholder="Select">
+                                                            <mat-option value="option">01</mat-option>
+                                                            <mat-option value="option">02</mat-option>
+                                                            <mat-option value="option">03</mat-option>
+                                                            <mat-option value="option">04</mat-option>
+                                                            <mat-option value="option">05</mat-option>
+                                                            <mat-option value="option">06</mat-option>
+                                                            <mat-option value="option">07</mat-option>
+                                                            <mat-option value="option">08</mat-option>
+                                                            <mat-option value="option">09</mat-option>
+                                                            <mat-option value="option">10</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                employees in a Region by
+                                                <div class="inline-drop">
+                                                    <mat-form-field style="width: 105px;">
+                                                        <mat-select placeholder="Select">
+                                                            <mat-option value="option">Sales</mat-option>
+                                                            <mat-option value="option">Overall Score</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                would get extra bonus of &#8377;
+                                                <div class="inline-input">
+                                                    <mat-form-field style="width: 65px;">
+                                                        <input matInput placeholder="Amount">
+                                                    </mat-form-field>
+                                                </div>
+                                                each.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="mr-auto">
+                                <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled"
+                                       name="previous" value="Previous">
+                            </div>
+                            <div class="ml-auto">
+                                <input type="button" class="btn btn-next btn-fill btn-success btn-wd" name="next"
+                                       value="Next">
+                                <button type="submit" class="btn btn-finish btn-fill btn-success btn-wd">Finish</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- wizard container -->
+        </div>
+    </div>
+</div>

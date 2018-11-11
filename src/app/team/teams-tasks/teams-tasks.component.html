@@ -1,0 +1,436 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-success">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">My Tasks:</span>
+                                <ul class="nav nav-tabs tasks_tab" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#due_today_tasks" (click)="refreshDue()"
+                                           data-toggle="tab">
+                                            <i class="material-icons">access_time</i> Due Today/OverDue
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#open_tasks" (click)="refreshOpen()"
+                                           data-toggle="tab">
+                                            <i class="material-icons">assignment</i> Open
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#marked_done_tasks" (click)="refreshMarked()"
+                                           data-toggle="tab">
+                                            <i class="material-icons">done</i> Closed
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#completed_tasks" (click)="refreshCompleted()"
+                                           data-toggle="tab">
+                                            <i class="material-icons">done_all</i> Archived
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-actions">
+                                    <mat-form-field class="tab-action-drop">
+                                        <mat-select [(ngModel)]="employeeId" (change)="filter()"
+                                                    placeholder="Choose Employee" ariaLabel="names[0]">
+                                            <mat-option value="">All</mat-option>
+                                            <mat-option *ngFor="let member of team" [value]="member.id">
+                                                {{ member.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button mat-raised-button mat-min-fab
+                                            class="btn btn-success btn-just-icon btn-round" matTooltip="Add Task"
+                                            [matTooltipPosition]="'above'"
+                                            data-toggle="modal" data-target="#newtaskModal">
+                                        <i class="material-icons" style="color: #00cebd !important;">add</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="due_today_tasks">
+                                <table *ngIf="tasks_due_today.length==0" class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><h3 class="text-center">No Tasks Available</h3></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="tasks_due_today.length!=0" class="table">
+                                    <tr *ngFor="let row of tasks_due_today;">
+                                        <td class="taskTitle">
+                                            <h4>{{row.task}}</h4>
+                                            <a (click)="updateHistory(row.id)" href="#taskUpdates"
+                                               data-toggle="modal">{{row.updates_count}} Update(s) on this task</a>
+                                            <br>
+                                            <span *ngIf="(row.overdue!=1)&&(row.due_date!=null)">Due-Date: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.overdue==1)&&(row.due_date!=null)"
+                                                  class="danger-span">Overdue Since: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.due_date==null)">Due-Date: Not Specified</span>
+                                            <span>Last Update: {{row.updated_at|date}}</span>
+                                            <span>Assigned To: {{row.Employee[0].name}}</span>
+                                            <span *ngIf="row.type!=null">Label: {{row.type}}</span>
+                                            <span *ngIf="row.priority=='High'" class="danger-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Medium'" class="warn-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Low'"
+                                                  class="low-span">Priority: {{row.priority}}</span>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                                <span *ngFor="let action of row.user_actions">
+                                                    <button mat-raised-button *ngIf="action=='MarkComplete'"
+                                                            type="button" matTooltip="Archive"
+                                                            [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkComplete(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done_all</i>
+                                                    </button>
+                                                    <button mat-raised-button *ngIf="action=='MarkDone'" type="button"
+                                                            matTooltip="Done/Close" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkDone(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForComment(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Delete'"
+                                                            matTooltip="Delete" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForDelete(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                    <button
+                                                            mat-raised-button type="button" *ngIf="action=='Schedule'"
+                                                            matTooltip="Set Target Date" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSchedule(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">date_range</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            *ngIf="action=='SetReminder'"
+                                                            matTooltip="Set Reminder" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSetReminder(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">notification_important</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Reopen'"
+                                                            matTooltip="Reopen" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForReOpen(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">refresh</i>
+                                                    </button>
+                                                </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="open_tasks">
+                                <table *ngIf="tasks_open.length==0" class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><h3 class="text-center">No Tasks Available</h3></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="tasks_open.length!=0" class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of tasks_open">
+                                        <td class="taskTitle">
+                                            <h4>{{row.task}}</h4>
+                                            <a (click)="updateHistory(row.id)" href="#taskUpdates"
+                                               data-toggle="modal">{{row.updates_count}} Update(s) on this task</a>
+                                            <br>
+                                            <span *ngIf="(row.overdue!=1)&&(row.due_date!=null)">Due-Date: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.overdue==1)&&(row.due_date!=null)"
+                                                  class="danger-span">Overdue Since: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.due_date==null)">Due-Date: Not Specified</span>
+                                            <span>Last Update: {{row.updated_at|date}}</span>
+                                            <span>Assigned To: {{row.Employee[0].name}}</span>
+                                            <span *ngIf="row.type!=null">Label: {{row.type}}</span>
+                                            <span *ngIf="row.priority=='High'" class="danger-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Medium'" class="warn-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Low'"
+                                                  class="low-span">Priority: {{row.priority}}</span>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                                <span *ngFor="let action of row.user_actions">
+                                                    <button mat-raised-button *ngIf="action=='MarkComplete'"
+                                                            type="button" matTooltip="Archive"
+                                                            [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkComplete(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done_all</i>
+                                                    </button>
+                                                    <button mat-raised-button *ngIf="action=='MarkDone'" type="button"
+                                                            matTooltip="Done/Close" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkDone(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForComment(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Delete'"
+                                                            matTooltip="Delete" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForDelete(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                    <button
+                                                            mat-raised-button type="button" *ngIf="action=='Schedule'"
+                                                            matTooltip="Set Target Date" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSchedule(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">date_range</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            *ngIf="action=='SetReminder'"
+                                                            matTooltip="Set Reminder" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSetReminder(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">notification_important</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Reopen'"
+                                                            matTooltip="Reopen" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForReOpen(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">refresh</i>
+                                                    </button>
+                                                </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="marked_done_tasks">
+                                <table *ngIf="tasks_marked_done.length==0" class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><h3 class="text-center">No Tasks Available</h3></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="tasks_marked_done.length!=0" class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of tasks_marked_done">
+                                        <td class="taskTitle">
+                                            <h4>{{row.task}}</h4>
+                                            <a (click)="updateHistory(row.id)" href="#taskUpdates"
+                                               data-toggle="modal">{{row.updates_count}} Update(s) on this task</a>
+                                            <br>
+                                            <span *ngIf="(row.due_date!=null)">Due-Date: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.due_date==null)">Due-Date: Not Specified</span>
+                                            <span>Last Update: {{row.updated_at|date}}</span>
+                                            <span>Assigned To: {{row.Employee[0].name}}</span>
+                                            <span *ngIf="row.type!=null">Label: {{row.type}}</span>
+                                            <span *ngIf="row.priority=='High'" class="danger-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Medium'" class="warn-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Low'"
+                                                  class="low-span">Priority: {{row.priority}}</span>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                                <span *ngFor="let action of row.user_actions">
+                                                    <button mat-raised-button *ngIf="action=='MarkComplete'"
+                                                            type="button" matTooltip="Archive"
+                                                            [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkComplete(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done_all</i>
+                                                    </button>
+                                                    <button mat-raised-button *ngIf="action=='MarkDone'" type="button"
+                                                            matTooltip="Done/Close" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForMarkDone(row.unique_code)"
+                                                            class="btn btn-success btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForComment(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Delete'"
+                                                            matTooltip="Delete" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForDelete(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                    <button
+                                                            mat-raised-button type="button" *ngIf="action=='Schedule'"
+                                                            matTooltip="Set Target Date" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSchedule(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">date_range</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            *ngIf="action=='SetReminder'"
+                                                            matTooltip="Set Reminder" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForSetReminder(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">notification_important</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button" *ngIf="action=='Reopen'"
+                                                            matTooltip="Reopen" [matTooltipPosition]="'above'"
+                                                            (click)="openDialogForReOpen(row.unique_code)"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">refresh</i>
+                                                    </button>
+                                                </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="completed_tasks">
+                                <table *ngIf="tasks_completed.length==0" class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><h3 class="text-center">No Tasks Available</h3></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="tasks_completed.length!=0" class="table">
+                                    <tbody>
+                                    <tr *ngFor="let row of tasks_completed">
+                                        <td class="taskTitle">
+                                            <h4>{{row.task}}</h4>
+                                            <a (click)="updateHistory(row.id)" href="#taskUpdates"
+                                               data-toggle="modal">{{row.updates_count}} Update(s) on this task</a>
+                                            <br>
+                                            <span *ngIf="(row.due_date!=null)">Due-Date: {{row.due_date|date}}</span>
+                                            <span *ngIf="(row.due_date==null)">Due-Date: Not Specified</span>
+                                            <span>Last Update: {{row.updated_at|date}}</span>
+                                            <span>Assigned To: {{row.Employee[0].name}}</span>
+                                            <span *ngIf="row.type!=null">Label: {{row.type}}</span>
+                                            <span *ngIf="row.priority=='High'" class="danger-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Medium'" class="warn-span">Priority: {{row.priority}}</span>
+                                            <span *ngIf="row.priority=='Low'"
+                                                  class="low-span">Priority: {{row.priority}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Updates of Task Modal -->
+<div class="modal fade" id="taskUpdates" tabindex="-1" role="dialog" aria-labelledby="taskUpdatesLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="taskUpdatesLabel">Update(s) on the task</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="updates-container">
+                    <ul>
+                        <li *ngFor="let item of history">
+                            <i class="{{item.action_icon}}"></i>
+                            <label>
+                                <h5><i class="fa fa-user-o"></i> {{item.actor_name}}
+                                    {{item.success_message}} on {{item.created_at|date: "MMM d,yyyy h:mm a"}}
+                                </h5>
+                            </label>
+                            <p *ngIf="item.subtitle!=null" class="subTitle">{{item.subtitle}}</p>
+                            <p class="comment">{{item.comment}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Task Modal -->
+<div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog" aria-labelledby="newtaskModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newtaskModalLabel">Add New Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form [formGroup]="tasks">
+                            <legend>Task</legend>
+                            <mat-form-field class="example-full-width">
+                                <input formControlName="task" matInput placeholder="Type here..." type="text">
+                                <mat-error>Task is Required</mat-error>
+                            </mat-form-field>
+                            <legend>Due Date</legend>
+                            <mat-form-field>
+                                <input matInput [min]="minDate" formControlName="duedate" [matDatepicker]="picker"
+                                       placeholder="Choose a date" (click)="picker.open()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error>Due Date is Required</mat-error>
+                            </mat-form-field>
+                            <legend>Assignee</legend>
+                            <mat-form-field>
+                                <mat-select formControlName="assignee" placeholder="Choose Assignee"
+                                            ariaLabel="names[0]">
+                                    <mat-option *ngFor="let member of team" [value]="member.id">
+                                        {{ member.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <legend>Label</legend>
+                            <mat-form-field>
+                                <mat-select formControlName="label" placeholder="Choose Label" ariaLabel="names[0]">
+                                    <mat-option *ngFor="let name of labels" [value]="name.label">
+                                        {{ name.label }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Label is Required</mat-error>
+                            </mat-form-field>
+                            <legend>Priority</legend>
+                            <mat-radio-group style="display: flex;justify-content: space-around;width: 250px"
+                                             formControlName="priority">
+                                <mat-radio-button [value]="'Low'">Low</mat-radio-button>
+                                <mat-radio-button [value]="'Medium'">Medium</mat-radio-button>
+                                <mat-radio-button [value]="'High'">High</mat-radio-button>
+                            </mat-radio-group>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" [disabled]="tasks.invalid" (click)="addTask()"
+                        data-dismiss="modal">Create Task
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

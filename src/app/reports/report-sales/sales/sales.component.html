@@ -1,0 +1,50 @@
+<div class="main-content">
+    <div class="mobile-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="table-title">{{month}} {{year}}</h3>
+                    <table class="table table-bordered report-table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="width: 100px;">Zone</th>
+                            <th class="text-center">Sales(&#8377;)</th>
+                            <th class="text-center">Target Achived</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let zone of zoneData">
+                            <th><a href="javascript:void(0)" (click)="regionReport(zone.geography)">{{zone.geography}}</a></th>
+                            <td>{{zone.sales_actual}}</td>
+                            <td [class]="(+zone.sales_target_achieved > 100 ? 'status-green' : (+zone.sales_target_achieved > 90 ? 'status-orange' : 'status-red'))">
+                                {{zone.sales_target_achieved}}%
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="table-title">Sales Growth</h3>
+                    <table class="table table-bordered report-table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="width: 100px;">Zone</th>
+                            <th class="text-center">MoM({{previousMonth}} {{year}})</th>
+                            <th class="text-center">YoY({{month}} {{year - 1}})</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let zone of zoneData">
+                            <th><a href="javascript:void(0)">{{zone.geography}}</a></th>
+                            <td [class]="(+zone.sales_growth_mom > 100 ? 'status-green' : (+zone.sales_growth_mom > 90 ? 'status-orange' : 'status-red'))">{{zone.sales_growth_mom}}%</td>
+                            <td [class]="(+zone.sales_growth_yoy > 100 ? 'status-green' : (+zone.sales_growth_yoy > 90 ? 'status-orange' : 'status-red'))">{{zone.sales_growth_yoy}}%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,318 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="col-md-8 mr-auto ml-auto">
+      <!--      Wizard container        -->
+      <div class="wizard-container">
+        <div class="card card-wizard" data-color="rose" id="wizardProfile">
+          <form [formGroup]="type" action="" method="">
+            <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+            <div class="card-header text-center">
+              <h3 class="card-title">
+                Incentive Configuration
+              </h3>
+              <!-- <h5 class="card-description">This information will let us know more about you.</h5> -->
+            </div>
+            <div class="wizard-navigation">
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#step_1" data-toggle="tab" role="tab">
+                    Step 1
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#step_2" data-toggle="tab" role="tab">
+                    Step 2
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#step_3" data-toggle="tab" role="tab">
+                    Step 3
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active" id="step_1">
+                  <div class="row justify-content-center">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <label class="col-sm-4 col-form-label">Scheme Name</label>
+                        <div class="col-sm-8">
+                          <mat-form-field class="example-full-width">
+                            <input matInput type="text">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="col-sm-4 col-form-label">Based on</label>
+                        <div class="col-sm-8 checkbox-radios">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="basedOn" value="option1" checked> Monthly Sales
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="basedOn" value="option2"> Quarterly Sales
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="basedOn" value="option3"> Yearly Sales
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <label class="col-sm-4 col-form-label">Calculation based on</label>
+                        <div class="col-sm-8 checkbox-radios">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="calculationBase" value="option1" checked> Sales value 
+                              <button mat-raised-button class="btn btn-default infoBtn" matTooltip="Help text" [matTooltipPosition]="'below'"><i class="material-icons">error_outline</i></button>
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="radio" name="calculationBase" value="option2"> % of target
+                              <button mat-raised-button class="btn btn-default infoBtn" matTooltip="Help text 2" [matTooltipPosition]="'below'"><i class="material-icons">error_outline</i></button>
+                              <span class="circle">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="step_2">
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="table-responsive">
+                          <table class="table parameters-table bordered">
+                              <thead class="border-head">
+                                  <tr>
+                                      <th style="width: 70%;">Parameters</th>
+                                      <th>Weightage</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="parameters" value="option1" checked> Sales
+                                                <span class="form-check-sign">
+                                                  <span class="check"></span>
+                                                </span>
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <mat-form-field class="table-input">
+                                              <input matInput placeholder="" type="text" value="100">
+                                          </mat-form-field> <b>%</b>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="parameters" value="option2"> AR
+                                                <span class="form-check-sign">
+                                                  <span class="check"></span>
+                                                </span>
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <mat-form-field class="table-input">
+                                              <input matInput placeholder="" type="text" value="0">
+                                          </mat-form-field> <b>%</b>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="parameters" value="option3"> Location
+                                                <span class="form-check-sign">
+                                                  <span class="check"></span>
+                                                </span>
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <mat-form-field class="table-input">
+                                              <input matInput placeholder="" type="text" value="0">
+                                          </mat-form-field> <b>%</b>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="step_3">
+                  <div class="row justify-content-center">
+                    <div class="col-md-12">
+                      <div class="row">
+                      <label class="col-sm-4 col-form-label">Calculation Algorithm</label>
+                      <div class="col-sm-8 checkbox-radios">
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="calcAlgo" value="option1" checked> Variable
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="calcAlgo" value="option2"> incremental
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="calcAlgo" value="option3"> Fixed
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table bordered" style="margin-top: 20px;min-width: 500px;">
+                          <thead class="border-head">
+                              <tr>
+                                  <th rowspan="2">Incentive Levels</th>
+                                  <th colspan="2" class="center">Target (&#8377;)</th>
+                                  <th rowspan="2" class="center" style="width: 80px;text-align: center;">Variable</th>
+                                  <th rowspan="2" style="width: 80px;" class="center">Fixed</th>
+                              </tr>
+                              <tr>
+                                  <th style="width: 80px;" class="center">From</th>
+                                  <th style="width: 80px;" class="center">To</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Level 1</td>
+                                  <td class="center">100</td>
+                                  <td class="center">200</td>
+                                  <td>
+                                      <mat-form-field class="table-input">
+                                          <input matInput placeholder="" type="text" value="0">
+                                      </mat-form-field> <b>%</b>
+                                  </td>
+                                  <td>
+                                      <mat-form-field>
+                                          <input style="text-align: center;" matInput placeholder="" type="text" value="0">
+                                      </mat-form-field>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Level 2</td>
+                                  <td class="center">201</td>
+                                  <td class="center">300</td>
+                                  <td>
+                                      <mat-form-field class="table-input">
+                                          <input matInput placeholder="" type="text" value="0">
+                                      </mat-form-field> <b>%</b>
+                                  </td>
+                                  <td>
+                                      <mat-form-field>
+                                          <input style="text-align: center;" matInput placeholder="" type="text" value="0">
+                                      </mat-form-field>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Level 3</td>
+                                  <td class="center">301</td>
+                                  <td class="center">400</td>
+                                  <td>
+                                      <mat-form-field class="table-input">
+                                          <input matInput placeholder="" type="text" value="0">
+                                      </mat-form-field> <b>%</b>
+                                  </td>
+                                  <td>
+                                      <mat-form-field>
+                                          <input style="text-align: center;" matInput placeholder="" type="text" value="0">
+                                      </mat-form-field>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Level 4</td>
+                                  <td class="center">401</td>
+                                  <td class="center">500</td>
+                                  <td>
+                                      <mat-form-field class="table-input">
+                                          <input matInput placeholder="" type="text" value="0">
+                                      </mat-form-field> <b>%</b>
+                                  </td>
+                                  <td>
+                                      <mat-form-field>
+                                          <input style="text-align: center;" matInput placeholder="" type="text" value="0">
+                                      </mat-form-field>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Level 5</td>
+                                  <td class="center">501</td>
+                                  <td class="center">600</td>
+                                  <td>
+                                      <mat-form-field class="table-input">
+                                          <input matInput placeholder="" type="text" value="0">
+                                      </mat-form-field> <b>%</b>
+                                  </td>
+                                  <td>
+                                      <mat-form-field>
+                                          <input style="text-align: center;" matInput placeholder="" type="text" value="0">
+                                      </mat-form-field>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="mr-auto">
+                <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+              </div>
+              <div class="ml-auto">
+                <input type="button" class="btn btn-next btn-fill btn-rose btn-wd" name="next" value="Next">
+                <input type="button" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Finish" (click)="showSwal('err-message')" style="display: none;">
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- wizard container -->
+    </div>
+  </div>
+</div>

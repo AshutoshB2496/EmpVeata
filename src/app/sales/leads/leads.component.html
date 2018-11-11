@@ -1,0 +1,353 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-success">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs catalogue_tab" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" (click)="refreshLead1()" href="#category_1"
+                       data-toggle="tab">
+                      Stage 1
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refreshLead2()" href="#category_2"
+                       data-toggle="tab">
+                      Stage 2
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refreshLead3()" href="#category_3"
+                       data-toggle="tab">
+                      Approved
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="refreshLead4()" href="#category_4"
+                       data-toggle="tab">
+                      Rejected
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-actions">
+                  <mat-form-field class="tab-action-drop">
+                    <mat-select placeholder="Type" [(ngModel)]="type">
+                      <mat-option value="">All</mat-option>
+                      <mat-option value="New Customer">New Customer</mat-option>
+                      <mat-option value="Marketing">Marketing</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="category_1">
+                <table *ngIf="lead_01.length==0" class="table">
+                  <tbody>
+                  <tr>
+                    <td><h3 class="text-center">No Leads Available</h3></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <table *ngIf="lead_01.length!=0" class="table">
+                  <tbody>
+                  <tr *ngFor="let row of lead_01|filter:type">
+                    <td class="proDetail">
+                      <h3 data-toggle="modal" (click)="updateInformation(row)" class="LeadTitle"
+                          data-target="#address">{{row.name}}</h3>
+                      <a href="javascript:void(0);" data-toggle="modal"
+                         (click)="updateHistory(row.id)"
+                         data-target="#taskUpdates">{{row.history.length-1}} Update(s)</a>
+                      <br>
+                      <div class="packages">
+                        <span>Type: {{row.lead_type}}</span>
+                        <span *ngIf="row.lead_bool==0">Ad Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Org Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==0">Business Name: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Turnover: {{row.field2}}</span>
+                        <span>Contact Person: {{row.contact_person}}</span>
+                        <span>Contact Number: {{row.number}}</span>
+                      </div>
+                    </td>
+                    <td class="td-actions text-right">
+                                            <span *ngFor="let action of row.user_actions">
+                                                    <button (click)="openDialogForComment(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            (click)="openDialogForApprove(row.unique_code)"
+                                                            *ngIf="action=='Approve'"
+                                                            matTooltip="Approve" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button (click)="openDialogForReject(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Reject'"
+                                                            matTooltip="Reject" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="category_2">
+                <table *ngIf="lead_02.length==0" class="table">
+                  <tbody>
+                  <tr>
+                    <td><h3 class="text-center">No Leads Available</h3></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <table *ngIf="lead_02.length!=0" class="table">
+                  <tbody>
+                  <tr *ngFor="let row of lead_02|filter:type">
+                    <td class="proDetail">
+                      <h3 data-toggle="modal" (click)="updateInformation(row)" class="LeadTitle"
+                          data-target="#address">{{row.name}}</h3>
+                      <a href="javascript:void(0);" data-toggle="modal"
+                         (click)="updateHistory(row.id)"
+                         data-target="#taskUpdates">{{row.history.length-1}} Update(s)</a>
+                      <br>
+                      <div class="packages">
+                        <span>Type: {{row.lead_type}}</span>
+                        <span *ngIf="row.lead_bool==0">Ad Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Org Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==0">Business Name: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Turnover: {{row.field2}}</span>
+                        <span>Contact Person: {{row.contact_person}}</span>
+                        <span>Contact Number: {{row.number}}</span>
+                      </div>
+                    </td>
+                    <td class="td-actions text-right">
+                                            <span *ngFor="let action of row.user_actions">
+                                                    <button (click)="openDialogForComment(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            (click)="openDialogForApprove(row.unique_code)"
+                                                            *ngIf="action=='Approve'"
+                                                            matTooltip="Approve" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button (click)="openDialogForReject(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Reject'"
+                                                            matTooltip="Reject" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="category_3">
+                <table *ngIf="lead_03.length==0" class="table">
+                  <tbody>
+                  <tr>
+                    <td><h3 class="text-center">No Leads Available</h3></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <table *ngIf="lead_03.length!=0" class="table">
+                  <tbody>
+                  <tr *ngFor="let row of lead_03|filter:type">
+                    <td class="proDetail">
+                      <h3 data-toggle="modal" (click)="updateInformation(row)" class="LeadTitle"
+                          data-target="#address">{{row.name}}</h3>
+                      <a href="javascript:void(0);" data-toggle="modal"
+                         (click)="updateHistory(row.id)"
+                         data-target="#taskUpdates">{{row.history.length-1}} Update(s)</a>
+                      <br>
+                      <div class="packages">
+                        <span>Type: {{row.lead_type}}</span>
+                        <span *ngIf="row.lead_bool==0">Ad Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Org Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==0">Business Name: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Turnover: {{row.field2}}</span>
+                        <span>Contact Person: {{row.contact_person}}</span>
+                        <span>Contact Number: {{row.number}}</span>
+                      </div>
+                    </td>
+                    <td class="td-actions text-right">
+                                            <span *ngFor="let action of row.user_actions">
+                                                    <button (click)="openDialogForComment(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            (click)="openDialogForApprove(row.unique_code)"
+                                                            *ngIf="action=='Approve'"
+                                                            matTooltip="Approve" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button (click)="openDialogForReject(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Reject'"
+                                                            matTooltip="Reject" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="category_4">
+                <table *ngIf="lead_04.length==0" class="table">
+                  <tbody>
+                  <tr>
+                    <td><h3 class="text-center">No Leads Available</h3></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <table *ngIf="lead_04.length!=0" class="table">
+                  <tbody>
+                  <tr *ngFor="let row of lead_04|filter:type">
+                    <td class="proDetail">
+                      <h3 data-toggle="modal" (click)="updateInformation(row)" class="LeadTitle"
+                          data-target="#address">{{row.name}}</h3>
+                      <a href="javascript:void(0);" data-toggle="modal"
+                         (click)="updateHistory(row.id)"
+                         data-target="#taskUpdates">{{row.history.length-1}} Update(s)</a>
+                      <br>
+                      <div class="packages">
+                        <span>Type: {{row.lead_type}}</span>
+                        <span *ngIf="row.lead_bool==0">Ad Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Org Type: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==0">Business Name: {{row.field1}}</span>
+                        <span *ngIf="row.lead_bool==1">Turnover: {{row.field2}}</span>
+                        <span>Contact Person: {{row.contact_person}}</span>
+                        <span>Contact Number: {{row.number}}</span>
+                      </div>
+                    </td>
+                    <td class="td-actions text-right">
+                                            <span *ngFor="let action of row.user_actions">
+                                                    <button (click)="openDialogForComment(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Comment'"
+                                                            matTooltip="Comment"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">comment</i>
+                                                    </button>
+                                                    <button mat-raised-button type="button"
+                                                            (click)="openDialogForApprove(row.unique_code)"
+                                                            *ngIf="action=='Approve'"
+                                                            matTooltip="Approve" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button (click)="openDialogForReject(row.unique_code)"
+                                                            mat-raised-button
+                                                            type="button" *ngIf="action=='Reject'"
+                                                            matTooltip="Reject" [matTooltipPosition]="'above'"
+                                                            class="btn btn-default btn-fab btn-round btn-link btn-sm">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+    </div>
+  </div>
+</div>
+<!-- Updates of Task Modal -->
+<div class="modal fade" id="taskUpdates" tabindex="-1" role="dialog" aria-labelledby="taskUpdatesLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="taskUpdatesLabel">Update(s)</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="updates-container">
+          <ul>
+            <li *ngFor="let item of history">
+              <i class="{{item.action_icon}}"></i>
+              <label>
+                <h5><i class="fa fa-user-o"></i> {{item.actor_name}}
+                  {{item.success_message}} on {{item.created_at|date: "MMM d,yyyy h:mm a"}}
+                </h5>
+              </label>
+              <p *ngIf="item.subtitle!=null">{{item.subtitle}}</p>
+              {{item.comment}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Info Model-->
+<div class="modal fade" id="address" tabindex="-1" role="dialog"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Additional Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div *ngFor="let information of informations" class="col-md-12">
+            <h5 *ngIf="information.name!=null"><b>Business Name: </b>{{information.name}}</h5>
+            <h5 *ngIf="information.address!=null"><b>Address: </b>{{information.address}}</h5>
+            <h5 *ngIf="information.town!=null"><b>Town: </b>{{information.town}}</h5>
+            <h5 *ngIf="information.district!=null"><b>District: </b>{{information.district}}</h5>
+            <h5 *ngIf="information.province!=null"><b>State: </b>{{information.province}}</h5>
+            <h5 *ngIf="information.pincode!=null"><b>Pincode: </b>{{information.pincode}}</h5>
+            <h5 *ngIf="information.note!=null"><b>Note: </b>{{information.note}}</h5>
+            <h5 *ngIf="information.image!=null"><b>Image: </b><a href="{{information.image}}"
+                                                                 target="_blank"><i class="material-icons">image</i></a>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

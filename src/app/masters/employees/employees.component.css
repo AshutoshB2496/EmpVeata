@@ -1,0 +1,101 @@
+table.dataTable > thead > tr > th {
+    font-weight: bold;
+    font-size: 13px;
+}
+.table-action-toolbar {
+    position: absolute;
+    right: 15px;
+    width: 40%;
+    text-align: right;
+    z-index: 999;
+}
+.table-action-toolbar .btn + .btn {
+    margin-right: 10px;
+}
+
+.fixed-plugin .fa-filter {
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+
+.fixed-plugin li.header-title-main {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+.form-filter .row + .row {
+    margin-top: 15px;
+}
+.form-filter legend {
+    font-size: 16px;
+    font-weight: 400;
+}
+.form-filter .togglebutton {
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+.togglebutton label .toggle {
+    margin-left: 0px !important;
+}
+.form-filter .range-slider-wrapper {
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+.inline-checkboxes {
+    padding: 10px 2px 20px;
+}
+.filterDrop .btn {
+    margin: 0 auto 20px;
+    width: 150px;
+    display: block;
+}
+
+#viewEmpModal .card-wizard {
+    box-shadow: none;
+    width: 100%;
+    width: 800px;
+}
+
+#msgModal .modal-title,
+#viewEmpModal .modal-title {
+    font-size: 22px;
+    text-align: left;
+}
+#msgModal .modal-header,
+#viewEmpModal .modal-header {
+    margin-bottom: 20px;
+} 
+#viewEmpModal .timeline {
+    margin-top: 0;
+}
+.card-profile {
+    text-align: left;
+}
+
+.card-body+.card-footer {
+    border-top: 1px solid #eee !important;
+}
+
+#filterContainer {
+    display: none;
+}
+
+.dropdown-menu .dropdown-item:hover, 
+.dropdown-menu .dropdown-item:focus, 
+.dropdown-menu a:hover, 
+.dropdown-menu a:focus, 
+.dropdown-menu a:active {
+    color: #fff;
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
+}

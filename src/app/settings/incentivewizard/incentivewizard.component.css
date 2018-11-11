@@ -1,0 +1,25 @@
+.infoBtn {
+	width: 16px;
+    padding: 0 !important;
+    height: 16px;
+    margin: 0 0 0 5px !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+}
+.inline-sentence {
+    margin-bottom: 20px;
+}
+.inline-sentence .form-check-inline {
+    display: inline-block;
+}
+.inline-sentence .inline-drop,
+.inline-sentence .inline-input {
+    display: inline-block;
+    margin: 0 5px;
+}
+.inline-sentence .mat-form-field {
+    top: initial !important;
+}
+th{
+    text-align: center;
+}

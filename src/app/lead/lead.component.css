@@ -1,0 +1,282 @@
+.catalogue_tab {
+    width: 70%;
+    float: left;
+}
+.tab-actions {
+    float: right;
+    display: block;
+    overflow: hidden;
+    text-align: right;
+    width: 30%;
+}
+.tab-actions .btn {
+    margin-left: 5px;
+}
+
+.proImg {}
+.proImg span {
+    display: block;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    line-height: 55px;
+    background: #f6f6f6;
+}
+.proImg span i {
+    display: block;
+    height: 55px;
+    line-height: 55px;
+    width: 100%;
+}
+.proImg span img {
+    width: 100%;
+}
+.proDetail h3 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 23px;
+    /*font-weight: 400;*/
+}
+
+.proDetail a.collaterals {
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+.proDetail a.collaterals:hover,
+.proDetail a.collaterals:focus {
+    text-decoration: none;
+}
+.packages {
+    display: inline-block;
+    font-size: 0px;
+}
+.packages span {
+    display: inline-block;
+    background: #f6f6f6;
+    border-radius: 20px;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.catlogue_actions .dropdown-toggle::after {
+    display: none;
+}
+
+#collateralsModal .card-wizard,
+#moleculeModal .card-wizard,
+#editMoleculeModal .card-wizard {
+    box-shadow: none;
+    width: 100%;
+    width: 800px;
+}
+
+#addCollateralsModal .modal-title,
+#collateralsModal .modal-title,
+#editMoleculeModal .modal-title,
+#moleculeModal .modal-title {
+    font-size: 22px;
+}
+
+#addCollateralsModal .modal-header,
+#collateralsModal .modal-header,
+#editMoleculeModal .modal-header,
+#moleculeModal .modal-header {
+    margin-bottom: 20px;
+}
+
+#editMoleculeModal .timeline,
+#moleculeModal .timeline {
+    margin-top: 0;
+}
+#collateralsModal form,
+#editMoleculeModal form,
+#moleculeModal form {
+    padding-top: 30px;
+}
+
+#addCollateralsModal legend,
+#collateralsModal form legend,
+#editMoleculeModal form legend,
+#moleculeModal form legend {
+    font-size: 16px;
+    font-weight: 500;
+}
+.collaterals-cards {
+    padding-top: 50px;
+}
+
+tag-input {
+    padding: 0;
+}
+.ng2-tag-input__text-input {
+    padding: 0;
+}
+
+form.ng-touched {
+    margin-bottom: 0px;
+}
+.tag__text {
+    font-weight: 400 !important;
+}
+#addCollateralsModal { overflow-y:scroll }
+.modal-footer .btn + .btn {
+    margin-left: 5px;
+}
+
+
+.fixed-plugin .fa-filter {
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+
+.fixed-plugin li.header-title-main {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+.form-filter .row + .row {
+    margin-top: 15px;
+}
+.form-filter legend {
+    font-size: 16px;
+    font-weight: 400;
+}
+.form-filter .togglebutton {
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+.togglebutton label .toggle {
+    margin-left: 0px !important;
+}
+.form-filter .range-slider-wrapper {
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+.inline-checkboxes {
+    padding: 10px 2px 20px;
+}
+.filterDrop .btn {
+    margin: 0 auto 20px;
+    width: 150px;
+    display: block;
+}
+#filterContainer {
+    display: none;
+}
+.tab-pane .table td.proDetail {
+    width: auto !important;
+}
+.LeadTitle{
+    cursor: pointer;
+}
+.updates-container {
+    padding: 0px;
+    background: #fff;
+}
+
+.updates-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 2px;
+}
+
+.updates-container ul li {
+    padding-bottom: 20px;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+}
+
+.updates-container ul li > i {
+    position: absolute;
+    left: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    width: 24px;
+    text-align: center;
+}
+
+.updates-container ul li:after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 2px;
+    background: #ccc;
+    left: 11px;
+    top: 24px;
+}
+
+.updates-container label {
+    margin-bottom: 0;
+    display: block;
+    padding-top: 0px;
+    line-height: 24px;
+}
+
+.updates-container label h5 {
+    color: #00cebd;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.updates-container ul li:last-child:after {
+    display: none;
+}
+
+.updates-container ul li:before {
+    position: absolute;
+    content: '';
+    width: 24px;
+    height: 24px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background: #00CEBD;
+    top: 0px;
+    left: 0;
+}
+
+.updates-container .subTitle {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.updates-container .comment {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+@media (max-width: 767px){
+    #datatables_length {
+        text-align: left !important;
+    }
+    #collateralsModal .card-wizard,
+    #moleculeModal .card-wizard,
+    #editMoleculeModal .card-wizard {
+        width: 100%;
+    }
+
+}
+.card-header-success  .nav-link.active {
+    background: #fff !important;
+    color: #00cebd !important;
+}
+

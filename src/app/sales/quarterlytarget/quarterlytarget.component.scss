@@ -1,0 +1,57 @@
+.target-table .total-row td {
+  font-weight: 500;
+}
+.target-table thead tr th {
+  font-weight: 400;
+}
+.new-customer-col {}
+.ardays-col {}
+
+.new-customer-col,
+.ardays-col,
+.sales-total-col,
+.qtr-col{
+  width: 115px;
+}
+.qtr-col,
+.sales-col {
+  background: #00CEBD;
+  color: #fff;
+}
+.sales-total-col {
+  background: #46b9a8;
+  color: #fff;
+}
+.new-customer-col {
+  background: #359888;
+  color: #fff;
+}
+.ardays-col {
+  background: #328475;
+  color: #fff;
+}
+.target-table tr.bg-gray td {
+  background-color: #f3f2f2;
+}
+.target-table tr.bg-gray td:first-child {
+  background-color: #fff;
+}
+.target-table td div.status {
+  position: relative;
+}
+.target-table td div.status:after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  border-right: 10px solid #333;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+  right: -1px;
+  top: -1px;
+}
+.target-table td div.status-1:after {border-right-color: #2e7d32;}
+.target-table td.status-2:after {border-right-color: #7be47f;}
+.target-table td.status-3:after {border-right-color: #ffea00;}
+.target-table td.status-4:after {border-right-color: #d50000;}
+.target-table td.status-5:after {border-right-color: #f44336;}
+.status-10:after {border-right-color: #d50000;}

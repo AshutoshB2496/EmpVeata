@@ -1,0 +1,327 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <br>
+        <!--Sales Analysis chart-->
+        <div id="sales" class="row">
+            <div class="col-md-6">
+                <div class="card chart-card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <h4 class="card-title">Sales Values(In Crores)</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="custom-legends">
+                            <li class="blue">
+                                <span>&nbsp;</span> North
+                            </li>
+                            <li class="red">
+                                <span>&nbsp;</span> East
+                            </li>
+                            <li>
+                                <span style="background-color:#ff9800">&nbsp;</span> South
+                            </li>
+                            <li>
+                                <span style="background-color:#d17905">&nbsp;</span> West
+                            </li>
+                        </ul>
+                        <div id="salesChart" class="ct-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card chart-card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <h4 class="card-title">Sales Performance (% of Target)</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="custom-legends">
+                            <li class="blue">
+                                <span>&nbsp;</span> North
+                            </li>
+                            <li class="red">
+                                <span>&nbsp;</span> East
+                            </li>
+                            <li>
+                                <span style="background-color:#ff9800">&nbsp;</span> South
+                            </li>
+                            <li>
+                                <span style="background-color:#d17905">&nbsp;</span> West
+                            </li>
+                        </ul>
+                        <div id="salesChart2" class="ct-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Sales Analysis chart ends-->
+        <!-- 3 Block charts -->
+        <div id="block1" class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title">Meetings/Employee/Day</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="ct-chart" id="MeetingsChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title">Sales/Employee/Day</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="ct-chart" id="SalesEmpChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title">Collection/Employee/Day</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="ct-chart" id="CollectionEmpChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--AR Overdue Analysis chart-->
+        <div id="ar" class="row">
+            <div class="col-md-12">
+                <div class="card chart-card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">bar_chart</i>
+                        </div>
+                        <h4 class="card-title">AR Days</h4>
+                        <div class="chart-filter">
+                            <mat-form-field>
+                                <mat-select [(value)]="selectedPeriodAR" (change)="changeAR()">
+                                    <mat-option value="6">Last 6 Months</mat-option>
+                                    <mat-option value="3">Last Qtr</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="chart-filter">
+                            <mat-form-field>
+                                <mat-select [(value)]="selectedZoneAR" (change)="changeAR()">
+                                    <mat-option value="India">Pan India</mat-option>
+                                    <mat-option value="zone">Zone Wise</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul *ngIf="selectedZoneAR=='zone'" class="custom-legends">
+                            <li class="blue">
+                                <span>&nbsp;</span> North
+                            </li>
+                            <li class="red">
+                                <span>&nbsp;</span> East
+                            </li>
+                            <li>
+                                <span style="background-color:#ff9800">&nbsp;</span> South
+                            </li>
+                            <li>
+                                <span style="background-color:#d17905">&nbsp;</span> West
+                            </li>
+                        </ul>
+                        <ul *ngIf="selectedZoneAR!='zone'" class="custom-legends">
+                            <li class="blue">
+                                <span>&nbsp;</span> Pan India
+                            </li>
+                        </ul>
+                        <div id="ArChart" class="ct-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--AR Overdue Analysis chart ends-->
+
+
+        <div class="row d-none">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons"></i>
+                        </div>
+                        <h4 class="card-title">Sales Productivity</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="custom-legends">
+                                    <li class="blue">
+                                        <span>&nbsp;</span> Number of meetings
+                                    </li>
+                                    <li class="red">
+                                        <span>&nbsp;</span> Number of Sales
+                                    </li>
+                                    <li class="yello">
+                                        <span>&nbsp;</span> Target
+                                    </li>
+                                </ul>
+                                <div id="colouredBarsChart" class="ct-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Block charts -->
+        <div id="block2" class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                <i class="material-icons">build</i> Fix Header!
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
+                                    [matTooltipPosition]="'below'">
+                                <i class="material-icons">refresh</i>
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-default btn-link"
+                                    matTooltip="Change Date" [matTooltipPosition]="'below'">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">New Customers</h4>
+                        <p class="card-category">Y-Axis: No. of New Customers</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> Updated 4 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart" id="chartPreferences"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                <i class="material-icons">build</i> Fix Header!
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
+                                    [matTooltipPosition]="'below'">
+                                <i class="material-icons">refresh</i>
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-default btn-link"
+                                    matTooltip="Change Date" [matTooltipPosition]="'below'">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">Area Mgrs Not Meeting Target</h4>
+                        <p class="card-category">Y-Axis : Count of Area Mgrs</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> Updated 4 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart" id="multipleBarsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                <i class="material-icons">build</i> Fix Header!
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
+                                    [matTooltipPosition]="'below'">
+                                <i class="material-icons">refresh</i>
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-default btn-link"
+                                    matTooltip="Change Date" [matTooltipPosition]="'below'">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">Order Processing Time</h4>
+                        <p class="card-category">Y-Axis: % of total orders</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <i class="fa fa-circle" style="color: #d2f2f6"></i> Order Delayed(in %)
+                                <i class="fa fa-circle text-danger"></i> Order Unfulfilled(in %)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="performanceTable" class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">bar_chart</i>
+                        </div>
+                        <h4 class="card-title">Region Wise Performance - Last Month</h4>
+                    </div>
+
+                    <div class="card-body ">
+                        <div class="material-datatables">
+                            <table id="datatables" class="table table-no-bordered" cellspacing="0" width="100%" style="width:100%">
+                                <thead class="text-primary">
+                                <tr>
+                                    <!--<th>{{ dataTable.headerRow[0] }}</th>-->
+                                    <th>{{ dataTable.headerRow[1] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[2] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[3] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[4] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[5] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[6] }}</th>
+                                    <th class="text-center">{{ dataTable.headerRow[7] }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of dataTable.dataRows; let i=index">
+                                    <!--<td>{{row[0]}}</td>-->
+
+                                    <td>{{row[1]}}</td>
+
+                                    <td *ngIf="row[2]<80" class="text-center status-red">{{row[2]}}%</td>
+                                    <td *ngIf="row[2]>80&&row[2]<100" class="text-center status-orange">{{row[2]}}%</td>
+                                    <td *ngIf="row[2]>100" class="text-center status-green">{{row[2]}}%</td>
+
+                                    <td *ngIf="row[3]<0" class="text-center status-red">{{row[3]}}%</td>
+                                    <td *ngIf="row[3]>0" class="text-center status-green">{{row[3]}}%</td>
+
+                                    <td *ngIf="row[4]<0" class="text-center status-red">{{row[4]}}%</td>
+                                    <td *ngIf="row[4]>0" class="text-center status-green">{{row[4]}}%</td>
+
+                                    <td class="text-center">{{(row[5]/10000000)|currency:'INR':'symbol':'1.2-2'}} Cr</td>
+                                    <td *ngIf="row[6]<=row[8]" class="text-center status-green">{{row[6]}}</td>
+                                    <td *ngIf="row[6]>row[8]" class="text-center status-red">{{row[6]}}</td>
+                                    <td class="text-center">{{(row[7]/10000000)|currency:'INR':'symbol':'1.2-2'}} Cr</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
