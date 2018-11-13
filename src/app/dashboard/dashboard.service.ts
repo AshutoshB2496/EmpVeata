@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 const base_url = 'http://sfa.demoplatform.simplifii.com/api/v1/';
-const base_month_value = 31;
+const base_month_value = 32;
 
 @Injectable()
 export class DashboardService {
