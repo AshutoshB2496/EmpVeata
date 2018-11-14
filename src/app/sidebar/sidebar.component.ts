@@ -36,9 +36,6 @@ export const ROUTES: RouteInfo[] = [{
     children: [
         {path: 'customers', title: 'Customers', ab: 'C'},
         {path: 'catalogue', title: 'Catalogue', ab: 'C'},
-        {path: 'offices', title: 'Offices', ab: 'W'},
-        {path: 'ratelist', title: 'Ratelist', ab: 'R'},
-        {path: 'regions', title: 'Regions', ab: 'R'},
         {path: 'employees', title: 'Employees', ab: 'E'}
     ]
 }, {
@@ -48,15 +45,12 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'supervisor_account',
     collapse: 'team',
     children: [
-        {path: 'performance', title: 'Performance', ab: 'P'},
         {path: 'teams-tasks', title: 'Tasks', ab: 'T'},
         {path: 'beatplanning', title: 'Beat Plan', ab: 'BP'},
         {path: 'jobplanning', title: 'Weekly Plan', ab: 'WP'},
-        {path: 'daywiseplanning', title: 'Day Wise Plan', ab: 'DP'},
         {path: 'requests', title: 'Requests', ab: 'A'},
-        {path: 'hierarchy', title: 'My Team', ab: 'MT'},
-        {path: 'teams-location', title: 'Team\'s Location', ab: 'TL'}
-    ]
+        {path: 'hierarchy', title: 'My Team', ab: 'MT'}
+        ]
 }, {
     path: '/userslocation',
     title: 'User Location',
@@ -64,9 +58,8 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'settings',
     collapse: 'User Location',
     children: [
-        {path: 'daywise-map', title: 'Daywise Map', ab: 'D'},
-        {path: 'daywise-list', title: 'Daywise List', ab: 'D'}
-    ]
+        {path: 'daywise-map', title: 'Daywise Map', ab: 'D'}
+        ]
 }, {
     path: '/settings',
     title: 'Settings',
@@ -75,7 +68,6 @@ export const ROUTES: RouteInfo[] = [{
     collapse: 'Settings',
     children: [
         {path: 'incentivewizard', title: 'Incentive Configuration', ab: 'IC'},
-        {path: 'colconfig', title: 'Custom Fields', ab: 'CC'},
         {path: 'claimlimits', title: 'Claim Limits', ab: 'CL'}
     ]
 },{
@@ -86,7 +78,6 @@ export const ROUTES: RouteInfo[] = [{
     collapse: 'sales',
     children: [
         {path: 'monthlytarget', title: 'Monthly Target', ab: 'MT'},
-        {path: 'schemes', title: 'Schemes', ab: 'S'},
         {path: 'orders', title: 'Orders', ab: 'O'},
         {path: 'leads', title: 'Leads', ab: 'L'}
     ]
