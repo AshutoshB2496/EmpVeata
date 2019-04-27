@@ -5,6 +5,7 @@ import { OrdersComponent } from './orders/orders.component';
 import {QuarterlytargetComponent} from './quarterlytarget/quarterlytarget.component';
 import {MonthlytargetComponent} from './monthlytarget/monthlytarget.component';
 import {LeadsComponent} from './leads/leads.component';
+import {RequestsComponent} from './requests/requests.component';
 
 
 export const SalesRoutes: Routes = [
@@ -41,6 +42,13 @@ export const SalesRoutes: Routes = [
         children: [ {
             path: 'leads',
             component: LeadsComponent
+        }]
+    },
+    {
+        path: '',
+        children: [ {
+            path: 'requests',
+            component: RequestsComponent
         }]
     }
 ];

@@ -19,8 +19,7 @@ export class AuthService {
             username: username,
             password: password
         }).map((value) => {
-            localStorage.setItem(LOGIN_TOKEN_KEY, value.token);
-            return value.response;
+            return value;
         });
     }
 

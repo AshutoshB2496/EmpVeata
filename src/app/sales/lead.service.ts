@@ -63,4 +63,16 @@ export class LeadService {
             return value.msg;
         });
     }
+
+    addLead(lead) {
+        return this.http.post(base_url + 'cards', {
+            'entity': 'Lead',
+            'action': 'Create',
+            'lead_type': lead.type,
+            'name': lead.title,
+            'number': lead.mobile,
+            'field1': lead.name,
+            'contact_person': lead.person
+        })
+    }
 }

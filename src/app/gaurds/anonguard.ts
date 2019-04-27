@@ -13,7 +13,7 @@ export class Anonguard implements CanActivate {
     if (!isLogged) {
       return true;
     } else {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/masters/employees']);
       return false;
     }
   }

@@ -3,6 +3,7 @@ import {LeadService} from '../lead.service';
 import swal from 'sweetalert2';
 import {MatDialog} from '@angular/material';
 import {LeadDialogComponent} from './leaddialog.component';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 declare const $: any;
 
@@ -18,22 +19,65 @@ declare interface Info {
 }
 
 @Component({
-  selector: 'app-leads',
-  templateUrl: './leads.component.html',
-  styleUrls: ['./leads.component.scss']
+    selector: 'app-leads',
+    templateUrl: './leads.component.html',
+    styleUrls: ['./leads.component.scss']
 })
 export class LeadsComponent implements OnInit {
 
-    public lead_01 = [];
+    public lead_01: any = [];
     public lead_02 = [];
     public lead_03 = [];
     public lead_04 = [];
     history = [];
     informations = [];
-    type='';
+    type = '';
+    lead: FormGroup;
 
-    constructor(private service: LeadService, private dialog: MatDialog) {
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({onlySelf: true});
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
+    }
 
+    constructor(private service: LeadService, private dialog: MatDialog, private fb: FormBuilder) {
+        this.lead = this.fb.group({
+            title: ['', [Validators.required]],
+            name: ['', [Validators.required]],
+            person: ['', [Validators.required]],
+            mobile: ['', [Validators.required, Validators.min(1111111111), Validators.max(9999999999)]],
+            type: ['', [Validators.required]]
+        });
+    }
+
+    addLead() {
+        if (this.lead.valid) {
+                this.service.addLead(this.lead.value).subscribe(value => {
+                    document.getElementById('dismiss-add-modal').click();
+                    this.refresh();
+                    swal({
+                        type: 'success',
+                        text: 'You added the lead',
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-success'
+                    }).catch(swal.noop);
+
+                }, err => {
+                    swal({
+                        type: 'error',
+                        text: err.error.msg,
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-rose'
+                    }).catch(swal.noop);
+                });
+        } else {
+            this.validateAllFormFields(this.lead);
+        }
     }
 
     openDialogForComment(uniqueid): void {

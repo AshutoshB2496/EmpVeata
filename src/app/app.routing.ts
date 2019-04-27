@@ -9,16 +9,17 @@ import {RegisterComponent} from './pages/register/register.component';
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'masters/employees',
         pathMatch: 'full',
     }, {
         path: '',
         component: AdminLayoutComponent, canActivate: [Authguard],
         children: [
+            // {
+            //     path: '',
+            //     loadChildren: './dashboard/dashboard.module#DashboardModule'
+            // },
             {
-                path: '',
-                loadChildren: './dashboard/dashboard.module#DashboardModule'
-            }, {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
             }, {
@@ -46,14 +47,8 @@ export const AppRoutes: Routes = [
                 path: 'sales',
                 loadChildren: './sales/sales.module#SalesModule'
             }, {
-                path: 'lead',
-                loadChildren: './lead/lead.module#LeadModule'
-            }, {
                 path: 'performance',
                 loadChildren: './performance/performance.module#PerformanceModule'
-            }, {
-                path: 'requests',
-                loadChildren: './requests/requests.module#RequestsModule'
             }, {
                 path: 'forms',
                 loadChildren: './forms/forms.module#Forms'

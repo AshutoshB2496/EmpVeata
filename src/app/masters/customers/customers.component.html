@@ -1,681 +1,655 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card" id="filterContainer">
-          <div class="card-header ">
-            <h4 class="card-title">Filter Results</h4>
-          </div>
-          <div class="card-body">
-            <div class="form-filter">
-              <form>
-                <div class="row">
-                  <div class="col-md-4">
-                    <legend>Name</legend>
-                    <mat-form-field>
-                      <input type="text"
-                             matInput
-                             [formControl]="userName" name="user"
-                             name="custName"
-                             [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let name of filteredOptions | async"
-                                        [value]="name">
-                                {{ name }}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-4">
-                    <legend>Cust ID</legend>
-                    <mat-form-field>
-                        <mat-select placeholder="Choose ID"
-                                    [(ngModel)]="currentId"
-                                    name="id"
-                                    custid="CUST 001" ariaLabel="custids[0]">
-                            <mat-option *ngFor="let custid of custids" [value]="custid.value">
-                                {{ custid.viewValue }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-4">
-                    <legend>Region</legend>
-                    <mat-form-field>
-                        <mat-select placeholder="Choose Region"
-                                    name="region"
-                                    [(ngModel)]="currentRegion"
-                                    rid="CUST 001" ariaLabel="regions[0]">
-                            <mat-option *ngFor="let rid of regions" [value]="rid.value">
-                                {{ rid.viewValue }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <legend>Balance(&#8377;)</legend>
-                    <div class="range-slider-wrapper">
-                      <nouislider class="slider slider-info"
-                                  [connect]="true"
-                                  [min]="0" [max]="50000"
-                                  [step]="1"
-                                  name="bal"
-                                  [(ngModel)]="doubleSlider1" [tooltips]="true"></nouislider>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="filterContainer">
+                    <div class="card-header ">
+                        <h4 class="card-title">Filter Results</h4>
                     </div>
-                  </div>
-                  <div class="col-md-4">
-                    <legend>Overdue(&#8377;)</legend>
-                    <div class="range-slider-wrapper">
-                      <nouislider class="slider slider-info"
-                                  [connect]="true"
-                                  [min]="0" [max]="50000"
-                                  [step]="1"
-                                  name="overdue"
-                                  [(ngModel)]="doubleSlider2" [tooltips]="true"></nouislider>
+                    <div class="card-body">
+                        <div class="form-filter">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <legend>Name</legend>
+                                        <mat-form-field>
+                                            <input type="text"
+                                                   matInput
+                                                   [formControl]="userName" name="user"
+                                                   name="custName"
+                                                   [matAutocomplete]="auto">
+                                            <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let name of filteredOptions | async"
+                                                            [value]="name">
+                                                    {{ name }}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <legend>Cust ID</legend>
+                                        <mat-form-field>
+                                            <mat-select placeholder="Choose ID"
+                                                        [(ngModel)]="currentId"
+                                                        name="id"
+                                                        custid="CUST 001" ariaLabel="custids[0]">
+                                                <mat-option *ngFor="let custid of custids" [value]="custid.value">
+                                                    {{ custid.viewValue }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <legend>Region</legend>
+                                        <mat-form-field>
+                                            <mat-select placeholder="Choose Region"
+                                                        name="region"
+                                                        [(ngModel)]="currentRegion"
+                                                        rid="CUST 001" ariaLabel="regions[0]">
+                                                <mat-option *ngFor="let rid of regions" [value]="rid.value">
+                                                    {{ rid.viewValue }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <legend>Balance(&#8377;)</legend>
+                                        <div class="range-slider-wrapper">
+                                            <nouislider class="slider slider-info"
+                                                        [connect]="true"
+                                                        [min]="0" [max]="50000"
+                                                        [step]="1"
+                                                        name="bal"
+                                                        [(ngModel)]="doubleSlider1" [tooltips]="true"></nouislider>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <legend>Overdue(&#8377;)</legend>
+                                        <div class="range-slider-wrapper">
+                                            <nouislider class="slider slider-info"
+                                                        [connect]="true"
+                                                        [min]="0" [max]="50000"
+                                                        [step]="1"
+                                                        name="overdue"
+                                                        [(ngModel)]="doubleSlider2" [tooltips]="true"></nouislider>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <legend>Not Visited Since</legend>
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                                                   (click)="picker.open()">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-right btn-row">
+                                        <button mat-raised-button type="submit" id="resetFilter"
+                                                class="btn btn-round btn-default">Reset Filter(s)
+                                        </button>
+                                        <button mat-raised-button type="submit"
+                                                class="btn btn-fill btn-round btn-success">Apply Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-4">
-                    <legend>Not Visited Since</legend>
-                    <mat-form-field >
-                      <input matInput [matDatepicker]="picker" placeholder="Choose a date" (click)="picker.open()">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                  </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-12 text-right btn-row">
-                    <button mat-raised-button type="submit" id="resetFilter" class="btn btn-round btn-default">Reset Filter(s)</button>
-                    <button mat-raised-button type="submit" class="btn btn-fill btn-round btn-success">Apply Filter</button>
-                  </div>
+                <div id="performanceTable" class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">person</i>
+                                </div>
+                                <h4 class="card-title">Customers</h4>
+                            </div>
+                            <div class="toolbar table-action-toolbar">
+                                <div class="btn-group">
+                                    <button matTooltip="Add Customer" [matTooltipPosition]="'above'" mat-raised-button
+                                            type="button" class="btn btn-fab btn-sm btn-rose" data-toggle="modal"
+                                            data-target="#addcustomerModal">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <div class="material-datatables">
+                                    <table class="table table-responsive-sm">
+                                        <thead class="text-primary">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Contact Person</th>
+                                            <th>Address</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let customer of customers;let i=index">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{customer.name}}</td>
+                                            <td>{{customer.mobile}}</td>
+                                            <td>{{customer.spoc}}</td>
+                                            <td>{{customer.address}}</td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <!--<button mat-raised-button type="button" matTooltip="Send Message" [matTooltipPosition]="'above'"  data-toggle="modal" data-target="#msgModal" class="btn btn-fab btn-success btn-sm">-->
+                                                    <!--<i class="material-icons">message</i>-->
+                                                    <!--</button>-->
+                                                    <button mat-raised-button type="button" matTooltip="Edit"
+                                                            [matTooltipPosition]="'above'" data-toggle="modal"
+                                                            data-target="#editcustomerModal" (click)="editCustomerModal(customer)"
+                                                            class="btn btn-fab btn-success btn-sm">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <!--<td class="text-center">-->
+                                            <!--<div class="btn-group">-->
+                                            <!--<a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm"-->
+                                            <!--matTooltip="Add Dealer" [matTooltipPosition]="'above'"-->
+                                            <!--data-target="#adddealerModal" data-toggle="modal"><i-->
+                                            <!--class="material-icons">change dealer</i></a>-->
+                                            <!--<a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm"-->
+                                            <!--matTooltip="Edit Details" [matTooltipPosition]="'above'"-->
+                                            <!--data-target="#editcustomerModal" data-toggle="modal"><i-->
+                                            <!--class="material-icons">edit</i></a>-->
+                                            <!--&lt;!&ndash;<a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm" matTooltip="View Details" [matTooltipPosition]="'above'" data-toggle="modal" data-target="#viewModal"><i class="material-icons">remove_red_eye</i></a>&ndash;&gt;-->
+                                            <!--</div>-->
+                                            <!--</td>-->
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
+                <!--  end card  -->
             </div>
-          </div>
+            <!-- end col-md-12 -->
         </div>
-        <div class="card">
-          <div class="card-body">
-            <div class="toolbar table-action-toolbar">
-              <div class="btn-group">
-                <button matTooltip="Download" [matTooltipPosition]="'above'" mat-raised-button type="button" class="btn btn-fab btn-sm btn-rose">
-                  <i class="material-icons">save_alt</i>
-                </button>
-                <button matTooltip="Add Customer" [matTooltipPosition]="'above'" mat-raised-button type="button" data-toggle="modal" data-target="#addcustomerModal" class="btn btn-fab btn-sm btn-rose">
-
-                  <i class="material-icons">add</i>
-                </button>
-              </div>
-            </div>
-            <div class="material-datatables">
-              <table id="datatables" class="table" cellspacing="0" width="100%" style="width:100%">
-                <thead>
-                  <tr>
-                    <th class="text-center">{{ dataTable.headerRow[0] }}</th>
-                    <th>{{ dataTable.headerRow[1] }}</th>
-                    <th>{{ dataTable.headerRow[2] }}</th>
-                    <th>{{ dataTable.headerRow[3] }}</th>
-                    <th>{{ dataTable.headerRow[4] }}</th>
-                    <th>{{ dataTable.headerRow[5] }}</th>
-                    <th class="text-center">{{ dataTable.headerRow[6] }}</th>
-                    <th class="disabled-sorting text-center">
-                      {{ dataTable.headerRow[7] }}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let row of dataTable.dataRows">
-                    <td class="text-center">{{row[0]}}</td>
-                    <td>{{row[1]}}</td>
-                    <td>{{row[2]}}</td>
-                    <td>{{row[3]}}</td>
-                    <td>{{row[4]}}</td>
-                    <td>{{row[5]}}</td>
-                    <td class="text-center">{{row[6]}}</td>
-                    <td class="text-center">
-                      <div class="btn-group">
-                        <a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm" matTooltip="Add Dealer" [matTooltipPosition]="'above'" data-target="#adddealerModal" data-toggle="modal"><i class="material-icons">add</i></a>
-                        <a href="https://www.dropbox.com/s/qlr5ijttdhuihk5/Sample.PDF?dl=1" class="btn btn-fab btn-success btn-sm" matTooltip="Download Ledger" [matTooltipPosition]="'above'"><i class="material-icons">cloud_download</i></a>
-                        <a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm" matTooltip="Edit Details" [matTooltipPosition]="'above'" data-target="#editcustomerModal" data-toggle="modal"><i class="material-icons">edit</i></a>
-                        <a href="javascript:void(0);" class="btn btn-fab btn-success btn-sm" matTooltip="View Details" [matTooltipPosition]="'above'" data-toggle="modal" data-target="#viewModal"><i class="material-icons">remove_red_eye</i></a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- end content-->
-        </div>
-        <!--  end card  -->
-      </div>
-      <!-- end col-md-12 -->
     </div>
-  </div>
 </div>
 
 <!-- View Modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="card-wizard" data-color="green">
-          <div class="card-header text-center">
-            <h3 class="card-title">
-              Ram Kumar and Sons
-            </h3>
-            <h5 class="card-description">#CUST001</h5>
-          </div>
-          <div class="wizard-navigation">
-            <ul class="nav nav-pills">
-              <li class="nav-item">
-                <a class="nav-link active" href="#tab_01" data-toggle="tab" role="tab">
-                  Summary
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#tab_02" data-toggle="tab" role="tab">
-                  Last 5 Orders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#tab_03" data-toggle="tab" role="tab">
-                  Last 5 Visits
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#tab_04" data-toggle="tab" role="tab">
-                  Dealers
-                </a>
-              </li>
-            </ul>
-          </div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-wizard" data-color="green">
+                <div class="card-header text-center">
+                    <h3 class="card-title">
+                        Ram Kumar and Sons
+                    </h3>
+                    <h5 class="card-description">#CUST001</h5>
+                </div>
+                <div class="wizard-navigation">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab_01" data-toggle="tab" role="tab">
+                                Summary
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_02" data-toggle="tab" role="tab">
+                                Last 5 Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_03" data-toggle="tab" role="tab">
+                                Last 5 Visits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab_04" data-toggle="tab" role="tab">
+                                Dealers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-          <div class="tab-content">
-            <div class="tab-pane active" id="tab_01">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="card summary-card">
-                    <div class="card-body">
-                      <p><label>Region</label>Moga</p>
-                      <p><label>Account Manager</label>Anshul Garg</p>
-                      <p><label>Closing Balance(&#8377;)</label>89.20 L</p>
-                      <p><label>Overdue(&#8377;)</label>83.97 L</p>
-                      <p><label>Total Credit Limit(&#8377;)</label>50.00 L</p>
-                      <p><label>Remaining Credit Limit(&#8377;)</label>30.00 L</p> 
-                      <p><label>Advance</label>Nil</p>   
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_01">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card summary-card">
+                                    <div class="card-body">
+                                        <p><label>Region</label>Moga</p>
+                                        <p><label>Account Manager</label>Anshul Garg</p>
+                                        <p><label>Closing Balance(&#8377;)</label>89.20 L</p>
+                                        <p><label>Overdue(&#8377;)</label>83.97 L</p>
+                                        <p><label>Total Credit Limit(&#8377;)</label>50.00 L</p>
+                                        <p><label>Remaining Credit Limit(&#8377;)</label>30.00 L</p>
+                                        <p><label>Advance</label>Nil</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card summary-card">
+                                    <div class="card-body">
+                                        <h4 style="margin-bottom: 20px;">Invoice Amount Ageing</h4>
+                                        <p><label>0-30 D</label>5.20 L</p>
+                                        <p><label>31-60 D</label>3.97 L</p>
+                                        <p><label>61-90 D</label>50.00 L</p>
+                                        <p><label>91-120 D</label>--</p>
+                                        <p><label>121-180 D</label>--</p>
+                                        <p><label>>180 D</label>30.00 L</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card summary-card">
-                    <div class="card-body">
-                      <h4 style="margin-bottom: 20px;">Invoice Amount Ageing</h4>
-                      <p><label>0-30 D</label>5.20 L</p>
-                      <p><label>31-60 D</label>3.97 L</p>
-                      <p><label>61-90 D</label>50.00 L</p>
-                      <p><label>91-120 D</label>--</p>    
-                      <p><label>121-180 D</label>--</p>
-                      <p><label>>180 D</label>30.00 L</p>
+                    <div class="tab-pane" id="tab_02">
+                        <div class="row">
+                            <div class="col-md-8 ml-auto mr-auto">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Placed On</th>
+                                            <th>Status</th>
+                                            <th class="text-right">Amount(&#8377;)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>ORDER_001</td>
+                                            <td>23-03-2018</td>
+                                            <td><span class="status placed">Placed</span></td>
+                                            <td class="text-right">2340.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ORDER_002</td>
+                                            <td>10-04-2018</td>
+                                            <td><span class="status accepted">Accepted</span></td>
+                                            <td class="text-right">340.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ORDER_003</td>
+                                            <td>27-04-2018</td>
+                                            <td><span class="status rejected">Rejected</span></td>
+                                            <td class="text-right">3840.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ORDER_004</td>
+                                            <td>07-05-2018</td>
+                                            <td><span class="status invoiced">Invoiced</span></td>
+                                            <td class="text-right">4750.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ORDER_005</td>
+                                            <td>13-05-2018</td>
+                                            <td><span class="status invoiced">Invoiced</span></td>
+                                            <td class="text-right">9631.00</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="tab-pane" id="tab_03">
+                        <div class="col-md-10 ml-auto mr-auto">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th style="width: 100px;">Date</th>
+                                        <th>Person</th>
+                                        <th>Purpose</th>
+                                        <th>Note</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>23-03-2018</td>
+                                        <td>Anshul Garg</td>
+                                        <td><span class="badge badge-warning">Product Demo</span></td>
+                                        <td matTooltip="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+                                            [matTooltipPosition]="'below'">It is a long established...
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10-04-2018</td>
+                                        <td>Mahesh Kumar</td>
+                                        <td><span class="badge badge-default">New Order</span></td>
+                                        <td matTooltip="The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
+                                            [matTooltipPosition]="'below'">The point of using Lorem...
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>27-04-2018</td>
+                                        <td>Vipul Deora</td>
+                                        <td><span class="badge badge-info">Cheque Collection</span></td>
+                                        <td matTooltip="It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+                                            [matTooltipPosition]="'below'">It has survived not only...
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>07-05-2018</td>
+                                        <td>Chandresh Kumar</td>
+                                        <td><span class="badge badge-success">General Meeting</span></td>
+                                        <td matTooltip="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+                                            [matTooltipPosition]="'below'">If you are going to use...
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>13-05-2018</td>
+                                        <td>Yogesh Chaudhary</td>
+                                        <td><span class="badge badge-success">General Meeting</span></td>
+                                        <td matTooltip="It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable."
+                                            [matTooltipPosition]="'below'">It uses a dictionary of...
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_04">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-profile">
+                                    <div class="card-body">
+                                        <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
+                                        <h4 class="card-title">Dhananjay Kumar</h4>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation
+                                            in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design
+                                            but the back is...
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">access_time</i> Updated 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-profile">
+                                    <div class="card-body">
+                                        <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
+                                        <h4 class="card-title">Mahesh Kumar</h4>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation
+                                            in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design
+                                            but the back is...
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">access_time</i> Updated 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-profile">
+                                    <div class="card-body">
+                                        <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
+                                        <h4 class="card-title">Yogesh Chaudhary</h4>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation
+                                            in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design
+                                            but the back is...
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">access_time</i> Updated 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-profile">
+                                    <div class="card-body">
+                                        <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
+                                        <h4 class="card-title">Vipul Deora</h4>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation
+                                            in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design
+                                            but the back is...
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">access_time</i> Updated 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="tab-pane" id="tab_02">
-              <div class="row">
-                <div class="col-md-8 ml-auto mr-auto">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class="text-primary">
-                        <tr>
-                          <th>Order ID</th>
-                          <th>Placed On</th>
-                          <th>Status</th>
-                          <th class="text-right">Amount(&#8377;)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>ORDER_001</td>
-                          <td>23-03-2018</td>
-                          <td><span class="status placed">Placed</span></td>
-                          <td class="text-right">2340.00</td>
-                        </tr>
-                        <tr>
-                          <td>ORDER_002</td>
-                          <td>10-04-2018</td>
-                          <td><span class="status accepted">Accepted</span></td>
-                          <td class="text-right">340.00</td>
-                        </tr>
-                        <tr>
-                          <td>ORDER_003</td>
-                          <td>27-04-2018</td>
-                          <td><span class="status rejected">Rejected</span></td>
-                          <td class="text-right">3840.00</td>
-                        </tr>
-                        <tr>
-                          <td>ORDER_004</td>
-                          <td>07-05-2018</td>
-                          <td><span class="status invoiced">Invoiced</span></td>
-                          <td class="text-right">4750.00</td>
-                        </tr>
-                        <tr>
-                          <td>ORDER_005</td>
-                          <td>13-05-2018</td>
-                          <td><span class="status invoiced">Invoiced</span></td>
-                          <td class="text-right">9631.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>    
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab_03">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class="text-primary">
-                    <tr>
-                      <th style="width: 100px;">Date</th>
-                      <th>Person</th>
-                      <th>Purpose</th>
-                      <th>Note</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>23-03-2018</td>
-                      <td>Anshul Garg</td>
-                      <td><span class="badge badge-warning">Product Demo</span></td>
-                      <td matTooltip="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." [matTooltipPosition]="'below'">It is a long established...</td>
-                    </tr>
-                    <tr>
-                      <td>10-04-2018</td>
-                      <td>Mahesh Kumar</td>
-                      <td><span class="badge badge-default">New Order</span></td>
-                      <td matTooltip="The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters." [matTooltipPosition]="'below'">The point of using Lorem...</td>
-                    </tr>
-                    <tr>
-                      <td>27-04-2018</td>
-                      <td>Vipul Deora</td>
-                      <td><span class="badge badge-info">Cheque Collection</span></td>
-                      <td matTooltip="It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." [matTooltipPosition]="'below'">It has survived not only...</td>
-                    </tr>
-                    <tr>
-                      <td>07-05-2018</td>
-                      <td>Chandresh Kumar</td>
-                      <td><span class="badge badge-success">General Meeting</span></td>
-                      <td matTooltip="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text." [matTooltipPosition]="'below'">If you are going to use...</td>
-                    </tr>
-                    <tr>
-                      <td>13-05-2018</td>
-                      <td>Yogesh Chaudhary</td>
-                      <td><span class="badge badge-success">General Meeting</span></td>
-                      <td matTooltip="It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable." [matTooltipPosition]="'below'">It uses a dictionary of...</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab_04">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="card card-profile">
-                    <div class="card-body">
-                      <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
-                      <h4 class="card-title">Dhananjay Kumar</h4>
-                      <p class="card-description">
-                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="stats">
-                        <i class="material-icons">access_time</i> Updated 2 days ago
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-profile">
-                    <div class="card-body">
-                      <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
-                      <h4 class="card-title">Mahesh Kumar</h4>
-                      <p class="card-description">
-                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="stats">
-                        <i class="material-icons">access_time</i> Updated 2 days ago
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-profile">
-                    <div class="card-body">
-                      <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
-                      <h4 class="card-title">Yogesh Chaudhary</h4>
-                      <p class="card-description">
-                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="stats">
-                        <i class="material-icons">access_time</i> Updated 2 days ago
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-profile">
-                    <div class="card-body">
-                      <h6 class="card-category text-gray">Lorem Ipsum Dolor</h6>
-                      <h4 class="card-title">Vipul Deora</h4>
-                      <p class="card-description">
-                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="stats">
-                        <i class="material-icons">access_time</i> Updated 2 days ago
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>            
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Add Customer Modal -->
-<div class="modal fade" id="addcustomerModal" tabindex="-1" role="dialog" aria-labelledby="addcustomerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Add New Customer</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="add_cust_form">
-          <div class="row">
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Code">
-              </mat-form-field>
+<div class="modal fade" id="addcustomerModal" tabindex="-1" role="dialog" aria-labelledby="addcustomerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Customer</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Business Name">
-              </mat-form-field>
+            <div class="modal-body">
+                <form [formGroup]="addCustomer" class="add_cust_form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Business Name" formControlName="name">
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="spoc" placeholder="Contact Person">
+                                    <mat-option *ngFor="let employee of employees"
+                                                [value]="employee.unique_code">{{employee.name}}</mat-option>
+                                </mat-select>
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="number" placeholder="Mobile" formControlName="mobile">
+                                <mat-error>This field is required and should be valid</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Address" formControlName="address">
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button mat-raised-button type="submit" data-dismiss="modal"
+                                    class="btn btn-fill btn-default btn-round">Cancel
+                            </button>
+                            <button id="dismiss-add-modal" style="display: none" data-dismiss="modal"></button>
+                            <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round"
+                                    (click)="addCustomers()">Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Contact Person">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Phone">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Mobile">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="email" placeholder="Email">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Address">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                <mat-select placeholder="Choose Region">
-                  <mat-option *ngFor="let rid of regions" [value]="rid.value">
-                    {{ rid.viewValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="GSTIN">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="PAN Number">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                  <mat-select placeholder="Account Manager" mgr="Anshul Garg" mgrLabel="mgrs[0]">
-                      <mat-option *ngFor="let mgr of mgrs" [value]="mgr.value">
-                          {{ mgr.viewValue }}
-                      </mat-option>
-                  </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Credit Limit">
-              </mat-form-field>
-            </div>
-            <div class="col-md-12 text-center">
-              <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
-              <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round" (click)="showSwal('success-message')">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Edit Customer Modal -->
-<div class="modal fade" id="editcustomerModal" tabindex="-1" role="dialog" aria-labelledby="editcustomerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Edit Customer Details</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="add_cust_form">
-          <div class="row">
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Code" value="CUST007">
-              </mat-form-field>
+<div class="modal fade" id="editcustomerModal" tabindex="-1" role="dialog" aria-labelledby="editcustomerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Customer Details</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Business Name" value="Ram Kumar and Sons">
-              </mat-form-field>
+            <div class="modal-body">
+                <form [formGroup]="editCustomer" class="add_cust_form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Business Name" formControlName="name">
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="spoc" placeholder="Contact Person">
+                                    <mat-option *ngFor="let employee of employees"
+                                                [value]="employee.unique_code">{{employee.name}}</mat-option>
+                                </mat-select>
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="number" placeholder="Mobile" formControlName="mobile">
+                                <mat-error>This field is required and should be valid</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Address" formControlName="address">
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button mat-raised-button type="submit" data-dismiss="modal"
+                                    class="btn btn-fill btn-default btn-round">Cancel
+                            </button>
+                            <button id="dismiss-edit-modal" style="display: none" data-dismiss="modal"></button>
+                            <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round"
+                                    (click)="editCustomerApi()">Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Contact Person" value="Dhananjay Kumar">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Phone" value="01124329843">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Mobile" value="8743990959">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="email" placeholder="Email" value="dhananjay@simplifii.com">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Address" value="Street No. 16/17, Pankha Road, New Delhi, 110046">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                <mat-select placeholder="Region">
-                  <mat-option *ngFor="let rid of regions" [value]="rid.value">
-                    {{ rid.viewValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="GSTIN" value="22AAAAA0000A1Z5">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="PAN Number" value="DEMUK9992C">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                  <mat-select placeholder="Account Manager" mgr="Anshul Garg" mgrLabel="mgrs[0]">
-                      <mat-option *ngFor="let mgr of mgrs" [value]="mgr.value">
-                          {{ mgr.viewValue }}
-                      </mat-option>
-                  </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Credit Limit" value="650000">
-              </mat-form-field>
-            </div>
-            <div class="col-md-12 text-center">
-              <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
-              <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Add Dealer Modal -->
-<div class="modal fade" id="adddealerModal" tabindex="-1" role="dialog" aria-labelledby="adddealerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Add New Dealer</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="add_cust_form">
-          <div class="row">
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Code">
-              </mat-form-field>
+<div class="modal fade" id="adddealerModal" tabindex="-1" role="dialog" aria-labelledby="adddealerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Dealer</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Business Name">
-              </mat-form-field>
+            <div class="modal-body">
+                <form class="add_cust_form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Code">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Business Name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Contact Person">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Phone">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Mobile">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="email" placeholder="Email">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Address">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <mat-select placeholder="Choose Region">
+                                    <mat-option *ngFor="let rid of regions" [value]="rid.value">
+                                        {{ rid.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="GSTIN">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="PAN Number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <mat-select placeholder="Account Manager" mgr="Anshul Garg" mgrLabel="mgrs[0]">
+                                    <mat-option *ngFor="let mgr of mgrs" [value]="mgr.value">
+                                        {{ mgr.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Credit Limit">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button mat-raised-button type="submit" data-dismiss="modal"
+                                    class="btn btn-fill btn-default btn-round">Cancel
+                            </button>
+                            <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round">Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Contact Person">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Phone">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Mobile">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="email" placeholder="Email">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Address">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                <mat-select placeholder="Choose Region">
-                  <mat-option *ngFor="let rid of regions" [value]="rid.value">
-                    {{ rid.viewValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="GSTIN">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="PAN Number">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field>
-                <mat-select placeholder="Account Manager" mgr="Anshul Garg" mgrLabel="mgrs[0]">
-                  <mat-option *ngFor="let mgr of mgrs" [value]="mgr.value">
-                    {{ mgr.viewValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Credit Limit">
-              </mat-form-field>
-            </div>
-            <div class="col-md-12 text-center">
-              <button mat-raised-button type="submit" data-dismiss="modal" class="btn btn-fill btn-default btn-round">Cancel</button>
-              <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round" (click)="showSwal('success-message')">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
 
-    </div>
-  </div>
-</div>
-<div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown" aria-expanded="true" id="showFilter">
-            <i class="fa fa-filter fa-2x"> </i>
-        </a>
+        </div>
     </div>
 </div>
+<!--<div class="fixed-plugin">-->
+<!--    <div class="dropdown show-dropdown">-->
+<!--        <a href="#" data-toggle="dropdown" aria-expanded="true" id="showFilter">-->
+<!--            <i class="fa fa-filter fa-2x"> </i>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->

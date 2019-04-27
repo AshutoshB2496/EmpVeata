@@ -7,12 +7,12 @@ import {AttendanceComponent} from '../attendance/attendance.component';
 import {CalendarComponent} from '../calendar/calendar.component';
 import {TeamsTasksComponent} from './teams-tasks/teams-tasks.component';
 import {BeatPlanComponent} from './beat-plan/beat-plan.component';
-import {RequestsComponent} from './requests/requests.component';
 import {PerformanceComponent} from './performance/performance.component';
 import {JobPlanComponent} from './weelky-plan/job-plan.component';
 import {DaywisePlanComponent} from './daywise-plan/daywise-plan.component';
 import {Map2Component} from '../shared/map/map2.component';
 import {TeamsLocationComponent} from './teams-location/teams-location.component';
+import {MeetPlanComponent} from './meet-plan/meet-plan.component';
 
 
 export const TeamRoutes: Routes = [
@@ -41,7 +41,7 @@ export const TeamRoutes: Routes = [
         path: '',
         children: [{
             path: 'beatplanning',
-            component: BeatPlanComponent
+            component: MeetPlanComponent
         }]
     },
     {
@@ -56,13 +56,6 @@ export const TeamRoutes: Routes = [
         children: [{
             path: 'daywiseplanning',
             component: DaywisePlanComponent
-        }]
-    },
-    {
-        path: '',
-        children: [{
-            path: 'requests',
-            component: RequestsComponent
         }]
     },
     {

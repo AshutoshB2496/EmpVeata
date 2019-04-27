@@ -3,37 +3,33 @@
         <div class="row">
             <div class="col-md-6 ml-auto mr-auto">
                 <div class="card">
-                    <!--<div class="card-avatar">-->
-                        <!--<a href="#pablo">-->
-                            <!--<img class="img" src="./assets/img/faces/marc.jpg" />-->
-                        <!--</a>-->
-                    <!--</div>-->
+                    <div class="card-avatar">
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/faces/marc.jpg" />-->
+<!--                        </a>-->
+                    </div>
                     <div class="card-body">
-                        <h4 class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp; Ankit Shrivastava</h4>
+                        <h4 class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp; {{user.name}}</h4>
                         <br>
                         <table class="table text-left table-bordered">
                             <tr>
-                                <th>Branch</th>
-                                <td>Branch Name</td>
-                            </tr>
-                            <tr>
-                                <th>Region</th>
-                                <td>North</td>
+                                <th>Employee Code</th>
+                                <td>{{user.cdata.employee_code}}</td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td><a href="mailto:ankit.shrivastava@example.com">ankit.shrivastava@example.com</a></td>
+                                <td><a href="mailto:ankit.shrivastava@example.com">{{user.email}}</a></td>
                             </tr>
                             <tr>
                                 <th>Mobile</th>
-                                <td>+91 8775437876</td>
+                                <td>+91 {{user.mobile}}</td>
                             </tr>
                         </table>
-                        <a href="#!" class="btn btn-success btn-round">
+                        <a class="btn btn-success btn-round" (click)="markAttendence()">
                             <i class="material-icons">
-                                vpn_key
+                                where_to_vote
                             </i>&nbsp;
-                            Change Password
+                            Mark Attendence
                         </a>
                     </div>
                 </div>

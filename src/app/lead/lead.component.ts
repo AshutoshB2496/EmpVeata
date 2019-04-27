@@ -3,6 +3,7 @@ import {LeadService} from '../sales/lead.service';
 import swal from 'sweetalert2';
 import {MatDialog} from '@angular/material';
 import {LeadDialogComponent} from '../sales/leads/leaddialog.component';
+import {FormGroup} from '@angular/forms';
 
 declare const $: any;
 
@@ -32,6 +33,7 @@ export class LeadComponent implements OnInit {
     history = [];
     informations = [];
     type;
+    lead:FormGroup;
 
     constructor(private service: LeadService, private dialog: MatDialog) {
 

@@ -4,14 +4,20 @@
 }
 .tab-actions {
   float: right;
-  display: block;
   overflow: hidden;
   text-align: right;
-  width: 30%;
+  width: 32%;
+  margin-top: -3rem;
 }
+.tab-action-drop {
+  width: 70%; float: left;
+  margin-bottom: -10px;
+}
+
 .tab-actions .btn {
   margin-left: 5px;
 }
+
 
 .proImg {}
 .proImg span {

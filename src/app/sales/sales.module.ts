@@ -17,6 +17,9 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {LeadService} from './lead.service';
 import {LeadDialogComponent} from './leads/leaddialog.component';
 import {MonthlytargetService} from './monthlytarget/monthlytarget.service';
+import {RequestsComponent} from './requests/requests.component';
+import {RequestsDialogComponent} from './requests/requestsdialog.component';
+import {RequestsService} from './requests.service';
 
 @NgModule({
     imports: [
@@ -35,10 +38,12 @@ import {MonthlytargetService} from './monthlytarget/monthlytarget.service';
         MonthlytargetComponent,
         QuarterlytargetComponent,
         LeadsComponent,
-        LeadDialogComponent
+        LeadDialogComponent,
+        RequestsComponent,
+        RequestsDialogComponent,
     ],
-    providers: [SalesService, SchemesService, LeadService, MonthlytargetService],
-    entryComponents: [LeadDialogComponent, OrdersDialogComponent]
+    providers: [SalesService, SchemesService, LeadService, MonthlytargetService, RequestsService],
+    entryComponents: [LeadDialogComponent, OrdersDialogComponent, RequestsDialogComponent]
 })
 
 export class SalesModule {

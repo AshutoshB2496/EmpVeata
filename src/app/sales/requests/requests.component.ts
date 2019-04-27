@@ -1,20 +1,20 @@
-import { RequestsDialogComponent } from '../team/requests/requestsdialog.component';
-import { MatDialog } from '@angular/material';
-import { RequestsService } from '../team/requests.service';
-import { NgModule } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { TableData } from '../md/md-table/md-table.component';
+import {RequestsDialogComponent} from './requestsdialog.component';
+import {MatDialog} from '@angular/material';
+import {NgModule} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import swal from 'sweetalert2';
+import {TableData} from '../../md/md-table/md-table.component';
+import {RequestsService} from '../requests.service';
 
 declare var $: any;
-// style="display: inline-block"
-@Component({
-    selector: 'app-requests-cmp',
-    templateUrl: 'requests.component.html',
-    styleUrls: ['requests.component.css']
-})
 
+@Component({
+    selector: 'app-requests',
+    templateUrl: './requests.component.html',
+    styleUrls: ['./requests.component.scss']
+})
 export class RequestsComponent implements OnInit {
+
     public tableData: TableData;
     public requests_01: any[];
     public requests_02: any[];
@@ -22,6 +22,7 @@ export class RequestsComponent implements OnInit {
     public requests_04: any[];
     customername: string;
     items: any[]
+
     constructor(private service: RequestsService, private dialog: MatDialog) {
 
     }
@@ -31,11 +32,12 @@ export class RequestsComponent implements OnInit {
         this.customername = name;
         this.items = items;
     }
+
     openDialogForApprove(uniqueid): void {
         const dialogRef = this.dialog.open(RequestsDialogComponent, {
             width: '500px',
             height: '160px',
-            data: { id: uniqueid, message: 'Approve this Request', visible: false }
+            data: {id: uniqueid, message: 'Approve this Request', visible: false}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -56,7 +58,7 @@ export class RequestsComponent implements OnInit {
                     swal({
                         type: 'error',
                         title: 'Task Incomplete!',
-                        text: 'Request cannot be approved',
+                        text: err.error.msg,
                         buttonsStyling: false,
                         confirmButtonClass: 'btn btn-rose'
                     }).catch(swal.noop);
@@ -69,7 +71,7 @@ export class RequestsComponent implements OnInit {
         const dialogRef = this.dialog.open(RequestsDialogComponent, {
             width: '500px',
             height: '220px',
-            data: { id: uniqueid, message: 'Reject This Request', visible: true }
+            data: {id: uniqueid, message: 'Reject This Request', visible: true}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -90,7 +92,7 @@ export class RequestsComponent implements OnInit {
                     swal({
                         type: 'error',
                         title: 'Task Incomplete!',
-                        text: 'Request cannot be rejected',
+                        text: err.error.msg,
                         buttonsStyling: false,
                         confirmButtonClass: 'btn btn-rose'
                     }).catch(swal.noop);
@@ -98,11 +100,12 @@ export class RequestsComponent implements OnInit {
             }
         });
     }
+
     openDialogForComment(uniqueid): void {
         const dialogRef = this.dialog.open(RequestsDialogComponent, {
             width: '500px',
             height: '220px',
-            data: { id: uniqueid, message: 'Add the Comment', visible: true }
+            data: {id: uniqueid, message: 'Add the Comment', visible: true}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -123,7 +126,7 @@ export class RequestsComponent implements OnInit {
                     swal({
                         type: 'error',
                         title: 'Task Incomplete!',
-                        text: 'Comment cannot be added',
+                        text: err.error.msg,
                         buttonsStyling: false,
                         confirmButtonClass: 'btn btn-rose'
                     }).catch(swal.noop);
@@ -131,6 +134,7 @@ export class RequestsComponent implements OnInit {
             }
         });
     }
+
     refresh() {
         this.service.getSalesReturn().subscribe(value => {
             this.requests_01 = value
@@ -142,6 +146,7 @@ export class RequestsComponent implements OnInit {
             this.requests_04 = value
         })
     }
+
     ngOnInit() {
         this.refresh();
         this.requests_03 = [
@@ -150,7 +155,10 @@ export class RequestsComponent implements OnInit {
                  what was found when a ravaging rain swept through metro Detroit`, checked: true
             },
 
-            { title: 'Sign contract for \'What are conference organizers afraid of?\'', checked: false },
+            {title: 'Sign contract for \'What are conference organizers afraid of?\'', checked: false},
         ];
     }
+
 }
+
+

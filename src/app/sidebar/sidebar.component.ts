@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth-service.service';
+import swal from 'sweetalert2';
 
 declare const $: any;
 
@@ -22,71 +24,76 @@ export interface ChildrenItems {
 }
 
 // Menu Items
-export const ROUTES: RouteInfo[] = [{
-    path: '/dashboard',
-    title: 'Dashboard',
-    type: 'link',
-    icontype: 'dashboard'
-}, {
-    path: '/masters',
-    title: 'Masters',
-    type: 'sub',
-    icontype: 'apps',
-    collapse: 'masters',
-    children: [
-        {path: 'customers', title: 'Customers', ab: 'C'},
-        {path: 'catalogue', title: 'Catalogue', ab: 'C'},
-        {path: 'employees', title: 'Employees', ab: 'E'}
-    ]
-}, {
-    path: '/team',
-    title: 'Team',
-    type: 'sub',
-    icontype: 'supervisor_account',
-    collapse: 'team',
-    children: [
-        {path: 'teams-tasks', title: 'Tasks', ab: 'T'},
-        {path: 'beatplanning', title: 'Beat Plan', ab: 'BP'},
-        {path: 'jobplanning', title: 'Weekly Plan', ab: 'WP'},
-        {path: 'requests', title: 'Requests', ab: 'A'},
-        {path: 'hierarchy', title: 'My Team', ab: 'MT'}
+export const ROUTES: RouteInfo[] = [
+
+//     {
+//     path: '/dashboard',
+//     title: 'Dashboard',
+//     type: 'link',
+//     icontype: 'dashboard'
+// },
+//
+    {
+        path: '/masters',
+        title: 'Masters',
+        type: 'sub',
+        icontype: 'apps',
+        collapse: 'masters',
+        children: [
+            {path: 'customers', title: 'Customers', ab: 'C'},
+            {path: 'catalogue', title: 'Catalogue', ab: 'C'},
+            {path: 'employees', title: 'Employees', ab: 'E'}
         ]
-}, {
-    path: '/userslocation',
-    title: 'User Location',
-    type: 'sub',
-    icontype: 'settings',
-    collapse: 'User Location',
-    children: [
-        {path: 'daywise-map', title: 'Daywise Map', ab: 'D'}
+    }, {
+        path: '/team',
+        title: 'Team',
+        type: 'sub',
+        icontype: 'supervisor_account',
+        collapse: 'team',
+        children: [
+            {path: 'teams-tasks', title: 'Tasks', ab: 'T'},
+            {path: 'beatplanning', title: 'Beat Plan', ab: 'BP'},
+            {path: 'jobplanning', title: 'Weekly Plan', ab: 'WP'},
+            {path: 'hierarchy', title: 'My Team', ab: 'MT'}
         ]
-}, {
-    path: '/settings',
-    title: 'Settings',
-    type: 'sub',
-    icontype: 'settings',
-    collapse: 'Settings',
-    children: [
-        {path: 'incentivewizard', title: 'Incentive Configuration', ab: 'IC'},
-        {path: 'claimlimits', title: 'Claim Limits', ab: 'CL'}
-    ]
-},{
-    path: '/sales',
-    title: 'Sales',
-    type: 'sub',
-    icontype: 'timeline',
-    collapse: 'sales',
-    children: [
-        {path: 'monthlytarget', title: 'Monthly Target', ab: 'MT'},
-        {path: 'orders', title: 'Orders', ab: 'O'},
-        {path: 'leads', title: 'Leads', ab: 'L'}
-    ]
-}, {
-    path: '/performance',
-    title: 'Performance',
-    type: 'link',
-    icontype: 'av_timer'
-}
+    },
+//     {
+//     path: '/userslocation',
+//     title: 'User Location',
+//     type: 'sub',
+//     icontype: 'settings',
+//     collapse: 'User Location',
+//     children: [
+//         {path: 'daywise-map', title: 'Daywise Map', ab: 'D'}
+//         ]
+// },
+    {
+        path: '/sales',
+        title: 'Other Info',
+        type: 'sub',
+        icontype: 'settings',
+        collapse: 'Other Info',
+        children: [
+            {path: 'leads', title: 'Leads', ab: 'L'}
+        ]
+    },
+//   {
+//         path: '/sales',
+//         title: 'Sales',
+//         type: 'sub',
+//         icontype: 'timeline',
+//         collapse: 'sales',
+//         children: [
+//             {path: 'monthlytarget', title: 'Monthly Target', ab: 'MT'},
+//             {path: 'orders', title: 'Orders', ab: 'O'},
+//             {path: 'leads', title: 'Leads', ab: 'L'}
+//         ]
+//     }, {
+//         path: '/performance',
+//         title: 'Performance',
+//         type: 'link',
+//         icontype: 'av_timer'
+//     }
 ];
 
 @Component({
@@ -97,8 +104,9 @@ export const ROUTES: RouteInfo[] = [{
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     name: string;
+    loading: boolean;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private authService: AuthService) {
     }
 
     isMobileMenu() {
@@ -115,6 +123,7 @@ export class SidebarComponent implements OnInit {
     openBulk() {
         this.router.navigate(['bulkform']);
     }
+
     openProfile() {
         this.router.navigate(['myprofile']);
     }
@@ -129,6 +138,25 @@ export class SidebarComponent implements OnInit {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             let ps = new PerfectScrollbar(elemSidebar, {wheelSpeed: 2, suppressScrollX: true});
         }
+    }
+
+    logout() {
+        this.loading = true;
+        this.authService.logout().subscribe(value => {
+            this.loading = false;
+            localStorage.clear();
+            this.router.navigate(['login']);
+        }, error1 => {
+            this.loading = false;
+            this.router.navigate(['login']);
+            localStorage.clear();
+            swal({
+                type: 'error',
+                text: error1.error.msg,
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-rose'
+            }).catch(swal.noop);
+        });
     }
 
     isMac(): boolean {

@@ -1,8 +1,8 @@
 import swal from 'sweetalert2';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
-import { AuthService } from '../../auth-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit, ElementRef, OnDestroy} from '@angular/core';
+import {AuthService} from '../../auth-service.service';
 
 declare var $: any;
 
@@ -10,9 +10,9 @@ declare var $: any;
     selector: 'app-login-cmp',
     templateUrl: './login.component.html',
     styles: [`
-    .login-loader{
-        display: inline-block;
-    }`]
+        .login-loader {
+            display: inline-block;
+        }`]
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     error = false;
 
     constructor(private element: ElementRef,
-        private fb: FormBuilder,
-        private router: Router,
-        private service: AuthService,
-        private route: ActivatedRoute) {
+                private fb: FormBuilder,
+                private router: Router,
+                private service: AuthService,
+                private route: ActivatedRoute) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -39,12 +39,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.service.login(this.login.get('username').value, this.login.get('password').value)
             .subscribe(
-                (user) => {
+                (value) => {
                     this.loading = false;
-                    localStorage.setItem('user', JSON.stringify(user));
-                    console.log(user);
-                    console.log(this.returnUrl);
-                    this.router.navigateByUrl(this.returnUrl);
+                    localStorage.setItem('my_login_token', value.token);
+                    localStorage.setItem('user', JSON.stringify(value.response));
+                    this.service.login('sfa@example.com', 111111).subscribe(value1 => {
+                        localStorage.setItem('admin_token', value1.token);
+                        localStorage.setItem('admin_user', JSON.stringify(value1.response));
+                        this.router.navigateByUrl(this.returnUrl);
+                    });
                 },
                 (error) => {
                     this.loading = false;
@@ -74,6 +77,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             password: [null, [Validators.required]]
         })
     }
+
     sidebarToggle() {
         var toggleButton = this.toggleButton;
         var body = document.getElementsByTagName('body')[0];
@@ -90,6 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             body.classList.remove('nav-open');
         }
     }
+
     ngOnDestroy() {
         const body = document.getElementsByTagName('body')[0];
         body.classList.remove('login-page');

@@ -16,15 +16,16 @@ import {CalendarModule} from '../calendar/calendar.module';
 import {BeatPlanComponent} from './beat-plan/beat-plan.component';
 import {TruncatePipe} from './truncate.pipe';
 import {BeatplanningService} from './beat-plan/beatplanning.service';
-import {RequestsComponent} from './requests/requests.component';
-import {RequestsDialogComponent} from './requests/requestsdialog.component';
-import {RequestsService} from './requests.service';
+
+;
 import {PerformanceComponent} from './performance/performance.component';
 import {JobplanningService} from './weelky-plan/jobplanning.service';
 import {JobPlanComponent} from './weelky-plan/job-plan.component';
 import {DaywisePlanComponent} from './daywise-plan/daywise-plan.component';
 import {DaywiseplanningService} from './daywise-plan/daywiseplanning.service';
 import {TeamsLocationComponent} from './teams-location/teams-location.component';
+import {MeetPlanComponent} from './meet-plan/meet-plan.component';
+import {MeetplanningService} from './meet-plan/meetplanning.service';
 
 @NgModule({
     imports: [
@@ -45,15 +46,14 @@ import {TeamsLocationComponent} from './teams-location/teams-location.component'
         TreeComponent,
         BeatPlanComponent,
         TruncatePipe,
-        RequestsComponent,
-        RequestsDialogComponent,
+        MeetPlanComponent,
         PerformanceComponent,
         JobPlanComponent,
         DaywisePlanComponent,
         TeamsLocationComponent
     ],
-    providers: [BeatplanningService, RequestsService, JobplanningService, DaywiseplanningService],
-    entryComponents: [RequestsDialogComponent]
+    providers: [BeatplanningService, JobplanningService, DaywiseplanningService, MeetplanningService],
+    entryComponents: []
 })
 
 export class TeamModule {

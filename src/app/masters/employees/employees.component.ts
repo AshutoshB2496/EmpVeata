@@ -1,5 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { TableData } from '../../md/md-table/md-table.component';
+import {TableData} from '../../md/md-table/md-table.component';
+import {EmployeeServices} from '../../shared/employee-services.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import swal from 'sweetalert2';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 declare interface DataTable {
     headerRow: string[];
@@ -10,292 +14,181 @@ declare interface DataTable {
 declare const $: any;
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './employees.component.html',
+    selector: 'app-customers',
+    templateUrl: './employees.component.html',
     styleUrls: ['employees.component.css']
 })
 
 export class EmployeesComponent implements OnInit, AfterViewInit {
     public tableData1: TableData;
     public dataTable: DataTable;
+    employees = [];
+    Manager = '';
+    employee: FormGroup;
+    editEmployee: FormGroup;
+    isAdmin;
+    editemp: any = {};
+    customers = [];
 
-    ngOnInit() {
-        this.tableData1 = {
-            headerRow: [ 'Name', 'Country', 'City', 'Sale(₹)'],
-            dataRows: [
-                ['Dakota Rice', 'India', 'Delhi', '36,738'],
-                ['Minerva Hooper', 'India', 'Gurgaon', '23,789'],
-                ['Sage Rodriguez', 'India', 'Noida', '56,142'],
-                ['Philip Chaney', 'India', 'Faridabad', '38,735'],
-                ['Doris Greene', 'India', 'Jabalpur', '63,542'],
-                ['Mason Porter', 'India', 'Ghaziabad', '78,615']
-            ]
+    showSwal(type, msg) {
+        if (type === 'success-message') {
+            swal({
+                type: 'success',
+                title: 'Action Done!',
+                text: msg,
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-success'
+
+            }).catch(swal.noop);
         }
+    };
 
-        this.dataTable = {
-            headerRow: [ '#', 'Name', 'Email', 'Manager', 'Area', 'Performance', 'Actions', 'View', '' ],
-            footerRow: [ '#', 'Name', 'Email', 'Manager', 'Area', 'Performance', 'Actions', 'View', '' ],
+    showError(type, msg) {
+        if (type === 'error') {
+            swal({
+                type: 'error',
+                title: 'Error',
+                text: msg,
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-danger'
 
-            dataRows: [
-                ['1', 'Dhananjay', 'stu1@hj.com', 'Munish Bansal', 'Delhi', '-30%', '', '', '' ],
-                ['2', 'Chandresh', 'cs@example.com', 'Munish Bansal', 'Delhi', '+18%', '', '', '' ],
-                ['3', 'Anshul Garg', 'anshul@simplifii.com', 'Munish Bansal', 'Delhi', 'On Target', '', '', ''],
-                ['4', 'Yogesh Choudhary', 'yogi@simplifii.com', 'Munish Bansal', 'Delhi', 'On Target', '', '', '' ],
-                ['5', 'Vipul Deora', 'vipul@simplifii.com', 'Munish Bansal', 'Delhi', '+31%', '', '', '']
+            }).catch(swal.noop);
+        }
+    };
 
-            ]
-        };
-
-        $("#showFilter").click(function(){
-            $("#filterContainer").slideToggle();
-        });
-
-        // Wizard Initialization
-        $('.card-wizard').bootstrapWizard({
-            'tabClass': 'nav nav-pills',
-            'nextSelector': '.btn-next',
-            'previousSelector': '.btn-previous',
-
-
-            onInit: function(tab: any, navigation: any, index: any){
-
-              // check number of tabs and fill the entire row
-              let $total = navigation.find('li').length;
-              let $wizard = navigation.closest('.card-wizard');
-
-              let $first_li = navigation.find('li:first-child a').html();
-              let $moving_div = $('<div class="moving-tab">' + $first_li + '</div>');
-              $('.card-wizard .wizard-navigation').append($moving_div);
-
-              $total = $wizard.find('.nav li').length;
-             let  $li_width = 100/$total;
-
-              let total_steps = $wizard.find('.nav li').length;
-              let move_distance = $wizard.width() / total_steps;
-              let index_temp = index;
-              let vertical_level = 0;
-
-              let mobile_device = $(document).width() < 600 && $total > 3;
-
-              if(mobile_device){
-                  move_distance = $wizard.width() / 2;
-                  index_temp = index % 2;
-                  $li_width = 50;
-              }
-
-              $wizard.find('.nav li').css('width',$li_width + '%');
-
-              let step_width = move_distance;
-              move_distance = move_distance * index_temp;
-
-              let $current = index + 1;
-
-              if($current == 1 || (mobile_device == true && (index % 2 == 0) )){
-                  move_distance -= 8;
-              } else if($current == total_steps || (mobile_device == true && (index % 2 == 1))){
-                  move_distance += 8;
-              }
-
-              if(mobile_device){
-                  let x: any = index / 2;
-                  vertical_level = parseInt(x);
-                  vertical_level = vertical_level * 38;
-              }
-
-              $wizard.find('.moving-tab').css('width', step_width);
-              $('.moving-tab').css({
-                  'transform':'translate3d(' + move_distance + 'px, ' + vertical_level +  'px, 0)',
-                  'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-
-              });
-              $('.moving-tab').css('transition','transform 0s');
-           },
-
-            
-            onTabShow: function(tab: any, navigation: any, index: any) {
-                let $total = navigation.find('li').length;
-                let $current = index + 1;
-
-                const $wizard = navigation.closest('.card-wizard');
-
-                // If it's the last tab then hide the last button and show the finish instead
-                if ($current >= $total) {
-                    $($wizard).find('.btn-next').hide();
-                    $($wizard).find('.btn-finish').show();
-                } else {
-                    $($wizard).find('.btn-next').show();
-                    $($wizard).find('.btn-finish').hide();
-                }
-
-                const button_text = navigation.find('li:nth-child(' + $current + ') a').html();
-
-                setTimeout(function(){
-                    $('.moving-tab').text(button_text);
-                }, 150);
-
-                const checkbox = $('.footer-checkbox');
-
-                if ( index !== 0 ) {
-                    $(checkbox).css({
-                        'opacity':'0',
-                        'visibility':'hidden',
-                        'position':'absolute'
-                    });
-                } else {
-                    $(checkbox).css({
-                        'opacity':'1',
-                        'visibility':'visible'
-                    });
-                }
-                $total = $wizard.find('.nav li').length;
-               let  $li_width = 100/$total;
-
-                let total_steps = $wizard.find('.nav li').length;
-                let move_distance = $wizard.width() / total_steps;
-                let index_temp = index;
-                let vertical_level = 0;
-
-                let mobile_device = $(document).width() < 600 && $total > 3;
-
-                if(mobile_device){
-                    move_distance = $wizard.width() / 2;
-                    index_temp = index % 2;
-                    $li_width = 50;
-                }
-
-                $wizard.find('.nav li').css('width',$li_width + '%');
-
-                let step_width = move_distance;
-                move_distance = move_distance * index_temp;
-
-                $current = index + 1;
-
-                if($current == 1 || (mobile_device == true && (index % 2 == 0) )){
-                    move_distance -= 8;
-                } else if($current == total_steps || (mobile_device == true && (index % 2 == 1))){
-                    move_distance += 8;
-                }
-
-                if(mobile_device){
-                    let x: any = index / 2;
-                    vertical_level = parseInt(x);
-                    vertical_level = vertical_level * 38;
-                }
-
-                $wizard.find('.moving-tab').css('width', step_width);
-                $('.moving-tab').css({
-                    'transform':'translate3d(' + move_distance + 'px, ' + vertical_level +  'px, 0)',
-                    'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-
-                });
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({onlySelf: true});
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
             }
         });
+    }
 
+    constructor(private employeeService: EmployeeServices, private fb: FormBuilder) {
 
-        
+        this.employee = this.fb.group({
+            name: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            mobile: ['', [Validators.required, Validators.min(1111111111), Validators.max(9999999999)]],
+            code: ['', [Validators.required]]
+        });
+        this.editEmployee = this.fb.group({
+            id: [''],
+            name: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            mobile: ['', [Validators.required, Validators.min(1111111111), Validators.max(9999999999)]],
+            code: ['', [Validators.required]]
+        })
+    }
+
+    openEmpModal(employee) {
+        this.editemp = {};
+        this.editemp = employee;
+        this.editEmployee.reset();
+        this.editEmployee = this.fb.group({
+            id: [employee.id],
+            name: [employee.name, [Validators.required]],
+            email: [employee.email, [Validators.required, Validators.email]],
+            mobile: [employee.mobile, [Validators.required, Validators.min(1111111111), Validators.max(9999999999)]],
+            code: [employee.username, [Validators.required]]
+        })
+    }
+
+    getEmpCustomer(spoc) {
+        this.employeeService.getCustomers(spoc).subscribe(value => {
+            console.log(value);
+            this.customers = value;
+        })
+    }
+
+    editEmployeeApi() {
+        if (this.editEmployee.valid) {
+            if (this.editemp.name !== this.editEmployee.value.name) {
+                this.employeeService.editEmpName(this.editEmployee.value).subscribe(value => {
+                    this.getEmployees();
+                }, error1 => {
+                    this.showError('error', error1.error.msg);
+                });
+            }
+            if (this.editemp.email !== this.editEmployee.value.email) {
+                this.employeeService.editEmpEmail(this.editEmployee.value).subscribe(value2 => {
+                    this.getEmployees();
+                }, error1 => {
+                    this.showError('error', error1.error.msg);
+                });
+            }
+            if (this.editemp.mobile !== this.editEmployee.value.mobile) {
+                this.employeeService.editEmpMobile(this.editEmployee.value).subscribe(value3 => {
+                    this.getEmployees();
+                }, error1 => {
+                    this.showError('error', error1.error.msg);
+                });
+            }
+            document.getElementById('dismiss-edit-modal').click();
+            this.showSwal('success-message', 'The employee details edited successfully!');
+            this.getEmployees();
+        } else {
+            this.validateAllFormFields(this.editEmployee);
+        }
+    }
+
+    addEmployee() {
+        document.getElementById('dismiss-add-modal').click()
+        this.showSwal('success-message', 'A new employee added to the database successfully!');
+        this.employee.reset();
+        this.getEmployees();
+    }
+
+    submit() {
+        if (this.employee.valid) {
+            if (this.isAdmin) {
+                this.employeeService.addadminEmployee(this.employee.value).subscribe(value => {
+                    this.addEmployee();
+                }, error1 => {
+                    this.showError('error', error1.error.msg);
+                });
+            } else {
+                this.employeeService.addfeildEmployee(this.employee.value).subscribe(value => {
+                    this.addEmployee();
+                }, error1 => {
+                    this.showError('error', error1.error.msg);
+                });
+            }
+        } else {
+            this.validateAllFormFields(this.employee);
+        }
+    }
+
+    getEmployees() {
+        if (this.isAdmin) {
+            this.employeeService.getAdminEmployees().subscribe(value => {
+                this.employees = value;
+                this.Manager = 'Admin'
+                console.log(this.employees);
+            })
+        } else {
+            this.employeeService.getEmployees().subscribe(value => {
+                this.employees = value[0].reportees;
+                console.log(this.employees);
+                this.Manager = value[0].string1;
+            })
+        }
+    }
+
+    ngOnInit() {
+
+        this.isAdmin = JSON.parse(localStorage.getItem('user')).role === 'OrgAdmin';
+
+        this.getEmployees();
+
         $('.set-full-height').css('height', 'auto');
 
     }
 
     ngAfterViewInit() {
-        $('#datatables').DataTable({
-            'searching': false,
-            'pagingType': 'full_numbers',
-            'lengthMenu': [
-                [2, 5, 10, -1],
-                [2, 5, 10, 'All']
-            ],
-            responsive: true,
-            language: {
-                search: '_INPUT_',
-                searchPlaceholder: 'Free text search',
-            }
-
-        });
-
-        const table = $('#datatables').DataTable();
-
-        $('.card .material-datatables label').addClass('form-group');
-
-        // Initialize moving navigation
-        $( window ).resize( () => { $('.card-wizard').each(function(){
-
-            const $wizard = $(this);
-            const index = $wizard.bootstrapWizard('currentIndex');
-            let $total = $wizard.find('.nav li').length;
-            let  $li_width = 100/$total;
-
-            let total_steps = $wizard.find('.nav li').length;
-            let move_distance = $wizard.width() / total_steps;
-            let index_temp = index;
-            let vertical_level = 0;
-
-            let mobile_device = $(document).width() < 600 && $total > 3;
-
-            if(mobile_device){
-                move_distance = $wizard.width() / 2;
-                index_temp = index % 2;
-                $li_width = 50;
-            }
-
-            $wizard.find('.nav li').css('width',$li_width + '%');
-
-            let step_width = move_distance;
-            move_distance = move_distance * index_temp;
-
-            let $current = index + 1;
-
-            if($current == 1 || (mobile_device == true && (index % 2 == 0) )){
-                move_distance -= 8;
-            } else if($current == total_steps || (mobile_device == true && (index % 2 == 1))){
-                move_distance += 8;
-            }
-
-            if(mobile_device){
-                let x: any = index / 2;
-                vertical_level = parseInt(x);
-                vertical_level = vertical_level * 38;
-            }
-
-            $wizard.find('.moving-tab').css('width', step_width);
-            $('.moving-tab').css({
-                'transform':'translate3d(' + move_distance + 'px, ' + vertical_level +  'px, 0)',
-                'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-            });
-
-            $('.moving-tab').css({
-                'transition': 'transform 0s'
-            });
-            });
-        });
     }
 
-
-    currentMgr: string[];
-    mgrs = [
-      {value: 'mgr-0', viewValue: 'Munish Bansal'},
-      {value: 'mgr-1', viewValue: 'Anshul Garg'},
-      {value: 'mgr-2', viewValue: 'Mahesh Kumar'},
-      {value: 'mgr-3', viewValue: 'Dhananjay Kumar'},
-      {value: 'mgr-4', viewValue: 'Chandresh'},
-
-    ];
-
-    currentArea: string[];
-    areaids = [
-      {value: 'aid-0', viewValue: 'Delhi'},
-      {value: 'aid-1', viewValue: 'Noida'},
-      {value: 'aid-2', viewValue: 'Chandigarh'},
-      {value: 'aid-3', viewValue: 'Moga'},
-    ];
-
-    currentRegion: string[];
-    regions = [
-      {value: 'rid-0', viewValue: 'Region 001'},
-      {value: 'rid-1', viewValue: 'Region 002'},
-      {value: 'rid-2', viewValue: 'Region 003'},
-      {value: 'rid-3', viewValue: 'Region 004'},
-      {value: 'rid-4', viewValue: 'Region 005'},
-      {value: 'rid-5', viewValue: 'Region 006'},
-    ];
 }
